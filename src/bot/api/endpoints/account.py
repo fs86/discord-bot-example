@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from fastapi_discord import User
 
-from api.ipc_factory import IpcFactory
+from api.ipc import ipc_client
 from api.oauth import discord_oauth as discord
 
 # Check out https://github.com/tokusumi/fastapi-cloudauth for OAuth2 authentication.
@@ -12,8 +12,6 @@ router = APIRouter(
     tags=["Account"],
     responses={404: {"description": "Not found"}},
 )
-
-ipc_client = IpcFactory.get_client()
 
 
 @router.get("/login")

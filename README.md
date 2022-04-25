@@ -1,1 +1,1 @@
-# discord-bot-example-py
+# discord-bot-example

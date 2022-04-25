@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from fastapi_discord import User
 
+from api.ipc_factory import IpcFactory
 from api.oauth import discord_oauth as discord
 
 # Check out https://github.com/tokusumi/fastapi-cloudauth for OAuth2 authentication.
@@ -11,6 +12,8 @@ router = APIRouter(
     tags=["Account"],
     responses={404: {"description": "Not found"}},
 )
+
+ipc_client = IpcFactory.get_client()
 
 
 @router.get("/login")
@@ -25,5 +28,11 @@ async def callback(code: str):
 
 
 @router.get("/@me", dependencies=[Depends(discord.requires_authorization)], response_model=User)
-async def private(user: User = Depends(discord.user)):
+async def me(user: User = Depends(discord.user)):
     return user
+
+
+@router.get("/test")
+async def test():
+    guild_count = await ipc_client.request("get_guild_count")
+    return {"guild_count": guild_count}

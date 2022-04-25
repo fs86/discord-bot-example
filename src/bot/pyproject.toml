@@ -1,0 +1,39 @@
+[tool.black]
+exclude = '/(\.eggs|\.git|\.mypy_cache|\.venv.*|_build|build|dist)/'
+line-length = 100
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.poetry]
+name = "bot"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+exclude = ["**"]
+classifiers = ["Private :: Do Not Upload"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+certifi = "^2021.10.8"
+dnspython = "^2.2.1"
+motor = "^2.5.1"
+munch = "^2.5.0"
+py-cord = "2.0.0b7"
+PyYAML = "^6.0"
+fastapi = "^0.75.2"
+uvicorn = {extras = ["standard"], version = "^0.17.6"}
+discord-ext-ipc = {git = "https://github.com/krittick/discord-ext-ipc.git", rev = "main"}
+fastapi-discord = {git = "https://github.com/Tert0/fastapi-discord.git"}
+ujson = "^5.2.0"
+msgpack = "^1.0.3"
+
+[tool.poetry.dev-dependencies]
+black = "^22.3.0"
+isort = "^5.10.1"
+toml = "^0.10.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

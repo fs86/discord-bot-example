@@ -1,0 +1,7 @@
+{
+	"recommendations": [
+		"ms-python.vscode-pylance",
+		"donjayamanne.python-extension-pack",
+		"irongeek.vscode-env"
+	]
+}

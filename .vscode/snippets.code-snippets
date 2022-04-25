@@ -1,0 +1,52 @@
+{
+	"Bot Cog Skeleton": {
+		"scope": "python",
+		"prefix": "bot-cog",
+		"body": [
+			"from discord.ext import commands",
+			"\r\n",
+			"class ${1:CogName}(commands.Cog):",
+			"\tdef __init__(self, bot: commands.Bot):",
+			"\t\tself.bot = bot",
+			"\r",
+			"\t@commands.command()",
+			"\tasync def my_command(self, ctx: commands.Context):",
+			"\t\tprint(f\"Hello {ctx.author.display_name} 👋\")",
+			"\r\n",
+			"def setup(bot: commands.Bot):",
+			"\tbot.add_cog(${1:CogName}(bot))"
+		]
+	},
+	"Bot Command": {
+		"scope": "python",
+		"prefix": "bot-command",
+		"body": [
+			"@commands.command()",
+			"async def ${1:command_name}(self, ctx: commands.Context):",
+			"\t..."
+		]
+	},
+	"Bot Event": {
+		"scope": "python",
+		"prefix": "bot-event",
+		"body": [
+			"@commands.Cog.listener()",
+			"async def ${1:event_name}(self):",
+			"\t..."
+		]
+	},
+	"React Component": {
+		"scope": "typescriptreact",
+		"prefix": "component",
+		"body": [
+			"// eslint-disable-next-line @typescript-eslint/no-unused-vars",
+			"interface ${1:ComponentName}Props {}",
+			"\r",
+			"// eslint-disable-next-line no-empty-pattern",
+			"export function ${1:ComponentName}({}: ${1:ComponentName}Props) {",
+			"\treturn <h1>LinkButton</h1>;",
+			"}",
+			""
+		]
+	}
+}

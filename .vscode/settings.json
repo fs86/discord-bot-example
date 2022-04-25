@@ -1,0 +1,18 @@
+{
+    "python.terminal.activateEnvInCurrentTerminal": true,
+    "python.terminal.activateEnvironment": true,
+    "python.formatting.provider": "black",
+    "python.autoComplete.extraPaths": ["./src/bot"],
+    "python.analysis.extraPaths": ["./src/bot"],
+    "files.exclude": {
+        "**/.git": true,
+        "**/*.pyc": {"when": "$(basename).py"},
+        "**/__pycache__": true
+    },
+    "[python]": {
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        }
+    }
+}

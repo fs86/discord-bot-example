@@ -1,0 +1,26 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Initialize Project",
+            "type": "shell",
+            "command": [
+                "cd ${workspaceFolder}/src/bot && poetry install &&",
+                "cd ${workspaceFolder}/src/dashboard && yarn"
+            ],
+        },
+        {
+            "label": "Generate requirements.txt",
+            "type": "shell",
+            "options": {"cwd": "${workspaceFolder}/src/bot"},
+            "command": "poetry export -o requirements.txt --without-hashes",
+            "presentation": {
+                "reveal": "silent",
+                "revealProblems": "onProblem",
+                "close": true
+            }
+        },
+    ],
+}

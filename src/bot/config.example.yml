@@ -1,0 +1,29 @@
+common:
+  dev_mode: true
+
+ipc:
+  secret_key: <RANDOM SECRET KEY>
+
+db:
+  host: <DATABASE HOST>
+  name: <DATABASE NAME>
+  user: <DATABASE USER>
+  password: <DATABASE PASSWORD>
+
+bot:
+  token: <BOT TOKEN>
+  dev_server_id: <ID OF DEV SERVER>
+  owner_id: <ID OF BOT OWNER>
+  prefix: "?"
+
+api:
+  enabled: true
+
+oauth:
+  client_id: <CLIENT ID>
+  client_secret: <CLIENT SECRET>
+  redirect_uri: <REDIRECT URI>
+  scopes:
+    - identify
+    - email
+    - guilds

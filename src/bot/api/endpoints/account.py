@@ -1,11 +1,8 @@
 from fastapi import APIRouter, Depends
 from fastapi_discord import User
 
-from api.ipc import ipc_client
-from api.oauth import discord_oauth as discord
-
-# Check out https://github.com/tokusumi/fastapi-cloudauth for OAuth2 authentication.
-# When using PyJWT, dont forget to install PyJWT["crypto"].
+from api.utils import discord_oauth as discord
+from api.utils import ipc_client
 
 router = APIRouter(
     prefix="/account",

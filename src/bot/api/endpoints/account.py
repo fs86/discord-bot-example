@@ -2,9 +2,8 @@ from fastapi import APIRouter, Depends
 from fastapi_discord import User
 
 from api.utils import discord_oauth as discord
-from api.utils import ipc_client
 
-from ..dependencies import is_admin
+from ..dependencies import is_logged_in_user
 
 router = APIRouter(
     prefix="/account",
@@ -24,12 +23,6 @@ async def callback(code: str):
     return {"access_token": token, "refresh_token": refresh_token}
 
 
-@router.get("/@me", dependencies=[Depends(discord.requires_authorization)], response_model=User)
+@router.get("/@me", dependencies=[Depends(is_logged_in_user)], response_model=User)
 async def me(user: User = Depends(discord.user)):
     return user
-
-
-@router.get("/test", dependencies=[Depends(is_admin)])
-async def test():
-    guild_count = await ipc_client.request("get_guild_count")
-    return {"guild_count": guild_count}

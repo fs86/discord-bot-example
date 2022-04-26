@@ -4,6 +4,8 @@ from fastapi_discord import User
 from api.utils import discord_oauth as discord
 from api.utils import ipc_client
 
+from ..dependencies import is_admin
+
 router = APIRouter(
     prefix="/account",
     tags=["Account"],
@@ -27,7 +29,7 @@ async def me(user: User = Depends(discord.user)):
     return user
 
 
-@router.get("/test")
+@router.get("/test", dependencies=[Depends(is_admin)])
 async def test():
     guild_count = await ipc_client.request("get_guild_count")
     return {"guild_count": guild_count}

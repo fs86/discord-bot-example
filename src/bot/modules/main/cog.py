@@ -9,6 +9,10 @@ class MainCog(commands.Cog):
     async def on_ready(self):
         print(f"{self.bot.user.name} has connected to Discord!")
 
+    @commands.command()
+    async def sync(self, ctx: commands.Context):
+        await self.bot.sync_commands()
+
 
 def setup(bot: commands.Bot):
     bot.add_cog(MainCog(bot))

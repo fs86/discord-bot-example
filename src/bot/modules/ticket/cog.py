@@ -2,7 +2,7 @@ import discord
 from discord.commands import Option
 from discord.ext import commands
 
-from ui.base_dialog import DialogResult
+from ui import DialogResult
 
 from .ticket_manager import TicketManager
 from .ui.create_ticket_dialog import CreateTicketDialog
@@ -33,6 +33,7 @@ class TicketCog(commands.Cog):
         ticket_create_dialog = CreateTicketDialog(
             title="Create new ticket", callback=self.create_callback
         )
+
         await ctx.send_modal(ticket_create_dialog)
 
     async def create_callback(self, result: DialogResult):

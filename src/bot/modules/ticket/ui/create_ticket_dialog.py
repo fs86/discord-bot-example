@@ -1,10 +1,12 @@
+from typing import Callable
+
 import discord
 
-from ui.base_dialog import BaseDialog
+from ui import Dialog, DialogResult
 
 
-class CreateTicketDialog(BaseDialog):
-    def __init__(self, callback, *args, **kwargs) -> None:
+class CreateTicketDialog(Dialog):
+    def __init__(self, callback: Callable[[DialogResult], None], *args, **kwargs) -> None:
         super().__init__(callback, *args, **kwargs)
 
         self.add_item(discord.ui.InputText(label="Short Input"))

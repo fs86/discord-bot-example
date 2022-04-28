@@ -1,6 +1,10 @@
-from typing import List
+from typing import Callable, List
 
 import discord
+
+
+class MissingDialogCallbackException(Exception):
+    """An Exception raised when no callback was provided."""
 
 
 class DialogResult:
@@ -22,9 +26,15 @@ class DialogResult:
         return self.__dialog_values
 
 
-class BaseDialog(discord.ui.Modal):
-    def __init__(self, callback, *args, **kwargs) -> None:
+class Dialog(discord.ui.Modal):
+    callback_fn: Callable[[DialogResult], None]
+
+    def __init__(self, callback: Callable[[DialogResult], None], *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
+
+        if not callback:
+            raise MissingDialogCallbackException("A dialog callback must be specified.")
+
         self.callback_fn = callback
 
     async def callback(self, interaction: discord.Interaction):

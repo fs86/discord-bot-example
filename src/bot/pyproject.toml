@@ -20,7 +20,7 @@ certifi = "^2021.10.8"
 dnspython = "^2.2.1"
 motor = "^2.5.1"
 munch = "^2.5.0"
-py-cord = "2.0.0b7"
+py-cord = {git = "https://github.com/Pycord-Development/pycord.git"}
 PyYAML = "^6.0"
 fastapi = "^0.75.2"
 uvicorn = {extras = ["standard"], version = "^0.17.6"}

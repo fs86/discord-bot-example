@@ -9,21 +9,19 @@ class MissingDialogCallbackException(Exception):
 
 class DialogResult:
     __interaction: discord.Interaction
-    __dialog_values: List[discord.InputText]
+    __data: List[discord.InputText]
 
-    def __init__(
-        self, interaction: discord.Interaction, dialog_values: List[discord.InputText]
-    ) -> None:
+    def __init__(self, interaction: discord.Interaction, data: List[discord.InputText]) -> None:
         self.__interaction = interaction
-        self.__dialog_values = dialog_values
+        self.__data = data
 
     @property
     def interaction(self):
         return self.__interaction
 
     @property
-    def dialog_values(self):
-        return self.__dialog_values
+    def data(self):
+        return self.__data
 
 
 class Dialog(discord.ui.Modal):

@@ -37,8 +37,9 @@ class TicketCog(commands.Cog):
         await ctx.send_modal(ticket_create_dialog)
 
     async def create_callback(self, result: DialogResult):
-        dialog_values = result.dialog_values
-        await result.interaction.response.send_message("Ok")
+        await result.interaction.response.send_message(
+            f"Short Input: {result.data[0].value}\r\nLong Input: {result.data[1].value}"
+        )
 
     @ticket.command(guild_ids=[873898854607650826])
     async def close(

@@ -2,7 +2,10 @@ import discord
 from discord.commands import Option
 from discord.ext import commands
 
+from ui.base_dialog import DialogResult
+
 from .ticket_manager import TicketManager
+from .ui.create_ticket_dialog import CreateTicketDialog
 
 
 class TicketCog(commands.Cog):
@@ -27,7 +30,14 @@ class TicketCog(commands.Cog):
 
     @ticket.command(guild_ids=[873898854607650826])
     async def create(self, ctx: discord.ApplicationContext):
-        await ctx.respond("Ticket wurde erstellt", ephemeral=True)
+        ticket_create_dialog = CreateTicketDialog(
+            title="Create new ticket", callback=self.create_callback
+        )
+        await ctx.send_modal(ticket_create_dialog)
+
+    async def create_callback(self, result: DialogResult):
+        dialog_values = result.dialog_values
+        await result.interaction.response.send_message("Ok")
 
     @ticket.command(guild_ids=[873898854607650826])
     async def close(

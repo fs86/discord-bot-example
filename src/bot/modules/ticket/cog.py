@@ -31,7 +31,7 @@ class TicketCog(commands.Cog):
     @ticket.command(guild_ids=[873898854607650826])
     async def create(self, ctx: discord.ApplicationContext):
         ticket_create_dialog = CreateTicketDialog(
-            title="Create new ticket", callback=self.create_callback
+            title="Create new ticket", callback=self.create_callback, params={"type": "abc"}
         )
 
         await ctx.send_modal(ticket_create_dialog)

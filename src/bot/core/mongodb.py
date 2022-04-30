@@ -1,25 +1,22 @@
-import os
-
-import certifi
+from beanie import Document, init_beanie
 from motor.motor_asyncio import AsyncIOMotorClient
 
-from core import Config, env_validator
-from core.singleton import Singleton
+from core import Config
+from models.warn.warning import WarnDetails, Warn
 
 
-class MongoDb(metaclass=Singleton):
-    def __init__(self):
-        connection_string = self.__build_connection_string()
-        self.__client = AsyncIOMotorClient(connection_string, ssl_ca_certs=certifi.where())
-        self.__database = self.__client[Config().db.name]
+async def configure():
+    config = Config().db
+    client = AsyncIOMotorClient(__build_connection_string(config))
+    await init_beanie(database=client[config.name], document_models=[Warn, WarnDetails])
 
-    # noinspection PyMethodMayBeStatic
-    def __build_connection_string(self):
-        return (
-            f"mongodb+srv://{Config().db.user}:{ Config().db.password}"
-            f"@{Config().db.host}/{Config().db.name}?retryWrites=true&w=majority"
-        )
 
-    @property
-    def database(self):
-        return self.__database
+def __build_connection_string(config):
+    return (
+        f"mongodb+srv://{config.user}:{config.password}"
+        f"@{config.host}/{config.name}?retryWrites=true&w=majority"
+    )
+
+
+def __get_model_classes():
+    model_classes = [cls.__name__ for cls in Document.__subclasses__()]

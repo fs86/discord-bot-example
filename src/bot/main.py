@@ -7,7 +7,7 @@ from uvicorn import Server as ApiServer
 
 import api
 from bot import Bot
-from core import Config
+from core import Config, mongodb
 
 bot = Bot(
     command_prefix=commands.when_mentioned_or(Config().bot.prefix),
@@ -23,6 +23,7 @@ if __name__ == "__main__":
 
     tasks = [
         bot.loop.create_task(bot.start(Config().bot.token)),
+        bot.loop.create_task(mongodb.configure()),
         bot.loop.create_task(api_server.serve()),
     ]
 

@@ -1,29 +1,26 @@
 from datetime import datetime
 
-from core.mongodb import MongoDb
+from beanie import WriteRules
+
+from models.warn.warning import Warn, WarnDetails
 
 
 class WarnManager:
-    def __init__(self):
-        self.warnings = MongoDb().database["warnings"]
-
     async def add_warning(self, guild_id: int, member_id: int, reason: str = None):
-        search_object = {"guild_id": guild_id, "member_id": member_id}
-        member_data = await self.warnings.find_one(search_object)
-        warning = {"reason": reason, "date": datetime.now()}
+        warn = await self.__get_warn(guild_id, member_id)
 
-        if member_data is None:
-            member_data = {"guild_id": guild_id, "member_id": member_id, "warnings": [warning]}
-            await self.warnings.insert_one(member_data)
-        else:
-            member_data["warnings"].append(warning)
-            await self.warnings.update_one(search_object, {"$set": member_data})
+        if not warn:
+            warn = Warn(guild_id=guild_id, member_id=member_id)
 
-        return len(member_data["warnings"])
+        warn.entries.append(WarnDetails(reason=reason, date=datetime.now()))
+
+        await warn.save(link_rule=WriteRules.WRITE)
+
+        return len(warn.entries)
 
     async def get_warnings(self, guild_id: int, member_id: int):
-        member_data = await self.warnings.find_one({"guild_id": guild_id, "member_id": member_id})
-        return member_data["warnings"] if member_data is not None else None
+        warn = await self.__get_warn(guild_id, member_id)
+        return warn.entries if warn else None
 
     async def remove_warning(self, guild_id: int, member_id: int, warns_to_remove):
         warns_to_remove = " ".join(warns_to_remove.split())
@@ -48,6 +45,11 @@ class WarnManager:
         )
 
         return len(warnings), warn_count_before - len(warnings)
+
+    async def __get_warn(self, guild_id: int, member_id: int, fetch_links: bool = True) -> Warn:
+        return await Warn.find_one(
+            Warn.guild_id == guild_id, Warn.member_id == member_id, fetch_links=fetch_links
+        )
 
     def __args_to_list(self, args, separators):
         args = " ".join(args.split())

@@ -2,7 +2,7 @@ from typing import Callable, Optional
 
 import discord
 
-from ui import Dialog, DialogResult
+from core.ui import Dialog, DialogResult
 
 
 class CreateTicketDialog(Dialog):

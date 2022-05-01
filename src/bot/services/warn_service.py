@@ -2,17 +2,32 @@ from datetime import datetime
 
 from beanie import WriteRules
 
-from models.warn.warning import Warn, WarnDetails
+from models import Warn, WarnDetails
 
 
-class WarnManager:
-    async def add_warning(self, guild_id: int, member_id: int, reason: str = None):
+class WarnService:
+    async def add_warning(
+        self,
+        guild_id: int,
+        member_id: int,
+        member_ref: str,
+        created_by_id: int,
+        created_by_ref: str,
+        reason: str = None,
+    ):
         warn = await self.__get_warn(guild_id, member_id)
 
         if not warn:
-            warn = Warn(guild_id=guild_id, member_id=member_id)
+            warn = Warn(guild_id=guild_id, member_id=member_id, member_ref=member_ref)
 
-        warn.entries.append(WarnDetails(reason=reason, date=datetime.now()))
+        warn.entries.append(
+            WarnDetails(
+                created_by_id=created_by_id,
+                created_by_ref=created_by_ref,
+                created_at=datetime.now(),
+                reason=reason,
+            )
+        )
 
         await warn.save(link_rule=WriteRules.WRITE)
 
@@ -24,27 +39,27 @@ class WarnManager:
 
     async def remove_warning(self, guild_id: int, member_id: int, warns_to_remove):
         warns_to_remove = " ".join(warns_to_remove.split())
-        warnings = await self.get_warnings(guild_id, member_id)
-        warn_count_before = len(warnings) if warnings else 0
+        warn = await self.__get_warn(guild_id, member_id)
+        warn_count_before = len(warn.entries) if warn else 0
         separators = [",", " "]
 
         if warns_to_remove == "*":
-            await self.warnings.delete_one({"guild_id": guild_id, "member_id": member_id})
-            warnings = []
+            warn.entries = []
 
         elif warns_to_remove.isdigit():
-            self.__remove(warnings, warns_to_remove)
+            self.__remove(warn.entries, warns_to_remove)
 
         elif any(s in warns_to_remove for s in separators):
             warns_to_remove = self.__args_to_list(warns_to_remove, separators)
             for number in reversed(sorted(warns_to_remove)):
-                self.__remove(warnings, number)
+                self.__remove(warn.entries, number)
 
-        await self.warnings.update_one(
-            {"guild_id": guild_id, "member_id": member_id}, {"$set": {"warnings": warnings}}
-        )
+        await warn.save()
 
-        return len(warnings), warn_count_before - len(warnings)
+        if not warn.entries:
+            await warn.delete()
+
+        return len(warn.entries), warn_count_before - len(warn.entries)
 
     async def __get_warn(self, guild_id: int, member_id: int, fetch_links: bool = True) -> Warn:
         return await Warn.find_one(

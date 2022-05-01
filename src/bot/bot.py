@@ -11,7 +11,7 @@ class Bot(commands.Bot):
         api_enabled = Config().api.enabled
         skip = ["ipc_routes"] if not api_enabled else []
 
-        cogloader.load(self, skip=skip)
+        cogloader.load(self, root_directory="cogs", cog_file_name="cog", skip=skip)
 
         if api_enabled:
             self.__ipc_server = ipc.Server(self, secret_key=Config().ipc.secret_key)

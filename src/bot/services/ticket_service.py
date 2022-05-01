@@ -1,7 +1,7 @@
-from .mock import tickets_metadata_mock, tickets_mock
+from .ticket_service_mock import tickets_metadata_mock, tickets_mock
 
 
-class TicketManager:
+class TicketService:
     def config(self, guild_id: int, category: str):
         guild_metadata_entry = next(
             filter(lambda x: x["guild_id"] == guild_id, tickets_metadata_mock), None

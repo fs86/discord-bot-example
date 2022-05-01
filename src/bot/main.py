@@ -8,6 +8,7 @@ from uvicorn import Server as ApiServer
 import api
 from bot import Bot
 from core import Config, mongodb
+from models.warn import Warn, WarnDetails
 
 bot = Bot(
     command_prefix=commands.when_mentioned_or(Config().bot.prefix),
@@ -23,8 +24,8 @@ if __name__ == "__main__":
 
     tasks = [
         bot.loop.create_task(bot.start(Config().bot.token)),
-        bot.loop.create_task(mongodb.configure()),
+        bot.loop.create_task(mongodb.configure(autoload_models=True)),
         bot.loop.create_task(api_server.serve()),
     ]
 
-    bot.loop.run_until_complete(asyncio.gather(*tasks, return_exceptions=True))
+    bot.loop.run_until_complete(asyncio.gather(*tasks, return_exceptions=False))

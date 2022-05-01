@@ -5,18 +5,18 @@ from beanie import Document, Link
 from pydantic import BaseModel
 
 
-class WarnDetails(Document):
+class WarnDetails(BaseModel):
+    created_by_id: int
+    created_by_ref: str
+    created_at: datetime
     reason: str
-    date: datetime
-
-    class Collection:
-        name = "warn_details"
 
 
 class Warn(Document):
     guild_id: int
     member_id: int
-    entries: Optional[List[Link[WarnDetails]]] = []
+    member_ref: str
+    entries: Optional[List[WarnDetails]] = []
 
     class Collection:
         name = "warn"

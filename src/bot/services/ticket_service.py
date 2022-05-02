@@ -1,4 +1,4 @@
-from .ticket_service_mock import tickets_metadata_mock, tickets_mock
+from .mock.ticket_service_mock import tickets_metadata_mock, tickets_mock
 
 
 class TicketService:

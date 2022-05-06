@@ -11,8 +11,10 @@ class MainCog(commands.Cog):
         print(f"{self.bot.user.name} has connected to Discord!")
 
     @discord.slash_command()
-    async def sync(self, ctx: discord.ApplicationContext):
+    @commands.is_owner()
+    async def synccommands(self, ctx: discord.ApplicationContext):
         await self.bot.sync_commands()
+        await ctx.respond("Commands has been synchronized", ephemeral=True)
 
 
 def setup(bot: commands.Bot):

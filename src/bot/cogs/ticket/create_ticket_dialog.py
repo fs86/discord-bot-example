@@ -15,5 +15,4 @@ class CreateTicketDialog(Dialog):
     ) -> None:
         super().__init__(callback, params, *args, **kwargs)
 
-        self.add_item(discord.ui.InputText(label="Short Input"))
-        self.add_item(discord.ui.InputText(label="Long Input", style=discord.InputTextStyle.long))
+        self.add_item(discord.ui.InputText(label="Beschreibung", style=discord.InputTextStyle.long))

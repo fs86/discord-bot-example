@@ -1,21 +1,18 @@
 import datetime
 from typing import List
 
-from beanie import Document
+from beanie import Document, Indexed
 from pydantic import BaseModel
 
-from models.common.auditable import AuditableBaseModel
 
-
-class ServerSettingsValue(AuditableBaseModel):
-    bot_prefix: str
-    ticket_category: str
-    ticket_channel_prefix: str
+class ServerSettingsValues(BaseModel):
+    bot_prefix: str = "."
+    ticket_category: str = "Tickets"
 
 
 class ServerSettings(Document):
-    guild_id: int
-    values: List[ServerSettingsValue] = []
+    guild_id: Indexed(int)
+    values: ServerSettingsValues = {}
 
     class Collection:
         name = "settings"

@@ -19,7 +19,16 @@ class WarnCog(commands.Cog):
         reason: Option(str, "Begründung der Verwarung", required=False),
     ):
         reason = reason or "<Keine Begründung angegeben>"
-        await self.warn_service.add_warning(ctx.guild_id, member.id, reason)
+
+        await self.warn_service.add_warning(
+            guild_id=ctx.guild_id,
+            member_id=member.id,
+            member_ref=f"{member}",
+            created_by_id=ctx.author.id,
+            created_by_ref=f"{ctx.author}",
+            reason=reason,
+        )
+
         await ctx.respond(f"{member} wurde verwarnt\r\nBegründung: {reason}", ephemeral=True)
 
     @discord.slash_command(guild_ids=[Config().bot.dev_server_id])
@@ -39,7 +48,7 @@ class WarnCog(commands.Cog):
                 number = str(i + 1).zfill(2)
                 description += f"`{number}` {warning['reason']}\r\n"
         else:
-            title = f"{member.name} dosn't have any warnings"
+            title = f"{member.name} wurde noch nicht verwarnt"
 
         embed = discord.Embed(title=title, description=description)
         await ctx.respond(embed=embed, ephemeral=True)

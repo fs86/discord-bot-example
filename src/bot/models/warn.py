@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import List, Optional
 
-from beanie import Document, Link
+from beanie import Document, Indexed, Link
 from pydantic import BaseModel
 
 
@@ -13,8 +13,8 @@ class WarnDetails(BaseModel):
 
 
 class Warn(Document):
-    guild_id: int
-    member_id: int
+    guild_id: Indexed(int)
+    member_id: Indexed(int)
     member_ref: str
     entries: Optional[List[WarnDetails]] = []
 

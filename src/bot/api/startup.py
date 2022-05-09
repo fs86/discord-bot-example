@@ -20,11 +20,10 @@ app.include_router(api_router)
 
 
 @app.exception_handler(Unauthorized)
-@app.exception_handler(InvalidPermissions)
 async def unauthorized_error_handler(_, __):
     return JSONResponse({"error": "Unauthorized"}, status_code=401)
 
 
-# @app.exception_handler(InvalidPermissions)
-# async def invalid_permissions_error_handler(_, __):
-#     return JSONResponse({"error": "Unauthorized"}, status_code=401)
+@app.exception_handler(InvalidPermissions)
+async def invalid_permissions_error_handler(_, __):
+    return JSONResponse({"error": "Forbidden"}, status_code=403)

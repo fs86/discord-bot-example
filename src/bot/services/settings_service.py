@@ -32,9 +32,7 @@ class SettingsService:
             await ServerSettings.insert_many(server_settings_new)
 
         if len(server_settings_old) > 0:
-            await ServerSettings.find(
-                In(ServerSettings.guild_id, server_settings_old)
-            ).delete_many()
+            await ServerSettings.find(In(ServerSettings.guild_id, server_settings_old)).delete_many()
 
     async def get(self, guild_id: int):
         return await self.__get_server_settings(guild_id)
@@ -52,6 +50,4 @@ class SettingsService:
         return ServerSettings(guild_id=guild_id, values=ServerSettingsValues())
 
     async def __get_server_settings(self, guild_id: int, fetch_links: bool = True):
-        return await ServerSettings.find_one(
-            ServerSettings.guild_id == guild_id, fetch_links=fetch_links
-        )
+        return await ServerSettings.find_one(ServerSettings.guild_id == guild_id, fetch_links=fetch_links)

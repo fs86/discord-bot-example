@@ -62,9 +62,7 @@ class WarnService:
         return len(warn.entries), warn_count_before - len(warn.entries)
 
     async def __get_warn(self, guild_id: int, member_id: int, fetch_links: bool = True) -> Warn:
-        return await Warn.find_one(
-            Warn.guild_id == guild_id, Warn.member_id == member_id, fetch_links=fetch_links
-        )
+        return await Warn.find_one(Warn.guild_id == guild_id, Warn.member_id == member_id, fetch_links=fetch_links)
 
     def __args_to_list(self, args, separators):
         args = " ".join(args.split())

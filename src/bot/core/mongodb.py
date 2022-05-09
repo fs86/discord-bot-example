@@ -13,9 +13,7 @@ class InvalidDocumentModelsConfiguration(Exception):
     """An Exception raised when the document models configuration is invalid."""
 
 
-async def configure(
-    autoload_models: bool = False, document_models: List[Union[Type["DocType"], str]] = None
-):
+async def configure(autoload_models: bool = False, document_models: List[Union[Type["DocType"], str]] = None):
     if not autoload_models and not document_models:
         raise InvalidDocumentModelsConfiguration(
             f"You must either enable automatic loading of model classes using autoload_models=True, "
@@ -30,10 +28,7 @@ async def configure(
 
 
 def __build_connection_string(config):
-    return (
-        f"mongodb+srv://{config.user}:{config.password}"
-        f"@{config.host}/{config.name}?retryWrites=true&w=majority"
-    )
+    return f"mongodb+srv://{config.user}:{config.password}" f"@{config.host}/{config.name}?retryWrites=true&w=majority"
 
 
 def __get_model_classes():

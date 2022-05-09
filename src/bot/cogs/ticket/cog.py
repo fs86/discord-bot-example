@@ -1,5 +1,5 @@
 import discord
-from discord.commands import Option
+from discord import OptionChoice, option
 from discord.ext import commands
 
 from core import Config
@@ -15,16 +15,16 @@ class TicketCog(commands.Cog):
         self.ticket_service = TicketService()
 
     @discord.slash_command(guild_ids=[Config().bot.dev_server_id])
-    async def ticket(
-        self,
-        ctx: discord.ApplicationContext,
-        ticket_type: Option(
-            str,
-            "Art des Tickets",
-            choices=["Bewerbung", "Beschwerde", "Allgemeine Frage"],
-            required=True,
-        ),
-    ):
+    @option(
+        "ticket_type",
+        description="Art des Tickets",
+        choices=[
+            OptionChoice(name="Bewerbung", value="application"),
+            OptionChoice(name="Beschwerde", value="complaint"),
+            OptionChoice(name="Allgemeine Frage", value="general_question"),
+        ],
+    )
+    async def ticket(self, ctx: discord.ApplicationContext, ticket_type: str):
         ticket_create_dialog = CreateTicketDialog(
             title=f"Neues Ticket: {ticket_type}",
             callback=self.ticket_dialog_callback,
@@ -35,8 +35,7 @@ class TicketCog(commands.Cog):
 
     async def ticket_dialog_callback(self, result: DialogResult):
         await result.interaction.response.send_message(
-            f"Art des Tickets: {result.params['ticket_type']}\r\n"
-            f"Beschreibung: {result.data[0].value}\r\n"
+            f"Art des Tickets: {result.params['ticket_type']}\r\n" f"Beschreibung: {result.data[0].value}\r\n"
         )
 
 

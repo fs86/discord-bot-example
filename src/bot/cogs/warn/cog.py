@@ -1,5 +1,5 @@
 import discord
-from discord.commands import Option
+from discord import option
 from discord.ext import commands
 
 from core import Config
@@ -12,14 +12,9 @@ class WarnCog(commands.Cog):
         self.warn_service = WarnService()
 
     @discord.slash_command(guild_ids=[Config().bot.dev_server_id])
-    async def warn(
-        self,
-        ctx: discord.ApplicationContext,
-        member: Option(discord.Member, "Benutzer, welcher verwarnt werden soll"),
-        reason: Option(str, "Begründung der Verwarung", required=False),
-    ):
-        reason = reason or "<Keine Begründung angegeben>"
-
+    @option("member", description="Benutzer, welcher verwarnt werden soll")
+    @option("reason", description="Begründung der Verwarung", default="<Keine Begründung angegeben>")
+    async def warn(self, ctx: discord.ApplicationContext, member: discord.Member, reason: str):
         await self.warn_service.add_warning(
             guild_id=ctx.guild_id,
             member_id=member.id,
@@ -32,11 +27,8 @@ class WarnCog(commands.Cog):
         await ctx.respond(f"{member} wurde verwarnt\r\nBegründung: {reason}", ephemeral=True)
 
     @discord.slash_command(guild_ids=[Config().bot.dev_server_id])
-    async def warninfo(
-        self,
-        ctx: discord.ApplicationContext,
-        member: Option(discord.Member, "Member", required=False),
-    ):
+    @option("member", description="Member", requried=False)
+    async def warninfo(self, ctx: discord.ApplicationContext, member: discord.Member):
         member = member or ctx.author
         warnings = await self.warn_service.get_warnings(ctx.guild.id, member.id)
         title, description = "", ""
@@ -54,15 +46,9 @@ class WarnCog(commands.Cog):
         await ctx.respond(embed=embed, ephemeral=True)
 
     @discord.slash_command(guild_ids=[Config().bot.dev_server_id])
-    async def removewarn(
-        self,
-        ctx: discord.ApplicationContext,
-        member: Option(discord.Member, "Member"),
-        warn_to_remove,
-    ):
-        warn_count, warns_removed = await self.warn_service.remove_warning(
-            ctx.guild.id, member.id, warn_to_remove
-        )
+    @option("member", description="Member")
+    async def removewarn(self, ctx: discord.ApplicationContext, member: discord.Member, warn_to_remove):
+        warn_count, warns_removed = await self.warn_service.remove_warning(ctx.guild.id, member.id, warn_to_remove)
 
         warning_text_1 = "Verwarnung" if warns_removed == 1 else "Verwarnungen"
         warning_text_2 = "Verwarnung" if warn_count == 1 else "Verwarnungen"

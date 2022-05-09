@@ -15,9 +15,7 @@ def load(
 
     cogs_loaded = []
     for folder in os.listdir(root_directory):
-        if folder not in disabled_cogs and os.path.exists(
-            os.path.join(root_directory, folder, f"{cog_file_name}.py")
-        ):
+        if folder not in disabled_cogs and os.path.exists(os.path.join(root_directory, folder, f"{cog_file_name}.py")):
             if folder in skip:
                 continue
 

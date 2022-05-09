@@ -95,7 +95,7 @@ tests_no_zope = ["coverage[toml] (>=5.0.2)", "hypothesis", "pympler", "pytest (>
 
 [[package]]
 name = "beanie"
-version = "1.10.8"
+version = "1.11.0"
 description = "Asynchronous Python ODM for MongoDB"
 category = "main"
 optional = false
@@ -206,7 +206,7 @@ wmi = ["wmi (>=1.5.1,<2.0.0)"]
 
 [[package]]
 name = "fastapi"
-version = "0.75.2"
+version = "0.76.0"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
 category = "main"
 optional = false
@@ -214,7 +214,7 @@ python-versions = ">=3.6.1"
 
 [package.dependencies]
 pydantic = ">=1.6.2,<1.7 || >1.7,<1.7.1 || >1.7.1,<1.7.2 || >1.7.2,<1.7.3 || >1.7.3,<1.8 || >1.8,<1.8.1 || >1.8.1,<2.0.0"
-starlette = "0.17.1"
+starlette = "0.18.0"
 
 [package.extras]
 all = ["requests (>=2.24.0,<3.0.0)", "jinja2 (>=2.11.2,<4.0.0)", "python-multipart (>=0.0.5,<0.0.6)", "itsdangerous (>=1.1.0,<3.0.0)", "pyyaml (>=5.3.1,<7.0.0)", "ujson (>=4.0.1,!=4.0.2,!=4.1.0,!=4.2.0,!=4.3.0,!=5.0.0,!=5.1.0,<6.0.0)", "orjson (>=3.2.1,<4.0.0)", "email_validator (>=1.1.1,<2.0.0)", "uvicorn[standard] (>=0.12.0,<0.18.0)"]
@@ -234,13 +234,13 @@ develop = false
 [package.dependencies]
 aiocache = "0.11.1"
 aiohttp = "3.8.1"
-fastapi = "0.75.2"
+fastapi = "0.76.0"
 
 [package.source]
 type = "git"
 url = "https://github.com/Tert0/fastapi-discord.git"
 reference = "master"
-resolved_reference = "92fbf407f1986a50b843a28513eb2cc029a77885"
+resolved_reference = "7b0cee1aad8b31b161f35aef5b5ef9e1f7e908db"
 
 [[package]]
 name = "frozenlist"
@@ -385,7 +385,7 @@ voice = ["PyNaCl (>=1.3.0,<1.6)"]
 type = "git"
 url = "https://github.com/Pycord-Development/pycord.git"
 reference = "master"
-resolved_reference = "5acbc49764f73241a28e82fbd0fbafe6f2c657ab"
+resolved_reference = "e3bb1073461e49f53de956294da62a6250345015"
 
 [[package]]
 name = "pydantic"
@@ -457,7 +457,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "starlette"
-version = "0.17.1"
+version = "0.18.0"
 description = "The little ASGI library that shines."
 category = "main"
 optional = false
@@ -571,7 +571,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "b031c2a15c89112c75df3a5490f81d733449db65467e92ff62e8bf0fd12a8a42"
+content-hash = "a4bcb89db3a757633a02b6afa6c7eec6a4fdf741c7e6d11678578231b3042b0a"
 
 [metadata.files]
 aiocache = [
@@ -673,8 +673,8 @@ attrs = [
     {file = "attrs-21.4.0.tar.gz", hash = "sha256:626ba8234211db98e869df76230a137c4c40a12d72445c45d5f5b716f076e2fd"},
 ]
 beanie = [
-    {file = "beanie-1.10.8-py3-none-any.whl", hash = "sha256:1461b0dc1c3e6d508a244bb89cf0963e26350e13acd10823b6a0e686cc0a7901"},
-    {file = "beanie-1.10.8.tar.gz", hash = "sha256:92c8209b025a275e65840d8384249db0bb2dff05dfdef699cf0bf45d7008a908"},
+    {file = "beanie-1.11.0-py3-none-any.whl", hash = "sha256:60102e1803bf87f6a96ce06601f6de7770f9825c37b7144717d10254f52cc4e7"},
+    {file = "beanie-1.11.0.tar.gz", hash = "sha256:634a1d0d49bc567340481a13703e8a305cd3f28a475185e1447073e1d42122c3"},
 ]
 black = [
     {file = "black-22.3.0-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:2497f9c2386572e28921fa8bec7be3e51de6801f7459dffd6e62492531c47e09"},
@@ -723,8 +723,8 @@ dnspython = [
     {file = "dnspython-2.2.1.tar.gz", hash = "sha256:0f7569a4a6ff151958b64304071d370daa3243d15941a7beedf0c9fe5105603e"},
 ]
 fastapi = [
-    {file = "fastapi-0.75.2-py3-none-any.whl", hash = "sha256:a70d31f4249b6b42dbe267667d22f83af645b2d857876c97f83ca9573215784f"},
-    {file = "fastapi-0.75.2.tar.gz", hash = "sha256:b5dac161ee19d33346040d3f44d8b7a9ac09b37df9efff95891f5e7641fa482f"},
+    {file = "fastapi-0.76.0-py3-none-any.whl", hash = "sha256:1e05c868651e3935bd9b290c61a3661a54e37471d3a0700bc5e4380f9ed935ae"},
+    {file = "fastapi-0.76.0.tar.gz", hash = "sha256:a5f99f6e827c7108a8efaf1d7f19d6cf2d735ad984f5e44d33ccec6ee88a7da1"},
 ]
 fastapi_discord = []
 frozenlist = [
@@ -1148,8 +1148,8 @@ sniffio = [
     {file = "sniffio-1.2.0.tar.gz", hash = "sha256:c4666eecec1d3f50960c6bdf61ab7bc350648da6c126e3cf6898d8cd4ddcd3de"},
 ]
 starlette = [
-    {file = "starlette-0.17.1-py3-none-any.whl", hash = "sha256:26a18cbda5e6b651c964c12c88b36d9898481cd428ed6e063f5f29c418f73050"},
-    {file = "starlette-0.17.1.tar.gz", hash = "sha256:57eab3cc975a28af62f6faec94d355a410634940f10b30d68d31cb5ec1b44ae8"},
+    {file = "starlette-0.18.0-py3-none-any.whl", hash = "sha256:377d64737a0e03560cb8eaa57604afee143cea5a4996933242798a7820e64f53"},
+    {file = "starlette-0.18.0.tar.gz", hash = "sha256:b45c6e9a617ecb5caf7e6446bd8d767b0084d6217e8e1b08187ca5191e10f097"},
 ]
 toml = [
     {file = "toml-0.10.2-py2.py3-none-any.whl", hash = "sha256:806143ae5bfb6a3c6e736a764057db0e6a0e05e338b5630894a5f779cabb4f9b"},

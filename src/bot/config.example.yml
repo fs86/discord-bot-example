@@ -1,5 +1,6 @@
 common:
   dev_mode: true
+  return_exceptions: false
 
 ipc:
   secret_key: <RANDOM SECRET KEY>
@@ -14,7 +15,6 @@ bot:
   token: <BOT TOKEN>
   dev_server_id: <ID OF DEV SERVER>
   owner_id: <ID OF BOT OWNER>
-  prefix: "?"
 
 api:
   enabled: true

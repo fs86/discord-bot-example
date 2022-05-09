@@ -7,11 +7,7 @@ class MissingEnvException(Exception):
         self.message = args[0] if args else None
 
     def __str__(self):
-        return (
-            f"MissingEnvException, {self.message}"
-            if self.message
-            else "MissingEnvException has been raised."
-        )
+        return f"MissingEnvException, {self.message}" if self.message else "MissingEnvException has been raised."
 
 
 def __create_empty_env_var(env_var: dict[str, bool], file_name: str):
@@ -56,7 +52,5 @@ def ensure_vars_exist(env_vars: list[dict[str, bool]]):
 
     if len(missing_env_vars) > 0:
         plural_suffix = "s" if len(missing_env_vars) > 1 else ""
-        message = (
-            f"Missing required environment variable{plural_suffix}: {', '.join(missing_env_vars)}"
-        )
+        message = f"Missing required environment variable{plural_suffix}: {', '.join(missing_env_vars)}"
         raise MissingEnvException(message)

@@ -36,4 +36,6 @@ if __name__ == "__main__":
         bot.loop.create_task(api_server.serve()),
     ]
 
-    bot.loop.run_until_complete(asyncio.gather(*tasks, return_exceptions=False))
+    return_exceptions = Config().common.return_exceptions
+
+    bot.loop.run_until_complete(asyncio.gather(*tasks, return_exceptions=return_exceptions))

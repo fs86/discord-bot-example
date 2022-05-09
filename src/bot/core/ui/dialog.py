@@ -40,11 +40,7 @@ class Dialog(discord.ui.Modal):
     params: Optional[dict]
 
     def __init__(
-        self,
-        callback: Callable[[DialogResult], None],
-        params: Optional[dict] = None,
-        *args,
-        **kwargs
+        self, callback: Callable[[DialogResult], None], params: Optional[dict] = None, *args, **kwargs
     ) -> None:
         super().__init__(*args, **kwargs)
 

@@ -28,6 +28,7 @@ py-cord = {git = "https://github.com/Pycord-Development/pycord.git"}
 PyYAML = "^6.0"
 ujson = "^5.2.0"
 uvicorn = {extras = ["standard"], version = "^0.17.6"}
+dependency-injector = "^4.39.1"
 
 [tool.poetry.dev-dependencies]
 black = "^22.3.0"

@@ -6,7 +6,10 @@ from fastapi_discord import Unauthorized
 from api.exceptions import InvalidPermissions
 from api.routes import router as api_router
 
+from .containers import Container
+
 app = FastAPI()
+app.container = Container()
 
 app.add_middleware(
     CORSMiddleware,

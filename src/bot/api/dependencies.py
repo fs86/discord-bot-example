@@ -18,13 +18,13 @@ async def get_user(
     discord: DiscordOAuthClient = Depends(Provide[Container.discord]),
     permission_service: PermissionService = Depends(Provide[Container.permission_service]),
 ):
-    discord_user = await discord.user(request)
+    user = await discord.user(request)
 
     guilds = [{"id": guild.id, "name": guild.name} for guild in await discord.guilds(request)]
-    is_admin = await permission_service.is_admin(int(discord_user.id))
+    is_admin = await permission_service.is_admin(int(user.id))
 
     user_profile_info = UserProfileInfo(is_admin=is_admin, guilds=guilds)
-    return UserVm.from_user(discord_user, profile_info=user_profile_info)
+    return UserVm.from_user(user, profile_info=user_profile_info)
 
 
 @inject

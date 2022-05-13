@@ -1,10 +1,12 @@
 import { useRoutes } from 'react-router-dom';
 import { Home } from '@pages';
 import { NotFound } from '@pages/common';
+import { Guilds } from '@pages/Guilds';
 
 export function Routes() {
   const routes = useRoutes([
     { path: '/', element: <Home /> },
+    { path: '/guilds', element: <Guilds /> },
     { path: '*', element: <NotFound /> },
   ]);
 

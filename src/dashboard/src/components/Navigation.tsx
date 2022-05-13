@@ -60,8 +60,8 @@ export function Navigation({}: NavigationProps) {
         <NavItem icon={<Home size={iconSize} />} to="/">
           Home
         </NavItem>
-        <NavItem icon={<ChartBar size={iconSize} />} to="/test1">
-          Test1
+        <NavItem icon={<ChartBar size={iconSize} />} to="/guilds">
+          Servereinstellungen
         </NavItem>
         <NavItem icon={<Wrench size={iconSize} />} to="/test2">
           Test2

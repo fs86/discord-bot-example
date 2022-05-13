@@ -1,17 +1,16 @@
-from enum import Enum
+import datetime
 
 from beanie import Document
 
 
-class PermissionLevel(Enum):
-    NONE = 0
-    MODERATOR = 1
-    ADMIN = 2
-
-
 class Permissions(Document):
     member_id: int
-    level: PermissionLevel
+    is_admin: bool
 
     class Collection:
         name = "permissions"
+
+    class Settings:
+        use_cache = True
+        cache_expiration_time = datetime.timedelta(minutes=30)
+        cache_capacity = 5

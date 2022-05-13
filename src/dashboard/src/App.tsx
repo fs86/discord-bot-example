@@ -11,15 +11,15 @@ import { Routes } from './Routes';
 
 function App() {
   const { isAuthenticated, isLoading, error } = useAuth();
-  const query = useQuery('getGuilds', getGuilds, { onSuccess: onGuildsLoaded });
+  // const query = useQuery('getGuilds', getGuilds, { onSuccess: onGuildsLoaded });
 
-  function onGuildsLoaded(data: Guild[]) {
-    console.log(data);
-  }
+  // function onGuildsLoaded(data: Guild[]) {
+  //   console.log(data);
+  // }
 
-  useEffect(() => {
-    console.log(query.data);
-  }, [query.data]);
+  // useEffect(() => {
+  //   console.log(query.data);
+  // }, [query.data]);
 
   if (isLoading) {
     return <>Loading ...</>;

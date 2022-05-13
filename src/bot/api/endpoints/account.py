@@ -3,8 +3,8 @@ from fastapi import APIRouter, Depends
 from fastapi_discord import DiscordOAuthClient, User
 
 from api.containers import Container
-from api.dependencies import get_discord_user, is_authenticated
-from api.viewmodels import UserProfileInfo, UserVm
+from api.dependencies import get_user, is_authenticated
+from api.viewmodels import UserVm
 
 router = APIRouter(
     prefix="/account",
@@ -27,5 +27,5 @@ async def callback(code: str, discord: DiscordOAuthClient = Depends(Provide[Cont
 
 
 @router.get("/@me", dependencies=[Depends(is_authenticated)], response_model=UserVm)
-async def me(user: User = Depends(get_discord_user)):
-    return UserVm.from_user(user, profile_info=UserProfileInfo(is_admin=True))
+async def me(user: User = Depends(get_user)):
+    return user

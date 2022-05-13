@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 
-from api.endpoints import account, admin
+import api.endpoints as endpoints
 
 router = APIRouter()
 
-router.include_router(account.router)
-router.include_router(admin.router)
+router.include_router(endpoints.account.router)
+router.include_router(endpoints.guilds.router)

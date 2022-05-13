@@ -3,8 +3,7 @@ from discord.ext import ipc
 from fastapi import APIRouter, Depends
 
 from api.containers import Container
-
-from ..dependencies import is_admin
+from api.dependencies import is_admin
 
 router = APIRouter(
     prefix="/admin",

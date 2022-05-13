@@ -3,10 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi_discord import Unauthorized
 
+from api.containers import Container
 from api.exceptions import InvalidPermissions
 from api.routes import router as api_router
-
-from .containers import Container
 
 app = FastAPI()
 app.container = Container()

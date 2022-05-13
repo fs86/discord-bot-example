@@ -3,10 +3,11 @@ from discord.ext import ipc
 from fastapi_discord import DiscordOAuthClient
 
 from core import Config
+from services.permission_service import PermissionService
 
 
 class Container(containers.DeclarativeContainer):
-    wiring_config = containers.WiringConfiguration(packages=["api.endpoints"])
+    wiring_config = containers.WiringConfiguration(packages=["api.endpoints", "api.helpers"])
 
     ipc_client = providers.Singleton(ipc.Client, secret_key=Config().ipc.secret_key)
 
@@ -18,3 +19,5 @@ class Container(containers.DeclarativeContainer):
         redirect_uri=__oauth_config.redirect_uri,
         scopes=tuple(__oauth_config.scopes),
     )
+
+    permission_service = providers.Factory(PermissionService)

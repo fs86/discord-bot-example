@@ -3,9 +3,8 @@ from fastapi import APIRouter, Depends
 from fastapi_discord import DiscordOAuthClient, User
 
 from api.containers import Container
+from api.dependencies import get_discord_user, is_authenticated
 from api.viewmodels import UserProfileInfo, UserVm
-
-from ..dependencies import get_discord_user, is_authenticated
 
 router = APIRouter(
     prefix="/account",

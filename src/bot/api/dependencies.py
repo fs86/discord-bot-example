@@ -5,29 +5,31 @@ from fastapi import Depends, Request
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from fastapi_discord import DiscordOAuthClient, User
 
+from api.containers import Container
 from api.exceptions import InvalidPermissions
 from api.helpers import check_authenticated
-from api.utils import discord_oauth as discord
+from models.permissions import PermissionLevel
+from services.permission_service import PermissionService
 
-from .containers import Container
+
+@inject
+async def get_discord_user(request: Request, discord: DiscordOAuthClient = Depends(Provide[Container.discord])) -> User:
+    return await discord.user(request)
 
 
 async def is_authenticated(bearer: Optional[HTTPAuthorizationCredentials] = Depends(HTTPBearer())):
     await check_authenticated(bearer)
 
 
+@inject
 async def is_admin(
     bearer: Optional[HTTPAuthorizationCredentials] = Depends(HTTPBearer()),
-    user: User = Depends(discord.user),
+    user: User = Depends(get_discord_user),
+    permission_service: PermissionService = Depends(Provide[Container.permission_service]),
 ):
     await check_authenticated(bearer)
 
-    admins = [110737883484143616]
+    permission_level = await permission_service.get_permission_level(user.id)
 
-    if not int(user.id) in admins:
+    if permission_level != PermissionLevel.ADMIN:
         raise InvalidPermissions
-
-
-@inject
-async def get_discord_user(request: Request, discord: DiscordOAuthClient = Depends(Provide[Container.discord])) -> User:
-    return await discord.user(request)

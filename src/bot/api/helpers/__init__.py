@@ -1,1 +1,1 @@
-from api.helpers.check_authenticated import check_authenticated as check_authenticated
+from .check_authenticated import check_authenticated as check_authenticated

@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, List, Optional
+from typing import Any, Optional
 
 from fastapi_discord import User
 
@@ -7,11 +7,10 @@ from fastapi_discord import User
 @dataclass
 class UserProfileInfo:
     is_admin: bool
-    guilds: Optional[List[Any]]
 
-    def __init__(self, is_admin: bool = False, guilds: List[Any] = []) -> None:
-        self.is_admin = is_admin
-        self.guilds = guilds
+    def __init__(self, **kwargs) -> None:
+        self.__dict__.update(kwargs)
+        ...
 
 
 class UserVm(User):

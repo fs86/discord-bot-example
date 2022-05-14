@@ -7,7 +7,7 @@ from services.permission_service import PermissionService
 
 
 class Container(containers.DeclarativeContainer):
-    wiring_config = containers.WiringConfiguration(packages=["api.endpoints", "api.helpers"])
+    wiring_config = containers.WiringConfiguration(packages=["api.endpoints"])
 
     ipc_client = providers.Singleton(ipc.Client, secret_key=Config().ipc.secret_key)
 

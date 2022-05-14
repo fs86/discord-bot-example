@@ -18,11 +18,9 @@ async def get_user(
     permission_service: PermissionService = Depends(Provide[Container.permission_service]),
 ):
     user = await discord.user(request)
-
-    guilds = [{"id": guild.id, "name": guild.name} for guild in await discord.guilds(request)]
     is_admin = await permission_service.is_admin(int(user.id))
+    user_profile_info = UserProfileInfo(is_admin=is_admin)
 
-    user_profile_info = UserProfileInfo(is_admin=is_admin, guilds=guilds)
     return UserVm.from_user(user, profile_info=user_profile_info)
 
 
@@ -49,7 +47,7 @@ async def is_admin(
 ):
     await is_authenticated(bearer)
 
-    is_admin = await permission_service.is_admin(user.id)
+    is_admin = await permission_service.is_admin(int(user.id))
 
     if not is_admin:
         raise InvalidPermissions

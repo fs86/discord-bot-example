@@ -23,7 +23,7 @@ async def guilds(
     ipc_client: ipc.Client = Depends(Provide[Container.ipc_client]),
 ):
     bot_guilds = await ipc_client.request("get_guild_ids")
-    user_guild_ids = [guild["id"] for guild in user.profile_info.guilds]
+    user_guild_ids = [guild.id for guild in guilds]
 
     if not user.profile_info.is_admin:
         bot_guilds = [guild for guild in bot_guilds if guild["id"] in user_guild_ids]

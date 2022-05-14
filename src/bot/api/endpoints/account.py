@@ -1,31 +1,24 @@
-from dependency_injector.wiring import Provide, inject
-from fastapi import APIRouter, Depends
-from fastapi_discord import DiscordOAuthClient, User
+from typing import List
 
-from api.containers import Container
-from api.dependencies import get_user, is_authenticated
+from fastapi import APIRouter, Depends
+from fastapi_discord import Guild, User
+
+from api.dependencies import get_guilds, get_user, is_authenticated
 from api.viewmodels import UserVm
 
 router = APIRouter(
     prefix="/account",
     tags=["Account"],
+    dependencies=[Depends(is_authenticated)],
     responses={404: {"description": "Not found"}},
 )
 
 
-@router.get("/login")
-@inject
-async def login(discord: DiscordOAuthClient = Depends(Provide[Container.discord])):
-    return {"url": discord.oauth_login_url}
-
-
-@router.get("/callback")
-@inject
-async def callback(code: str, discord: DiscordOAuthClient = Depends(Provide[Container.discord])):
-    token, refresh_token = await discord.get_access_token(code)
-    return {"access_token": token, "refresh_token": refresh_token}
-
-
-@router.get("/@me", dependencies=[Depends(is_authenticated)], response_model=UserVm)
+@router.get("/@me", response_model=UserVm)
 async def me(user: User = Depends(get_user)):
     return user
+
+
+@router.get("/@me/guilds", response_model=List[Guild])
+async def guilds(guilds=Depends(get_guilds)):
+    return guilds

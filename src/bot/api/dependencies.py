@@ -7,7 +7,6 @@ from fastapi_discord import DiscordOAuthClient, Guild, User
 
 from api.containers import Container
 from api.exceptions import InvalidPermissions
-from api.helpers import check_authenticated
 from api.viewmodels import UserProfileInfo, UserVm
 from services.permission_service import PermissionService
 
@@ -34,8 +33,12 @@ async def get_guilds(
     return await discord.guilds(request)
 
 
-async def is_authenticated(bearer: Optional[HTTPAuthorizationCredentials] = Depends(HTTPBearer())):
-    await check_authenticated(bearer)
+@inject
+async def is_authenticated(
+    bearer: Optional[HTTPAuthorizationCredentials] = Depends(HTTPBearer()),
+    discord: DiscordOAuthClient = Depends(Provide[Container.discord]),
+):
+    await discord.requires_authorization(bearer)
 
 
 @inject
@@ -44,7 +47,7 @@ async def is_admin(
     user: User = Depends(get_user),
     permission_service: PermissionService = Depends(Provide[Container.permission_service]),
 ):
-    await check_authenticated(bearer)
+    await is_authenticated(bearer)
 
     is_admin = await permission_service.is_admin(user.id)
 

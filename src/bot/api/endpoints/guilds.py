@@ -4,12 +4,13 @@ from fastapi import APIRouter, Depends
 from fastapi_discord import DiscordOAuthClient
 
 from api.containers import Container
-from api.dependencies import get_guilds, get_user, is_authenticated
+from api.dependencies import get_guilds, get_user, is_admin, is_authenticated
 from api.viewmodels import UserVm
 
 router = APIRouter(
     prefix="/guilds",
     tags=["Guilds"],
+    dependencies=[Depends(is_admin)],
     responses={404: {"description": "Not found"}},
 )
 

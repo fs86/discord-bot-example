@@ -1,1 +1,0 @@
-from .check_authenticated import check_authenticated as check_authenticated

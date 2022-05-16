@@ -7,7 +7,6 @@ export function Guilds() {
   const { isLoading, data } = useQuery('getGuilds', getGuilds, { onSuccess: onGuildsLoaded });
 
   function onGuildsLoaded(data: { id: string; name: string }[]) {
-    debugger;
     console.log(data);
   }
 

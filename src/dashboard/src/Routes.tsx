@@ -1,7 +1,7 @@
 import { useRoutes } from 'react-router-dom';
 import { Home } from '@pages';
 import { NotFound } from '@pages/common';
-import { Guilds } from '@pages/Guilds';
+import { Guilds } from '@pages/GuildSettings';
 
 export function Routes() {
   const routes = useRoutes([

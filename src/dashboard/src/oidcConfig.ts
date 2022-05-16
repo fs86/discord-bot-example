@@ -3,7 +3,7 @@ import { resetUrl } from '@helpers';
 
 function getUserinfoEndpoint() {
   return process.env.REACT_APP_API_URL
-    ? `${process.env.REACT_APP_API_URL}/account/@me`
+    ? `${process.env.REACT_APP_API_URL}/account`
     : 'https://discord.com/api/users/@me';
 }
 

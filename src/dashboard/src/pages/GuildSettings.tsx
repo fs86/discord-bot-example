@@ -1,12 +1,13 @@
 import { useQuery } from 'react-query';
 import { DefaultLayout } from '@layouts/DefaultLayout';
-import { getGuilds } from '@services/guildService';
+import { getGuilds } from '@services/botService';
 import styled from 'styled-components';
 
 export function Guilds() {
   const { isLoading, data } = useQuery('getGuilds', getGuilds, { onSuccess: onGuildsLoaded });
 
   function onGuildsLoaded(data: { id: string; name: string }[]) {
+    debugger;
     console.log(data);
   }
 

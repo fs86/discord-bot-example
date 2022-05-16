@@ -8,17 +8,17 @@ from api.viewmodels import UserVm
 
 router = APIRouter(
     prefix="/account",
-    tags=["Account"],
+    tags=["Account (Discord user info gateway)"],
     dependencies=[Depends(is_authenticated)],
     responses={404: {"description": "Not found"}},
 )
 
 
-@router.get("/@me", response_model=UserVm)
-async def me(user: User = Depends(get_user)):
+@router.get("/", response_model=UserVm)
+async def get_info(user: User = Depends(get_user)):
     return user
 
 
-@router.get("/@me/guilds", response_model=List[Guild])
-async def guilds(guilds=Depends(get_guilds)):
+@router.get("/guilds", response_model=List[Guild])
+async def get_guilds(guilds=Depends(get_guilds)):
     return guilds

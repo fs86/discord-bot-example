@@ -1,7 +1,8 @@
+import { endpoint } from '@helpers/apiHelper';
 import { Guild } from '@viewmodels/discord';
 import axios from 'axios';
 
 export async function getGuilds(): Promise<Guild[]> {
-  var response = await axios.get<Guild[]>(`${process.env.REACT_APP_API_URL}/account`);
+  const response = await axios.get<Guild[]>(endpoint('/account'));
   return response.data;
 }

@@ -12,6 +12,10 @@ export function Guilds() {
 
   const Select = styled.select`
     background-color: ${({ theme }) => theme.colors.background};
+    border: none;
+    border-bottom: 2px solid ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.foreground};
+    height: 2rem;
   `;
 
   return (
@@ -23,11 +27,11 @@ export function Guilds() {
 
         {!isLoading && (
           <>
-            <select name="guilds" id="guilds">
+            <Select name="guilds" id="guilds">
               {data?.map((guild) => (
                 <option value={guild.id}>{guild.name}</option>
               ))}
-            </select>
+            </Select>
           </>
         )}
       </>

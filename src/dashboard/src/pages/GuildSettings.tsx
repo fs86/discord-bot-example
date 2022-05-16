@@ -1,4 +1,6 @@
 import { useQuery } from 'react-query';
+import { Select } from '@components/Select';
+import { TextInput } from '@components/TextInput';
 import { DefaultLayout } from '@layouts/DefaultLayout';
 import { getGuilds } from '@services/botService';
 import styled from 'styled-components';
@@ -9,14 +11,6 @@ export function Guilds() {
   function onGuildsLoaded(data: { id: string; name: string }[]) {
     console.log(data);
   }
-
-  const Select = styled.select`
-    background-color: ${({ theme }) => theme.colors.background};
-    border: none;
-    border-bottom: 2px solid ${({ theme }) => theme.colors.primary};
-    color: ${({ theme }) => theme.colors.foreground};
-    height: 2rem;
-  `;
 
   return (
     <DefaultLayout>
@@ -32,6 +26,8 @@ export function Guilds() {
                 <option value={guild.id}>{guild.name}</option>
               ))}
             </Select>
+            <br />
+            <TextInput />
           </>
         )}
       </>

@@ -10,6 +10,7 @@
     "taskExplorer.enablePowershell": false,
     "taskExplorer.enablePython": false,
     "taskExplorer.enableTsc": false,
+    "css.lint.unknownAtRules": "ignore",
     "files.exclude": {
         "**/.git": true,
         "**/*.pyc": {"when": "$(basename).py"},

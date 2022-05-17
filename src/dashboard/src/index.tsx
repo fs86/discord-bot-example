@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { registerAxiosInterceptors } from '@helpers';
 
 import './index.css';
+import './antd.less';
 
 import App from './App';
 import { oidcConfig } from './oidcConfig';

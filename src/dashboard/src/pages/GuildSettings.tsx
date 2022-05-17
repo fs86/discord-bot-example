@@ -1,12 +1,16 @@
 import { useQuery } from 'react-query';
-import { Select } from '@components/Select';
-import { TextInput } from '@components/TextInput';
 import { DefaultLayout } from '@layouts/DefaultLayout';
 import { getGuilds } from '@services/botService';
+import { Button, Select } from 'antd';
 import styled from 'styled-components';
+
+const StyledSelect = styled(Select)`
+  width: 120px;
+`;
 
 export function Guilds() {
   const { isLoading, data } = useQuery('getGuilds', getGuilds, { onSuccess: onGuildsLoaded });
+  const { Option } = Select;
 
   function onGuildsLoaded(data: { id: string; name: string }[]) {
     console.log(data);
@@ -21,13 +25,12 @@ export function Guilds() {
 
         {!isLoading && (
           <>
-            <Select name="guilds" id="guilds">
+            <Button type="primary">Primary Button</Button>
+            <StyledSelect>
               {data?.map((guild) => (
-                <option value={guild.id}>{guild.name}</option>
+                <Option value={guild.id}>{guild.name}</Option>
               ))}
-            </Select>
-            <br />
-            <TextInput />
+            </StyledSelect>
           </>
         )}
       </>

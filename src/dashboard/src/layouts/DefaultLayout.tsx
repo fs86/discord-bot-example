@@ -1,6 +1,7 @@
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 import { useAuth } from 'react-oidc-context';
 import { DiscordProfileButton, Link, Navigation } from '@components';
+import { Bars } from '@styled-icons/fa-solid';
 import { up } from 'styled-breakpoints';
 import styled from 'styled-components';
 
@@ -27,7 +28,7 @@ const Header = styled.header`
 
 const HeaderContent = styled.div`
   display: grid;
-  grid-template-columns: min-content 1fr;
+  grid-template-columns: min-content min-content 1fr;
   align-items: center;
   line-height: 1;
   gap: 20px;
@@ -48,11 +49,12 @@ const HeaderActionBar = styled.div`
 const Main = styled.main`
   display: grid;
   overflow-y: auto;
-  grid-template-columns: 3.125rem 1fr;
+  grid-template-columns: min-content 1fr;
+  /* grid-template-columns: 3.125rem 1fr;
 
   ${up('xl')} {
     grid-template-columns: 16rem 1fr;
-  }
+  } */
 `;
 
 // const Navigation = styled.nav`
@@ -73,7 +75,12 @@ const Content = styled.div`
 `;
 
 export function DefaultLayout({ children }: DefaultLayoutProps) {
+  const [collapsed, setCollapsed] = useState(false);
   const { isLoading } = useAuth();
+
+  function toggleNavigation() {
+    setCollapsed(!collapsed);
+  }
 
   if (isLoading) {
     return <>Loading ...</>;
@@ -83,6 +90,7 @@ export function DefaultLayout({ children }: DefaultLayoutProps) {
     <Wrapper>
       <Header>
         <HeaderContent>
+          <Bars size={24} onClick={toggleNavigation} />
           <HeaderAppName>
             <Link to="/" disableHover>
               Dashboard
@@ -94,7 +102,7 @@ export function DefaultLayout({ children }: DefaultLayoutProps) {
         </HeaderContent>
       </Header>
       <Main>
-        <Navigation />
+        <Navigation collapsed={collapsed} />
         <Content>{children}</Content>
       </Main>
     </Wrapper>

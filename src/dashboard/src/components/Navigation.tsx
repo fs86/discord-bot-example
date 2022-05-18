@@ -4,12 +4,16 @@ import styled from 'styled-components';
 
 import { Link } from './Link';
 
-interface NavigationProps {}
+interface NavigationProps {
+  collapsed: boolean;
+}
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ width: number }>`
   background-color: ${({ theme }) => theme.colors.navigation.background};
   color: ${({ theme }) => theme.colors.foreground};
+  width: ${({ width }) => width}px;
   padding-top: 1rem;
+  transition: 0.3s;
   margin: 0;
 `;
 
@@ -48,12 +52,13 @@ function NavItem({ to, icon, children }: NavItemProps) {
   );
 }
 
-export function Navigation({}: NavigationProps) {
-  const [collapsed, setCollapsed] = useState(false);
+export function Navigation({ collapsed }: NavigationProps) {
   const iconSize = 24;
 
+  const width = collapsed ? 50 : 200;
+
   return (
-    <Wrapper>
+    <Wrapper width={width}>
       <StyledList>
         <NavItem icon={<Home size={iconSize} />} to="/">
           Home

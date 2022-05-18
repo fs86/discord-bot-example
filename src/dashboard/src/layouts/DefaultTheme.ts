@@ -15,6 +15,7 @@ declare module 'styled-components' {
       };
       navigation: {
         background: string;
+        itemHoveredBackground: string;
       };
     };
   }
@@ -32,7 +33,8 @@ const theme: DefaultTheme = {
       background: '#171a1c',
     },
     navigation: {
-      background: '#171a1c',
+      background: '#24282c',
+      itemHoveredBackground: '#15181a',
     },
     content: {
       background: defaultBackground,

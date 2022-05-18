@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.7.0",
     "@craco/craco": "6.4.3",
     "@styled-icons/fa-brands": "10.38.0",
     "@styled-icons/fa-regular": "10.34.0",

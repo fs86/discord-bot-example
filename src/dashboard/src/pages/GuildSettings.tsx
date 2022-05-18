@@ -1,5 +1,6 @@
 import { useQuery } from 'react-query';
 import { DefaultLayout } from '@layouts/DefaultLayout';
+import { DefaultLayout2 } from '@layouts/DefaultLayout2';
 import { getGuilds } from '@services/botService';
 import { Button, Select } from 'antd';
 import styled from 'styled-components';
@@ -17,7 +18,7 @@ export function Guilds() {
   }
 
   return (
-    <DefaultLayout>
+    <DefaultLayout2>
       <>
         <h1>Servereinstellungen</h1>
 
@@ -34,6 +35,6 @@ export function Guilds() {
           </>
         )}
       </>
-    </DefaultLayout>
+    </DefaultLayout2>
   );
 }

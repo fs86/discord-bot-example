@@ -27,8 +27,6 @@ const StyledLink = styled(Link)`
   transition: 0.3s;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.navigation.itemHoveredBackground};
-
     svg {
       color: ${({ theme }) => theme.colors.secondary};
     }

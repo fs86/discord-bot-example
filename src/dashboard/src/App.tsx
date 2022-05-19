@@ -1,10 +1,9 @@
 import { useAuth } from 'react-oidc-context';
 import { LandingPage } from '@pages/LandingPage';
-import { ThemeProvider } from 'styled-components';
 
+import { GlobalStyles } from './GlobalStyles';
 import { Layout } from './Layout';
 import { Routes } from './Routes';
-import { theme } from './Theme';
 
 function App() {
   const { isAuthenticated, isLoading, error } = useAuth();
@@ -17,7 +16,7 @@ function App() {
   }
 
   return (
-    <ThemeProvider theme={theme}>
+    <GlobalStyles appName="Dashboard">
       {isAuthenticated ? (
         <Layout>
           <Routes />
@@ -25,7 +24,7 @@ function App() {
       ) : (
         <LandingPage />
       )}
-    </ThemeProvider>
+    </GlobalStyles>
   );
 }
 

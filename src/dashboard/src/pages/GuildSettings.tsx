@@ -1,18 +1,21 @@
 import { useQuery } from 'react-query';
+import { Button, Select } from '@components';
 import { getGuilds } from '@services/botService';
-import { Button, Select } from 'antd';
-import styled from 'styled-components';
-
-const StyledSelect = styled(Select)`
-  width: 120px;
-`;
+import { Guild } from '@viewmodels/discord';
 
 export function Guilds() {
   const { isLoading, data } = useQuery('getGuilds', getGuilds, { onSuccess: onGuildsLoaded });
-  const { Option } = Select;
 
-  function onGuildsLoaded(data: { id: string; name: string }[]) {
+  function onGuildsLoaded(data: Guild[]) {
     console.log(data);
+  }
+
+  function handleOnClick() {
+    console.log('Click!');
+  }
+
+  function handleOnChange(guild: Guild) {
+    debugger;
   }
 
   return (
@@ -23,12 +26,10 @@ export function Guilds() {
 
       {!isLoading && (
         <>
-          <Button type="primary">Primary Button</Button>
-          <StyledSelect>
-            {data?.map((guild) => (
-              <Option value={guild.id}>{guild.name}</Option>
-            ))}
-          </StyledSelect>
+          <Button type="primary" onClick={handleOnClick}>
+            Primary Button
+          </Button>
+          <Select data={data} valueField="id" textField="name" onChange={handleOnChange} />
         </>
       )}
     </>

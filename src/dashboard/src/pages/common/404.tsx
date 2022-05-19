@@ -1,4 +1,3 @@
-import { DefaultLayout } from '@layouts/DefaultLayout';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -19,25 +18,23 @@ const ErrorText = styled.p`
 
 export function NotFound() {
   return (
-    <DefaultLayout>
-      <Wrapper>
-        <ErrorCode>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.oooo.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.o
-          <br />
-          &nbsp;&nbsp;&nbsp;&nbsp;.d88&nbsp;&nbsp;&nbsp;&nbsp;d8P'`Y8b&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.d88
-          <br />
-          &nbsp;&nbsp;.d'888&nbsp;&nbsp;&nbsp;888&nbsp;&nbsp;&nbsp;&nbsp;888&nbsp;&nbsp;&nbsp;.d'888
-          <br />
-          .d'&nbsp;&nbsp;888&nbsp;&nbsp;&nbsp;888&nbsp;&nbsp;&nbsp;&nbsp;888&nbsp;.d'&nbsp;&nbsp;888
-          <br />
-          88ooo888oo&nbsp;888&nbsp;&nbsp;&nbsp;&nbsp;888&nbsp;88ooo888oo
-          <br />
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;888&nbsp;&nbsp;&nbsp;`88b&nbsp;&nbsp;d88'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;888
-          <br />
-          &nbsp;&nbsp;&nbsp;&nbsp;o888o&nbsp;&nbsp;&nbsp;`Y8bd8P'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o888o
-        </ErrorCode>
-        <ErrorText>Die Seite wurde nicht gefunden ¯\_(ツ)_/¯</ErrorText>
-      </Wrapper>
-    </DefaultLayout>
+    <Wrapper>
+      <ErrorCode>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.o&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.oooo.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.o
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;.d88&nbsp;&nbsp;&nbsp;&nbsp;d8P'`Y8b&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.d88
+        <br />
+        &nbsp;&nbsp;.d'888&nbsp;&nbsp;&nbsp;888&nbsp;&nbsp;&nbsp;&nbsp;888&nbsp;&nbsp;&nbsp;.d'888
+        <br />
+        .d'&nbsp;&nbsp;888&nbsp;&nbsp;&nbsp;888&nbsp;&nbsp;&nbsp;&nbsp;888&nbsp;.d'&nbsp;&nbsp;888
+        <br />
+        88ooo888oo&nbsp;888&nbsp;&nbsp;&nbsp;&nbsp;888&nbsp;88ooo888oo
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;888&nbsp;&nbsp;&nbsp;`88b&nbsp;&nbsp;d88'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;888
+        <br />
+        &nbsp;&nbsp;&nbsp;&nbsp;o888o&nbsp;&nbsp;&nbsp;`Y8bd8P'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o888o
+      </ErrorCode>
+      <ErrorText>Die Seite wurde nicht gefunden ¯\_(ツ)_/¯</ErrorText>
+    </Wrapper>
   );
 }

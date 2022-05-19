@@ -1,8 +1,6 @@
-import { DefaultLayout } from '@layouts/DefaultLayout';
-
 export function Home() {
   return (
-    <DefaultLayout>
+    <>
       <h1>Home</h1>
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
       invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
@@ -199,6 +197,6 @@ export function Home() {
       nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
       Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel
       illum dolore eu feugiat nulla facilisis.
-    </DefaultLayout>
+    </>
   );
 }

@@ -1,13 +1,10 @@
-import { useEffect } from 'react';
 import { useAuth } from 'react-oidc-context';
-import { useQuery } from 'react-query';
-import { theme } from '@layouts/DefaultTheme';
 import { LandingPage } from '@pages/LandingPage';
-import { getGuilds } from '@services/accountService';
-import { Guild } from '@viewmodels/discord';
 import { ThemeProvider } from 'styled-components';
 
+import { Layout } from './Layout';
 import { Routes } from './Routes';
+import { theme } from './Theme';
 
 function App() {
   const { isAuthenticated, isLoading, error } = useAuth();
@@ -20,7 +17,15 @@ function App() {
   }
 
   return (
-    <ThemeProvider theme={theme}>{isAuthenticated ? <Routes /> : <LandingPage />}</ThemeProvider>
+    <ThemeProvider theme={theme}>
+      {isAuthenticated ? (
+        <Layout>
+          <Routes />
+        </Layout>
+      ) : (
+        <LandingPage />
+      )}
+    </ThemeProvider>
   );
 }
 

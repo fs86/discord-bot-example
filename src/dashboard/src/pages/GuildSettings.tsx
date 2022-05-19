@@ -1,5 +1,4 @@
 import { useQuery } from 'react-query';
-import { DefaultLayout } from '@layouts/DefaultLayout';
 import { getGuilds } from '@services/botService';
 import { Button, Select } from 'antd';
 import styled from 'styled-components';
@@ -17,23 +16,21 @@ export function Guilds() {
   }
 
   return (
-    <DefaultLayout>
-      <>
-        <h1>Servereinstellungen</h1>
+    <>
+      <h1>Servereinstellungen</h1>
 
-        {isLoading && <>Daten werden geladen ...</>}
+      {isLoading && <>Daten werden geladen ...</>}
 
-        {!isLoading && (
-          <>
-            <Button type="primary">Primary Button</Button>
-            <StyledSelect>
-              {data?.map((guild) => (
-                <Option value={guild.id}>{guild.name}</Option>
-              ))}
-            </StyledSelect>
-          </>
-        )}
-      </>
-    </DefaultLayout>
+      {!isLoading && (
+        <>
+          <Button type="primary">Primary Button</Button>
+          <StyledSelect>
+            {data?.map((guild) => (
+              <Option value={guild.id}>{guild.name}</Option>
+            ))}
+          </StyledSelect>
+        </>
+      )}
+    </>
   );
 }

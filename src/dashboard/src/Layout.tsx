@@ -5,7 +5,7 @@ import { Bars } from '@styled-icons/fa-solid';
 import { up } from 'styled-breakpoints';
 import styled from 'styled-components';
 
-interface DefaultLayoutProps {
+interface LayoutProps {
   children: ReactNode;
 }
 
@@ -74,7 +74,7 @@ const Content = styled.div`
   }
 `;
 
-export function DefaultLayout({ children }: DefaultLayoutProps) {
+export function Layout({ children }: LayoutProps) {
   const [collapsed, setCollapsed] = useState(false);
   const { isLoading } = useAuth();
 

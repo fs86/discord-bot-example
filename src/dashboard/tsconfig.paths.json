@@ -8,9 +8,6 @@
       "@helpers": ["helpers"],
       "@helpers/*": ["helpers/*"],
 
-      "@layouts": ["layouts"],
-      "@layouts/*": ["layouts/*"],
-
       "@pages": ["pages"],
       "@pages/*": ["pages/*"],
 

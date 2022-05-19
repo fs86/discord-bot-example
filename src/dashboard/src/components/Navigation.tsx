@@ -1,4 +1,4 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement } from 'react';
 import { ChartBar, Home, Wrench } from '@styled-icons/fa-solid';
 import styled from 'styled-components';
 

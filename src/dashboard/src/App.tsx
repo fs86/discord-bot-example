@@ -1,8 +1,8 @@
 import { useAuth } from 'react-oidc-context';
 import { LandingPage } from '@pages/LandingPage';
 
-import { GlobalStyles } from './GlobalStyles';
-import { Layout } from './Layout';
+import { GlobalStyles } from './theming/GlobalStyles';
+import { Layout } from './theming/Layout';
 import { Routes } from './Routes';
 
 function App() {

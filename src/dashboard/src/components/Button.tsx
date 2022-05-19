@@ -1,6 +1,5 @@
 import { MouseEventHandler, ReactNode } from 'react';
 import { Button as AntdButton } from 'antd';
-import styled from 'styled-components';
 
 interface ButtonProps {
   type?: 'default' | 'primary' | 'ghost' | 'dashed' | 'link' | 'text';

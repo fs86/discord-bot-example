@@ -2,6 +2,9 @@ import { ReactNode } from 'react';
 import { Helmet } from 'react-helmet';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
+import './css-reset.css';
+import './antd.less';
+
 import { theme } from './Theme';
 
 interface StylesProps {
@@ -17,6 +20,11 @@ const GlobalStyle = createGlobalStyle`
   h5,
   h6 {
     color: ${({ theme }) => theme.colors.foreground};
+  }
+
+  html,
+  body {
+    margin: 0;
   }
 `;
 

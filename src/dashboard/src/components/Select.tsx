@@ -1,13 +1,29 @@
 import { Select as AntdSelect } from 'antd';
+import styled from 'styled-components';
 
-interface SelectProps<T> {
+import { FieldWithLabel, FieldWithLabelProps } from './common/FieldWithLabel';
+
+interface SelectProps<T> extends Omit<FieldWithLabelProps, 'children'> {
   valueField: string;
   textField: string;
-  onChange?: (value: T) => void;
+  width?: number;
   data?: T[];
+  onChange?: (value: T) => void;
 }
 
-export function Select<T>({ valueField, textField, onChange, data }: SelectProps<T>) {
+const StyledSelect = styled(AntdSelect)`
+  width: 100%;
+`;
+
+export function Select<T>({
+  id,
+  valueField,
+  textField,
+  width = 120,
+  data,
+  onChange,
+  ...props
+}: SelectProps<T>) {
   const { Option } = AntdSelect;
 
   function handleOnChange(value: any) {
@@ -16,10 +32,12 @@ export function Select<T>({ valueField, textField, onChange, data }: SelectProps
   }
 
   return (
-    <AntdSelect onChange={handleOnChange}>
-      {data?.map((item: any) => (
-        <Option value={item[valueField]}>{item[textField]}</Option>
-      ))}
-    </AntdSelect>
+    <FieldWithLabel width={width} {...props}>
+      <StyledSelect id={id} onChange={handleOnChange}>
+        {data?.map((item: any) => (
+          <Option value={item[valueField]}>{item[textField]}</Option>
+        ))}
+      </StyledSelect>
+    </FieldWithLabel>
   );
 }

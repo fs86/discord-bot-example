@@ -2,6 +2,7 @@ import { useQuery } from 'react-query';
 import { Button, Select } from '@components';
 import { getGuilds } from '@services/botService';
 import { Guild } from '@viewmodels/discord';
+import { Input } from 'antd';
 
 export function Guilds() {
   const { isLoading, data } = useQuery('getGuilds', getGuilds, { onSuccess: onGuildsLoaded });
@@ -26,10 +27,11 @@ export function Guilds() {
 
       {!isLoading && (
         <>
-          <Button type="primary" onClick={handleOnClick}>
+          {/* <Button type="primary" onClick={handleOnClick}>
             Primary Button
-          </Button>
+          </Button> */}
           <Select data={data} valueField="id" textField="name" onChange={handleOnChange} />
+          {/* <Input addonBefore="First name" /> */}
         </>
       )}
     </>

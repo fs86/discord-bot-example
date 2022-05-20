@@ -1,3 +1,4 @@
+import { getPropertyValue } from '@helpers';
 import { Select as AntdSelect } from 'antd';
 import styled from 'styled-components';
 
@@ -34,8 +35,10 @@ export function Select<T>({
   return (
     <FieldWithLabel width={width} {...props}>
       <StyledSelect id={id} onChange={handleOnChange}>
-        {data?.map((item: any) => (
-          <Option value={item[valueField]}>{item[textField]}</Option>
+        {data?.map((item: T) => (
+          <Option value={getPropertyValue<T, string>(item, valueField)}>
+            {getPropertyValue<T, string>(item, textField)}
+          </Option>
         ))}
       </StyledSelect>
     </FieldWithLabel>

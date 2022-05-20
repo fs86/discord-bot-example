@@ -12,6 +12,7 @@ export interface FieldWithLabelProps {
 const Wrapper = styled.div<{ width: number }>`
   display: grid;
   grid-template-rows: repeat(2, min-content);
+  width: ${({ width }) => width}px;
 
   > {
     width: 100%;

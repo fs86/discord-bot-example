@@ -32,11 +32,16 @@ export function Select<T>({
   return (
     <FieldWithLabel width={width} {...props}>
       <AntdSelect id={id} onChange={handleOnChange} placeholder={placeholder}>
-        {data?.map((item: T) => (
-          <Option value={getPropertyValue<T, string>(item, valueField)}>
-            {getPropertyValue<T, string>(item, textField)}
-          </Option>
-        ))}
+        {data?.map((item: T) => {
+          const value = getPropertyValue<T, string>(item, valueField);
+          const text = getPropertyValue<T, string>(item, textField);
+
+          return (
+            <Option value={value} key={value}>
+              {text}
+            </Option>
+          );
+        })}
       </AntdSelect>
     </FieldWithLabel>
   );

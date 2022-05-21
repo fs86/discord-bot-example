@@ -26,7 +26,7 @@ const defaultBackground = '#2c3136';
 const theme: DefaultTheme = {
   colors: {
     primary: '#0CB7F5',
-    secondary: '#0CA798',
+    secondary: '#B5FFE1',
     foreground: '#fff',
     background: defaultBackground,
     header: {

@@ -1,4 +1,4 @@
-const CracoAlias = require('craco-alias');
+const { CracoAliasPlugin } = require('react-app-alias');
 const CracoLess = require('craco-less');
 
 // Compile TypeScript with Babel:
@@ -7,11 +7,10 @@ const CracoLess = require('craco-less');
 module.exports = {
   plugins: [
     {
-      plugin: CracoAlias,
+      plugin: CracoAliasPlugin,
       options: {
-        source: 'tsconfig',
         baseUrl: './src',
-        tsConfigPath: './tsconfig.paths.json',
+        tsconfig: './tsconfig.paths.json',
       },
     },
     {

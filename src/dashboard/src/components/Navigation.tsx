@@ -49,7 +49,7 @@ interface NavItemProps {
 
 function NavItem({ to, icon, children }: NavItemProps) {
   return (
-    <StyledLink to={to} disableHover>
+    <StyledLink to={to}>
       {icon}
       {children}
     </StyledLink>

@@ -4,5 +4,6 @@ export * from './DiscordProfileButton';
 export * from './Link';
 export * from './LinkButton';
 export * from './Navigation';
+export * from './NavigationToggleButton';
 export * from './Select';
 export * from './ServerSelection';

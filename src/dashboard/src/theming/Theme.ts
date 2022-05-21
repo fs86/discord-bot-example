@@ -4,7 +4,6 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
       primary: string;
-      secondary: string;
       foreground: string;
       background: string;
       header: {
@@ -26,7 +25,6 @@ const defaultBackground = '#2c3136';
 const theme: DefaultTheme = {
   colors: {
     primary: '#0CB7F5',
-    secondary: '#B5FFE1',
     foreground: '#fff',
     background: defaultBackground,
     header: {

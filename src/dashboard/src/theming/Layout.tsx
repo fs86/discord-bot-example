@@ -1,7 +1,12 @@
 import { ReactNode, useState } from 'react';
 import { useAuth } from 'react-oidc-context';
-import { DiscordProfileButton, Link, Navigation, ServerSelection } from '@components';
-import { Bars } from '@styled-icons/fa-solid';
+import {
+  DiscordProfileButton,
+  Link,
+  Navigation,
+  NavigationToggleButton,
+  ServerSelection,
+} from '@components';
 import { up } from 'styled-breakpoints';
 import styled from 'styled-components';
 
@@ -17,18 +22,18 @@ const Wrapper = styled.div`
 
 const Header = styled.header`
   display: grid;
-  grid-template-columns: 1fr min-content;
+  grid-template-columns: 1fr;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.header.background};
   border-bottom: 2px solid ${({ theme }) => theme.colors.primary};
-  padding: 0 1.5rem;
+  padding: 0 0.8rem 0 0;
   font-weight: 500;
   color: #fff;
 `;
 
 const HeaderContent = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, min-content) 1fr;
+  grid-template-columns: 50px repeat(2, min-content) 1fr;
   white-space: nowrap;
   align-items: center;
   line-height: 1;
@@ -91,7 +96,7 @@ export function Layout({ children }: LayoutProps) {
     <Wrapper>
       <Header>
         <HeaderContent>
-          <Bars size={24} onClick={toggleNavigation} />
+          <NavigationToggleButton collapsed={collapsed} onClick={toggleNavigation} />
           <HeaderAppName>
             <Link to="/" disableHover>
               Dashboard

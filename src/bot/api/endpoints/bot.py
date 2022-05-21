@@ -8,6 +8,7 @@ from fastapi_discord import Guild
 from api.containers import Container
 from api.dependencies import get_guilds, get_user, is_admin, is_authenticated
 from api.viewmodels import UserVm
+from services import SettingsService
 
 router = APIRouter(
     prefix="/bot",
@@ -36,3 +37,14 @@ async def get_guilds(
         bot_guilds = [guild for guild in bot_guilds if guild["id"] in user_guild_ids]
 
     return bot_guilds
+
+
+# /bot/guilds/43432456837573537
+
+
+@router.post("/guilds/{guild_id}")
+@inject
+async def update_guild(
+    guild_id: int, prefix: str, settings_service: SettingsService = Depends(Provide[Container.settings_service])
+):
+    await settings_service.set(guild_id=guild_id, key="bot_prefix", value=prefix)

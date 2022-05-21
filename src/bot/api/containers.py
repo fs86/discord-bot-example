@@ -3,7 +3,7 @@ from discord.ext import ipc
 from fastapi_discord import DiscordOAuthClient
 
 from core import Config
-from services.permission_service import PermissionService
+from services import PermissionService, SettingsService
 
 
 class Container(containers.DeclarativeContainer):
@@ -24,3 +24,4 @@ class Container(containers.DeclarativeContainer):
     )
 
     permission_service = providers.Factory(PermissionService)
+    settings_service = providers.Factory(SettingsService)

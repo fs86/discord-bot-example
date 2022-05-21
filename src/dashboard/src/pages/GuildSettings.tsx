@@ -1,22 +1,37 @@
+import { ChangeEvent, ChangeEventHandler, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Button, Select } from '@components';
-import { getGuilds } from '@services/botService';
+import { getGuilds, updateGuild } from '@services/botService';
 import { Guild } from '@viewmodels/discord';
-import { Input } from 'antd';
+import { Input, Tabs } from 'antd';
+import styled from 'styled-components';
+
+const SaveButton = styled(Button)`
+  margin-top: 1rem;
+`;
 
 export function Guilds() {
   const { isLoading, data } = useQuery('getGuilds', getGuilds, { onSuccess: onGuildsLoaded });
+  const [selectedGuild, setSelectedGuild] = useState<Guild>();
+  const [botPrefix, setBotPrefix] = useState('');
+  const { TabPane } = Tabs;
 
   function onGuildsLoaded(data: Guild[]) {
     console.log(data);
   }
 
-  function handleOnClick() {
-    console.log('Click!');
+  function handleOnChange(guild: Guild) {
+    setSelectedGuild(guild);
   }
 
-  function handleOnChange(guild: Guild) {
-    debugger;
+  function handleOnPrefixChange(event: ChangeEvent<HTMLInputElement>) {
+    setBotPrefix(event.target.value);
+  }
+
+  async function handleOnSaveClick() {
+    if (selectedGuild?.id) {
+      await updateGuild(selectedGuild?.id, botPrefix);
+    }
   }
 
   return (
@@ -27,11 +42,23 @@ export function Guilds() {
 
       {!isLoading && (
         <>
-          {/* <Button type="primary" onClick={handleOnClick}>
-            Primary Button
-          </Button> */}
           <Select data={data} valueField="id" textField="name" onChange={handleOnChange} />
-          {/* <Input addonBefore="First name" /> */}
+
+          {selectedGuild && (
+            <>
+              <Tabs>
+                <TabPane tab="Willkommen" key="welcomeSettings">
+                  <Input addonBefore="Willkommens-Kanal:" />
+                </TabPane>
+                <TabPane tab="Allgemeine Einstellungen" key="commonSettings">
+                  <Input addonBefore="Prefix:" onChange={handleOnPrefixChange} />
+                  <SaveButton type="primary" onClick={handleOnSaveClick}>
+                    Speichern
+                  </SaveButton>
+                </TabPane>
+              </Tabs>
+            </>
+          )}
         </>
       )}
     </>

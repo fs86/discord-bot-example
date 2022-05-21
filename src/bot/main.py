@@ -25,7 +25,6 @@ bot = Bot(
     owner_id=Config().bot.owner_id,
 )
 
-
 if __name__ == "__main__":
     api_config = ApiConfig(app=api.app, loop=bot.loop)
     api_server = ApiServer(api_config)

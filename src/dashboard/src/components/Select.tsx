@@ -6,6 +6,7 @@ import { FieldWithLabel, FieldWithLabelProps } from './common/FieldWithLabel';
 interface SelectProps<T> extends Omit<FieldWithLabelProps, 'children'> {
   valueField: string;
   textField: string;
+  placeholder?: string;
   width?: number;
   data?: T[];
   onChange?: (value: T) => void;
@@ -15,6 +16,7 @@ export function Select<T>({
   id,
   valueField,
   textField,
+  placeholder,
   width = 120,
   data,
   onChange,
@@ -29,7 +31,7 @@ export function Select<T>({
 
   return (
     <FieldWithLabel width={width} {...props}>
-      <AntdSelect id={id} onChange={handleOnChange}>
+      <AntdSelect id={id} onChange={handleOnChange} placeholder={placeholder}>
         {data?.map((item: T) => (
           <Option value={getPropertyValue<T, string>(item, valueField)}>
             {getPropertyValue<T, string>(item, textField)}

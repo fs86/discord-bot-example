@@ -26,9 +26,13 @@ const StyledList = styled.ul`
 const StyledLink = styled(Link)`
   display: grid;
   grid-template-columns: 50px 1fr;
-  padding: 1rem 0.5rem;
+  padding: 1rem 0;
   white-space: nowrap;
   transition: 0.3s;
+
+  svg {
+    justify-self: center;
+  }
 
   &:hover {
     svg {

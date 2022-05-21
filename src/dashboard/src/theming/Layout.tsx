@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { useAuth } from 'react-oidc-context';
-import { DiscordProfileButton, Link, Navigation } from '@components';
+import { DiscordProfileButton, Link, Navigation, ServerSelection } from '@components';
 import { Bars } from '@styled-icons/fa-solid';
 import { up } from 'styled-breakpoints';
 import styled from 'styled-components';
@@ -28,7 +28,8 @@ const Header = styled.header`
 
 const HeaderContent = styled.div`
   display: grid;
-  grid-template-columns: min-content min-content 1fr;
+  grid-template-columns: repeat(3, min-content) 1fr;
+  white-space: nowrap;
   align-items: center;
   line-height: 1;
   gap: 20px;
@@ -96,6 +97,7 @@ export function Layout({ children }: LayoutProps) {
               Dashboard
             </Link>
           </HeaderAppName>
+          <ServerSelection />
           <HeaderActionBar>
             <DiscordProfileButton size={32} />
           </HeaderActionBar>

@@ -1,4 +1,4 @@
-import { ChangeEvent, ChangeEventHandler, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useQuery } from 'react-query';
 import { Button, Select } from '@components';
 import { getGuilds, updateGuild } from '@services/botService';

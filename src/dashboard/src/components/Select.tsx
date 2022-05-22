@@ -7,6 +7,7 @@ interface SelectProps<T> extends Omit<FieldWithLabelProps, 'children'> {
   valueField: string;
   textField: string;
   placeholder?: string;
+  borderless?: boolean;
   width?: number;
   data?: T[];
   onChange?: (value: T) => void;
@@ -17,6 +18,7 @@ export function Select<T>({
   valueField,
   textField,
   placeholder,
+  borderless,
   width = 120,
   data,
   onChange,
@@ -31,7 +33,13 @@ export function Select<T>({
 
   return (
     <FieldWithLabel width={width} {...props}>
-      <AntdSelect id={id} onChange={handleOnChange} placeholder={placeholder}>
+      <AntdSelect
+        id={id}
+        onChange={handleOnChange}
+        placeholder={placeholder}
+        bordered={!borderless}
+        showArrow={false}
+      >
         {data?.map((item: T) => {
           const value = getPropertyValue<T, string>(item, valueField);
           const text = getPropertyValue<T, string>(item, textField);

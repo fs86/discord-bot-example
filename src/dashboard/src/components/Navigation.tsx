@@ -30,6 +30,10 @@ const StyledLink = styled(NavLink)<{ $isActive?: boolean }>`
   transition: 0.3s;
   color: ${({ theme }) => theme.colors.foreground};
 
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.navigation.itemHoveredBackground};
+  }
+
   ${({ $isActive }) =>
     $isActive &&
     css`
@@ -59,7 +63,7 @@ export function Navigation({ collapsed }: NavigationProps) {
   function NavItem({ to, icon, text }: NavItemProps) {
     const resolved = useResolvedPath(to);
     const match = useMatch({ path: resolved.pathname, end: true });
-    const tooltipText = collapsed ? text : '';
+    const tooltipText = collapsed ? text : undefined;
 
     return (
       <StyledLink to={to} $isActive={match !== null}>

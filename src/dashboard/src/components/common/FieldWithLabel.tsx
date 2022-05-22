@@ -1,18 +1,39 @@
 import { ReactNode } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export interface FieldWithLabelProps {
   id?: string;
   label?: string;
+  labelPosition?: 'top' | 'left';
   width?: number;
   children: ReactNode;
   className?: string;
 }
 
-const Wrapper = styled.div<{ width: number }>`
+const Wrapper = styled.div<{ width: number; labelPosition: 'top' | 'left' }>`
   display: grid;
-  grid-template-rows: repeat(2, min-content);
   width: ${({ width }) => width}px;
+  align-items: center;
+
+  ${({ labelPosition }) =>
+    labelPosition === 'left' &&
+    css`
+      label {
+        margin-right: 5px;
+      }
+    `}
+
+  ${({ labelPosition }) =>
+    labelPosition === 'top' &&
+    css`
+      grid-template-rows: repeat(2, min-content);
+    `}
+
+  ${({ labelPosition }) =>
+    labelPosition === 'left' &&
+    css`
+      grid-template-columns: min-content 1fr;
+    `}
 
   > {
     width: 100%;
@@ -24,12 +45,13 @@ const Label = styled.label``;
 export function FieldWithLabel({
   id,
   label,
+  labelPosition = 'top',
   width = 120,
   children,
   ...props
 }: FieldWithLabelProps) {
   return (
-    <Wrapper width={width} {...props}>
+    <Wrapper width={width} labelPosition={labelPosition} {...props}>
       <Label htmlFor={id}>{label}</Label>
       {children}
     </Wrapper>

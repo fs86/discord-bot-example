@@ -32,7 +32,7 @@ const theme: DefaultTheme = {
     },
     navigation: {
       background: '#24282c',
-      itemHoveredBackground: '#15181a',
+      itemHoveredBackground: '#1c1f22',
     },
     content: {
       background: defaultBackground,

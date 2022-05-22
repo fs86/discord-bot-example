@@ -80,6 +80,10 @@ const Content = styled.div`
   }
 `;
 
+const StyledLink = styled(Link)`
+  margin-bottom: 3px;
+`;
+
 export function Layout({ children }: LayoutProps) {
   const [collapsed, setCollapsed] = useState(false);
   const { isLoading } = useAuth();
@@ -98,9 +102,9 @@ export function Layout({ children }: LayoutProps) {
         <HeaderContent>
           <NavigationToggleButton collapsed={collapsed} onClick={toggleNavigation} />
           <HeaderAppName>
-            <Link to="/" disableHover>
+            <StyledLink to="/" disableHover>
               Dashboard
-            </Link>
+            </StyledLink>
           </HeaderAppName>
           <ServerSelection />
           <HeaderActionBar>

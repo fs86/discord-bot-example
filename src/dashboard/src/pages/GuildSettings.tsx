@@ -42,7 +42,14 @@ export function Guilds() {
 
       {!isLoading && (
         <>
-          <Select data={data} valueField="id" textField="name" onChange={handleOnChange} />
+          <Select
+            data={data}
+            valueField="id"
+            textField="name"
+            label="Test"
+            labelPosition="top"
+            onChange={handleOnChange}
+          />
 
           {selectedGuild && (
             <>

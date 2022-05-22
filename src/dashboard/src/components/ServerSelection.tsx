@@ -8,11 +8,22 @@ interface ServerSelectionProps {}
 
 // eslint-disable-next-line no-empty-pattern
 export function ServerSelection({}: ServerSelectionProps) {
-  const { isLoading, data } = useQuery('getGuilds', getGuilds, { onSuccess: onGuildsLoaded });
+  const { data } = useQuery('getGuilds', getGuilds, { onSuccess: onGuildsLoaded });
 
   function onGuildsLoaded(data: Guild[]) {
     console.log(data);
   }
 
-  return <Select data={data} valueField="id" textField="name" placeholder="test" />;
+  return (
+    <Select
+      data={data}
+      valueField="id"
+      textField="name"
+      label="Server:"
+      labelPosition="left"
+      placeholder="Klicke hier um einen Server auszuwählen"
+      width={200}
+      borderless
+    />
+  );
 }

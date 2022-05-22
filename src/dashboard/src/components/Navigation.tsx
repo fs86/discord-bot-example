@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import { NavLink, useMatch, useResolvedPath } from 'react-router-dom';
 import { ChartBar, Home, Wrench } from '@styled-icons/fa-solid';
+import { Tooltip } from 'antd';
 import styled, { css } from 'styled-components';
 
 interface NavigationProps {
@@ -23,9 +24,7 @@ const StyledList = styled.ul`
 `;
 
 const StyledLink = styled(NavLink)<{ $isActive?: boolean }>`
-  display: grid;
-  grid-template-columns: 50px 1fr;
-  /* padding: 1rem 0; */
+  display: block;
   padding: 1rem 0;
   white-space: nowrap;
   transition: 0.3s;
@@ -42,40 +41,42 @@ const StyledLink = styled(NavLink)<{ $isActive?: boolean }>`
   }
 `;
 
+const StyledTooltip = styled(Tooltip)`
+  display: grid;
+  grid-template-columns: 50px 1fr;
+`;
+
 interface NavItemProps {
   to: string;
   icon: ReactElement;
-  children: string;
-}
-
-function NavItem({ to, icon, children }: NavItemProps) {
-  const resolved = useResolvedPath(to);
-  const match = useMatch({ path: resolved.pathname, end: true });
-
-  return (
-    <StyledLink to={to} $isActive={match !== null}>
-      {icon}
-      {children}
-    </StyledLink>
-  );
+  text: string;
 }
 
 export function Navigation({ collapsed }: NavigationProps) {
   const iconSize = 24;
   const width = collapsed ? 50 : 200;
 
+  function NavItem({ to, icon, text }: NavItemProps) {
+    const resolved = useResolvedPath(to);
+    const match = useMatch({ path: resolved.pathname, end: true });
+    const tooltipText = collapsed ? text : '';
+
+    return (
+      <StyledLink to={to} $isActive={match !== null}>
+        <StyledTooltip placement="right" title={tooltipText}>
+          {icon}
+          {text}
+        </StyledTooltip>
+      </StyledLink>
+    );
+  }
+
   return (
     <Wrapper width={width}>
       <StyledList>
-        <NavItem icon={<Home size={iconSize} />} to="/">
-          Home
-        </NavItem>
-        <NavItem icon={<ChartBar size={iconSize} />} to="/guilds">
-          Servereinstellungen
-        </NavItem>
-        <NavItem icon={<Wrench size={iconSize} />} to="/test2">
-          Test2
-        </NavItem>
+        <NavItem icon={<Home size={iconSize} />} to="/" text="Home" />
+        <NavItem icon={<ChartBar size={iconSize} />} to="/guilds" text="Servereinstellungen" />
+        <NavItem icon={<Wrench size={iconSize} />} to="/test2" text="Test2" />
       </StyledList>
     </Wrapper>
   );

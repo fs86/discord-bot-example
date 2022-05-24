@@ -1,15 +1,16 @@
-import { AuthProviderProps } from 'react-oidc-context';
 import { resetUrl } from '@helpers';
+import { AuthProviderProps } from 'react-oidc-context';
+// import { resetUrl } from '@helpers';
 
 function getUserinfoEndpoint() {
-  return process.env.REACT_APP_API_URL
-    ? `${process.env.REACT_APP_API_URL}/account`
+  return import.meta.env.VITE_API_URL
+    ? `${import.meta.env.VITE_API_URL}/account`
     : 'https://discord.com/api/users/@me';
 }
 
 export const oidcConfig: AuthProviderProps = {
   authority: 'https://discord.com/',
-  client_id: String(process.env.REACT_APP_DC_CLIENT_ID),
+  client_id: String(import.meta.env.VITE_DC_CLIENT_ID),
   redirect_uri: window.location.origin,
   scope: 'identify email guilds',
   loadUserInfo: true,

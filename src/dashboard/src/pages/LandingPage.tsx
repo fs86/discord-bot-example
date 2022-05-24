@@ -27,7 +27,7 @@ export function LandingPage() {
 
   return (
     <Wrapper>
-      <h1>{process.env.REACT_APP_LANDING_PAGE_TITLE ?? 'Dashboard'}</h1>
+      <h1>{import.meta.env.VITE_LANDING_PAGE_TITLE ?? 'Dashboard'}</h1>
       <DiscordLoginButton>Sign in with Discord</DiscordLoginButton>
     </Wrapper>
   );

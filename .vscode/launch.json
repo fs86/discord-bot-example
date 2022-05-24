@@ -19,7 +19,7 @@
             "request": "launch",
             "runtimeExecutable": "yarn",
             "cwd": "${workspaceFolder}/src/dashboard",
-            "runtimeArgs": ["start"]
+            "runtimeArgs": ["dev"]
         }
     ],
     "compounds": [

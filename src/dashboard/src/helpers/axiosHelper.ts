@@ -3,7 +3,7 @@ import { User } from 'oidc-client-ts';
 
 function getAccessToken() {
   const oidcStorage = sessionStorage.getItem(
-    `oidc.user:https://discord.com/:${process.env.REACT_APP_DC_CLIENT_ID}`
+    `oidc.user:https://discord.com/:${import.meta.env.VITE_DC_CLIENT_ID}`
   );
 
   if (!oidcStorage) {

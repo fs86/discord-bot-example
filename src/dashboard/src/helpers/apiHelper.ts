@@ -1,5 +1,5 @@
 export function endpoint(path: string) {
-  if (!process.env.REACT_APP_API_URL) {
+  if (!import.meta.env.VITE_API_URL) {
     throw new Error('Environment variable "REACT_APP_API_URL" was not found.');
   }
 
@@ -7,5 +7,5 @@ export function endpoint(path: string) {
     path = path.substring(1);
   }
 
-  return `${process.env.REACT_APP_API_URL}/${path}`;
+  return `${import.meta.env.VITE_API_URL}/${path}`;
 }

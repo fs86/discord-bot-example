@@ -2,8 +2,6 @@ import { ReactNode } from 'react';
 import { Helmet } from 'react-helmet';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-import './css-reset.css';
-
 import { theme } from './Theme';
 
 interface StylesProps {

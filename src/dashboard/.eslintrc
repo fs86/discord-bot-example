@@ -1,0 +1,51 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jsx-a11y/recommended", "plugin:prettier/recommended"],
+  "plugins": ["simple-import-sort", "prettier"],
+  "env": {
+    "browser": true,
+    "amd": true,
+    "node": true
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "usePrettierrc": true
+          }
+        ],
+        "react/react-in-jsx-scope": "off",
+        "jsx-a11y/accessible-emoji": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "simple-import-sort/imports": [
+          "warn",
+          {
+            "groups": [
+              // Packages. React related packages are listed first.
+              ["^react", "^@?\\w"],
+              // Side effect imports.
+              ["^\\u0000"],
+              // Parent imports. ".." come last.
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+              // Other relative imports. First same-folder imports, then ".".
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"]
+            ]
+          }
+        ],
+        "simple-import-sort/exports": "warn",
+        "jsx-a11y/anchor-is-valid": [
+          "error",
+          {
+            "components": ["Link"],
+            "specialLink": ["hrefLeft", "hrefRight"],
+            "aspects": ["invalidHref", "preferButton"]
+          }
+        ]
+      }
+    }
+  ]
+}

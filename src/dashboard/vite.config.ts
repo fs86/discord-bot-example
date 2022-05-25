@@ -13,6 +13,20 @@ const themeVariables = lessToJS(
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          antd: ['antd', '@ant-design/icons'],
+          styledicons: [
+            '@styled-icons/fa-brands',
+            '@styled-icons/fa-regular',
+            '@styled-icons/fa-solid',
+          ],
+        },
+      },
+    },
+  },
   plugins: [
     ViteAliases({}),
     react(),

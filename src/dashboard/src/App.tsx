@@ -1,4 +1,5 @@
 import { useAuth } from 'react-oidc-context';
+import { GuildSelectionContextProvider } from '@context-providers/GuildSelectionContext';
 import { LandingPage } from '@pages/LandingPage';
 
 import { GlobalStyles } from './GlobalStyles';
@@ -18,9 +19,11 @@ function App() {
   return (
     <GlobalStyles appName="Dashboard">
       {isAuthenticated ? (
-        <Layout>
-          <Routes />
-        </Layout>
+        <GuildSelectionContextProvider>
+          <Layout>
+            <Routes />
+          </Layout>
+        </GuildSelectionContextProvider>
       ) : (
         <LandingPage />
       )}

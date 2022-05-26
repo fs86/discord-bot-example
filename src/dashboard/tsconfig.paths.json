@@ -4,6 +4,8 @@
     "paths": {
       "@components": ["components"],
       "@components/*": ["components/*"],
+      "@context-providers": ["context-providers"],
+      "@context-providers/*": ["context-providers/*"],
       "@helpers": ["helpers"],
       "@helpers/*": ["helpers/*"],
       "@pages": ["pages"],

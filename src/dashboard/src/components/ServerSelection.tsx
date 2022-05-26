@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { useQuery } from 'react-query';
+import { useGuildSelection } from '@context-providers/GuildSelectionContext';
 import { getGuilds } from '@services/botService';
 import { Guild } from '@viewmodels/discord';
 
@@ -10,10 +12,19 @@ interface ServerSelectionProps {}
 // eslint-disable-next-line no-empty-pattern
 export function ServerSelection({}: ServerSelectionProps) {
   const { data } = useQuery('getGuilds', getGuilds, { onSuccess: onGuildsLoaded });
+  const { selectedGuild, setSelectedGuild } = useGuildSelection();
 
   function onGuildsLoaded(data: Guild[]) {
     console.log(data);
   }
+
+  function handleOnChange(guild: Guild) {
+    setSelectedGuild(guild);
+  }
+
+  useEffect(() => {
+    console.log(selectedGuild);
+  }, [selectedGuild]);
 
   return (
     <Select
@@ -24,6 +35,7 @@ export function ServerSelection({}: ServerSelectionProps) {
       labelPosition="left"
       placeholder="Klicke hier um einen Server auszuwählen"
       width={200}
+      onChange={handleOnChange}
       borderless
     />
   );

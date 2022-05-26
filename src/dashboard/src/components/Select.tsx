@@ -26,8 +26,10 @@ export function Select<T>({
 }: SelectProps<T>) {
   const { Option } = AntdSelect;
 
-  function handleOnChange(value: any) {
-    const element = data?.find((item: any) => item[valueField] === value);
+  function handleOnChange(value: unknown) {
+    const element = data?.find(
+      (item: T) => getPropertyValue<T, string>(item, valueField) === value
+    );
     onChange && onChange(element as T);
   }
 

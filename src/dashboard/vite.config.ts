@@ -4,6 +4,7 @@ import lessToJS from 'less-vars-to-js';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import { ViteAliases } from 'vite-aliases';
+import checker from 'vite-plugin-checker';
 import vitePluginImp from 'vite-plugin-imp';
 
 const pathResolver = (path: string) => resolve(__dirname, path);
@@ -28,6 +29,12 @@ export default defineConfig({
     },
   },
   plugins: [
+    checker({
+      typescript: true,
+      eslint: {
+        lintCommand: 'eslint ./src --ext .jsx,.js,.ts,.tsx --ignore-path ./.gitignore',
+      },
+    }),
     ViteAliases(),
     react(),
     vitePluginImp({

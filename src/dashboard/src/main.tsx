@@ -15,6 +15,7 @@ const queryClient = new QueryClient();
 
 // Workaround for https://github.com/tannerlinsley/react-query/issues/3476
 declare module 'react-query/types/react/QueryClientProvider' {
+  // eslint-disable-next-line no-unused-vars
   interface QueryClientProviderProps {
     children?: ReactNode;
   }

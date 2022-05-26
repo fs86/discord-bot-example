@@ -1,3 +1,4 @@
+import { ButtonHTMLAttributes } from 'react';
 import { useAuth } from 'react-oidc-context';
 import { Discord as DiscordIcon } from '@styled-icons/fa-brands';
 import styled from 'styled-components';
@@ -27,10 +28,9 @@ const StyledDiscordButton = styled.button`
 `;
 
 export function DiscordLoginButton({
-  onClick,
   children,
   ...props
-}: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+}: ButtonHTMLAttributes<HTMLButtonElement>) {
   const { clearStaleState, signinRedirect } = useAuth();
 
   async function handleOnClick() {

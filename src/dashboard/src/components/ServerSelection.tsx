@@ -4,6 +4,7 @@ import { Guild } from '@viewmodels/discord';
 
 import { Select } from './Select';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface ServerSelectionProps {}
 
 // eslint-disable-next-line no-empty-pattern

@@ -1,6 +1,5 @@
-import { resetUrl } from '@helpers';
 import { AuthProviderProps } from 'react-oidc-context';
-// import { resetUrl } from '@helpers';
+import { resetUrl } from '@helpers';
 
 function getUserinfoEndpoint() {
   return import.meta.env.VITE_API_URL

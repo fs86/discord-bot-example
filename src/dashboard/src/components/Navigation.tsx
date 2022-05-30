@@ -89,7 +89,7 @@ export function Navigation({ collapsed }: NavigationProps) {
         <NavItem icon={<Home size={iconSize} />} to="/" text="Home" />
         <NavItem
           icon={<ChartBar size={iconSize} />}
-          to="/guilds"
+          to="/guild"
           text="Servereinstellungen"
           showWhen={selectedGuild !== undefined}
         />

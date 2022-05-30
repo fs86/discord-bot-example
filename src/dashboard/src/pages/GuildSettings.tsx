@@ -10,7 +10,7 @@ const SaveButton = styled(Button)`
   margin-top: 1rem;
 `;
 
-export function Guilds() {
+export function GuildSettings() {
   const { t } = useTranslation('guildSettings');
   const { selectedGuild } = useGuildSelection();
   const [botPrefix, setBotPrefix] = useState('');

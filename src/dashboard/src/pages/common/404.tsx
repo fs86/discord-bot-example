@@ -1,4 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -6,6 +7,7 @@ const Wrapper = styled.div`
   grid-template-rows: repeat(2, min-content);
   justify-items: center;
   margin-top: 4rem;
+  gap: 1rem;
 `;
 
 const ErrorCode = styled.div`
@@ -18,6 +20,8 @@ const ErrorText = styled.p`
 `;
 
 export function NotFound() {
+  const { t } = useTranslation('notFound');
+
   return (
     <Wrapper>
       <ErrorCode>
@@ -35,7 +39,7 @@ export function NotFound() {
         <br />
         &nbsp;&nbsp;&nbsp;&nbsp;o888o&nbsp;&nbsp;&nbsp;`Y8bd8P'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;o888o
       </ErrorCode>
-      <ErrorText>Die Seite wurde nicht gefunden ¯\_(ツ)_/¯</ErrorText>
+      <ErrorText>{t('errorMessage')}</ErrorText>
     </Wrapper>
   );
 }

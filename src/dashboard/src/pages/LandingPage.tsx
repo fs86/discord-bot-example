@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { DiscordLoginButton } from '@components';
 import { resetUrl } from '@helpers';
 import styled from 'styled-components';
@@ -21,6 +22,8 @@ const Wrapper = styled.div`
 `;
 
 export function LandingPage() {
+  const { t } = useTranslation('landingPage');
+
   useMemo(() => {
     resetUrl();
   }, []);
@@ -28,7 +31,7 @@ export function LandingPage() {
   return (
     <Wrapper>
       <h1>{import.meta.env.VITE_LANDING_PAGE_TITLE ?? 'Dashboard'}</h1>
-      <DiscordLoginButton>Sign in with Discord</DiscordLoginButton>
+      <DiscordLoginButton>{t('loginButton')}</DiscordLoginButton>
     </Wrapper>
   );
 }

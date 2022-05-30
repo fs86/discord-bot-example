@@ -1,0 +1,13 @@
+{
+  "pageTitle": "Servereinstellungen",
+  "tabs": {
+    "general": {
+      "title": "Allgemeine Einstellungen",
+      "botPrefixLabel": "Bot Prefix:"
+    },
+    "roles": {
+      "title": "Rollenzuordnung"
+    }
+  },
+  "saveButton": "Speichern"
+}

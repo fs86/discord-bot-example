@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from '@components';
 import { useGuildSelection } from '@context-providers/GuildSelectionContext';
 import { updateGuild } from '@services/botService';
@@ -10,6 +11,7 @@ const SaveButton = styled(Button)`
 `;
 
 export function Guilds() {
+  const { t } = useTranslation('guildSettings');
   const { selectedGuild } = useGuildSelection();
   const [botPrefix, setBotPrefix] = useState('');
   const { TabPane } = Tabs;
@@ -26,21 +28,24 @@ export function Guilds() {
 
   return (
     <>
-      <h1>Servereinstellungen</h1>
+      <h1>{t('pageTitle')}</h1>
 
       {selectedGuild && (
         <>
           <Tabs>
-            <TabPane tab="Willkommen" key="welcomeSettings">
-              <Input addonBefore="Willkommens-Kanal:" />
+            <TabPane tab={t('tabs.general.title')} key="general">
+              <Input
+                addonBefore={t('tabs.general.botPrefixLabel')}
+                onChange={handleOnPrefixChange}
+              />
             </TabPane>
-            <TabPane tab="Allgemeine Einstellungen" key="commonSettings">
-              <Input addonBefore="Prefix:" onChange={handleOnPrefixChange} />
-              <SaveButton type="primary" onClick={handleOnSaveClick}>
-                Speichern
-              </SaveButton>
+            <TabPane tab={t('tabs.roles.title')} key="roles">
+              ¯\_(ツ)_/¯
             </TabPane>
           </Tabs>
+          <SaveButton type="primary" onClick={handleOnSaveClick}>
+            {t('saveButton')}
+          </SaveButton>
         </>
       )}
     </>

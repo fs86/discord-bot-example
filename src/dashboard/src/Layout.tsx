@@ -81,7 +81,7 @@ const Content = styled.div`
 `;
 
 const StyledLink = styled(Link)`
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 `;
 
 export function Layout({ children }: LayoutProps) {

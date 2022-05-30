@@ -31,6 +31,9 @@ export default defineConfig({
   plugins: [
     checker({
       typescript: true,
+      overlay: {
+        position: 'br',
+      },
       eslint: {
         lintCommand: 'eslint ./src --ext .jsx,.js,.ts,.tsx --ignore-path ./.gitignore',
       },

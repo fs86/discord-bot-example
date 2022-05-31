@@ -4,13 +4,11 @@ import { useGuildSelection } from '@context-providers/GuildSelectionContext';
 import { getGuilds } from '@services/botService';
 import { Guild } from '@viewmodels/discord';
 
-import { Select } from './Select';
+import { Select, SelectProps } from './Select';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface ServerSelectionProps {}
+type ServerSelectionProps = Omit<SelectProps<Guild>, 'data' | 'valueField' | 'textField'>;
 
-// eslint-disable-next-line no-empty-pattern
-export function ServerSelection({}: ServerSelectionProps) {
+export function GuildSelection({ width = 200, ...props }: ServerSelectionProps) {
   const { data } = useQuery('getGuilds', getGuilds, { onSuccess: onGuildsLoaded });
   const { selectedGuild, setSelectedGuild } = useGuildSelection();
 
@@ -31,12 +29,10 @@ export function ServerSelection({}: ServerSelectionProps) {
       data={data}
       valueField="id"
       textField="name"
-      label="Server:"
-      labelPosition="left"
-      placeholder="Klicke hier um einen Server auszuwählen"
-      width={200}
+      width={width}
       onChange={handleOnChange}
       borderless
+      {...props}
     />
   );
 }

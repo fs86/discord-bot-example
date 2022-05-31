@@ -6,10 +6,6 @@ import styled, { css } from 'styled-components';
 import { getNavigationItems, NavItemType } from './Navigation.items';
 import { NavigationToggleButton } from './NavigationToggleButton';
 
-interface NavigationProps {
-  collapsed: boolean;
-}
-
 const Wrapper = styled.div<{ width: number }>`
   display: grid;
   grid-template-rows: 1fr 50px;

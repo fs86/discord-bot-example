@@ -3,7 +3,7 @@ import { Select as AntdSelect } from 'antd';
 
 import { FieldWithLabel, FieldWithLabelProps } from './common/FieldWithLabel';
 
-interface SelectProps<T> extends Omit<FieldWithLabelProps, 'children'> {
+export interface SelectProps<T> extends Omit<FieldWithLabelProps, 'children'> {
   valueField: string;
   textField: string;
   placeholder?: string;
@@ -11,6 +11,7 @@ interface SelectProps<T> extends Omit<FieldWithLabelProps, 'children'> {
   width?: number;
   data?: T[];
   onChange?: (value: T) => void;
+  className?: string;
 }
 
 export function Select<T>({
@@ -22,6 +23,7 @@ export function Select<T>({
   width = 120,
   data,
   onChange,
+  className,
   ...props
 }: SelectProps<T>) {
   const { Option } = AntdSelect;
@@ -34,7 +36,7 @@ export function Select<T>({
   }
 
   return (
-    <FieldWithLabel width={width} {...props}>
+    <FieldWithLabel width={width} className={className} {...props}>
       <AntdSelect
         id={id}
         onChange={handleOnChange}

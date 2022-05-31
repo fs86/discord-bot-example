@@ -1,6 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { useAuth } from 'react-oidc-context';
-import { DiscordProfileButton, Link, ServerSelection } from '@components';
+import { DiscordProfileButton, GuildSelection, Link } from '@components';
 import { Navigation, NavigationToggleButton } from '@components/layout';
 import { up } from 'styled-breakpoints';
 import styled from 'styled-components';
@@ -100,7 +100,11 @@ export function Layout({ children }: LayoutProps) {
               Dashboard
             </StyledLink>
           </HeaderAppName>
-          <ServerSelection />
+          <GuildSelection
+            label="Server:"
+            labelPosition="left"
+            placeholder="Klicke hier, um einen Server auszuwählen"
+          />
           <HeaderActionBar>
             <DiscordProfileButton size={32} />
           </HeaderActionBar>

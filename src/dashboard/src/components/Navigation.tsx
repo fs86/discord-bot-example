@@ -1,9 +1,8 @@
-import { ReactElement } from 'react';
 import { NavLink, useMatch, useResolvedPath } from 'react-router-dom';
-import { useGuildSelection } from '@context-providers/GuildSelectionContext';
-import { ChartBar, Home, Wrench } from '@styled-icons/fa-solid';
 import { Tooltip } from 'antd';
 import styled, { css } from 'styled-components';
+
+import { getNavigationItems, NavItemType } from './Navigation.items';
 
 interface NavigationProps {
   collapsed: boolean;
@@ -51,20 +50,10 @@ const StyledTooltip = styled(Tooltip)`
   grid-template-columns: 50px 1fr;
 `;
 
-interface NavItemProps {
-  to: string;
-  icon: ReactElement;
-  text: string;
-  showWhen?: boolean;
-}
-
 export function Navigation({ collapsed }: NavigationProps) {
-  const { selectedGuild } = useGuildSelection();
-
-  const iconSize = 24;
   const width = collapsed ? 50 : 200;
 
-  function NavItem({ to, icon, text, showWhen = true }: NavItemProps) {
+  function NavItem({ to, icon, text, showWhen = true }: NavItemType) {
     const resolved = useResolvedPath(to);
     const match = useMatch({ path: resolved.pathname, end: true });
     const tooltipText = collapsed ? text : undefined;
@@ -86,19 +75,9 @@ export function Navigation({ collapsed }: NavigationProps) {
   return (
     <Wrapper width={width}>
       <StyledList>
-        <NavItem icon={<Home size={iconSize} />} to="/" text="Home" />
-        <NavItem
-          icon={<ChartBar size={iconSize} />}
-          to="/guild"
-          text="Servereinstellungen"
-          showWhen={selectedGuild !== undefined}
-        />
-        <NavItem
-          icon={<Wrench size={iconSize} />}
-          to="/test2"
-          text="Test2"
-          showWhen={selectedGuild !== undefined}
-        />
+        {getNavigationItems().map((navItem) => (
+          <NavItem {...navItem} key={navItem.to} />
+        ))}
       </StyledList>
     </Wrapper>
   );

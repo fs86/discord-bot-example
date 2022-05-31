@@ -1,9 +1,7 @@
 import { ReactNode } from 'react';
 import { useRoutes } from 'react-router-dom';
 import { useGuildSelection } from '@context-providers/GuildSelectionContext';
-import { Home } from '@pages';
-import { GuildSettings } from '@pages';
-import { NotFound } from '@pages/common';
+import { GuildSettings, Home, NotFound } from '@pages';
 
 function when(
   condition: boolean,

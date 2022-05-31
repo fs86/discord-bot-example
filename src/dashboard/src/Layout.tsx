@@ -21,14 +21,14 @@ const Header = styled.header`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.header.background};
   border-bottom: 2px solid ${({ theme }) => theme.colors.primary};
-  padding: 0 0.8rem 0 0;
+  padding: 0 1rem;
   font-weight: 500;
   color: #fff;
 `;
 
 const HeaderContent = styled.div`
   display: grid;
-  grid-template-columns: 50px repeat(2, min-content) 1fr;
+  grid-template-columns: repeat(2, min-content) 1fr;
   white-space: nowrap;
   align-items: center;
   line-height: 1;
@@ -95,7 +95,6 @@ export function Layout({ children }: LayoutProps) {
     <Wrapper>
       <Header>
         <HeaderContent>
-          <NavigationToggleButton collapsed={collapsed} onClick={toggleNavigation} />
           <HeaderAppName>
             <StyledLink to="/" disableHover>
               Dashboard
@@ -108,7 +107,7 @@ export function Layout({ children }: LayoutProps) {
         </HeaderContent>
       </Header>
       <Main>
-        <Navigation collapsed={collapsed} />
+        <Navigation />
         <Content>{children}</Content>
       </Main>
     </Wrapper>

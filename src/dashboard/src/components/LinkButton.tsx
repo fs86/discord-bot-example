@@ -25,11 +25,12 @@ export interface LinkButtonProps {
   onClick: () => void;
   underline?: boolean;
   children: ReactNode;
+  className?: string;
 }
 
-export function LinkButton({ onClick, underline = false, children }: LinkButtonProps) {
+export function LinkButton({ onClick, underline = false, children, className }: LinkButtonProps) {
   return (
-    <StyledButton onClick={onClick} underline={underline}>
+    <StyledButton onClick={onClick} underline={underline} className={className}>
       {children}
     </StyledButton>
   );

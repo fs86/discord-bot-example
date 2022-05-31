@@ -1,14 +1,18 @@
+import { useState } from 'react';
 import { NavLink, useMatch, useResolvedPath } from 'react-router-dom';
 import { Tooltip } from 'antd';
 import styled, { css } from 'styled-components';
 
 import { getNavigationItems, NavItemType } from './Navigation.items';
+import { NavigationToggleButton } from './NavigationToggleButton';
 
 interface NavigationProps {
   collapsed: boolean;
 }
 
 const Wrapper = styled.div<{ width: number }>`
+  display: grid;
+  grid-template-rows: 1fr 50px;
   background-color: ${({ theme }) => theme.colors.navigation.background};
   color: ${({ theme }) => theme.colors.foreground};
   width: ${({ width }) => width}px;
@@ -19,6 +23,7 @@ const Wrapper = styled.div<{ width: number }>`
 
 const StyledList = styled.ul`
   list-style-type: none;
+  border-bottom: 3px solid ${({ theme }) => theme.colors.background};
   padding: 0;
   margin: 0;
 `;
@@ -50,8 +55,19 @@ const StyledTooltip = styled(Tooltip)`
   grid-template-columns: 50px 1fr;
 `;
 
-export function Navigation({ collapsed }: NavigationProps) {
+const StyledNavigationToggleButton = styled(NavigationToggleButton)<{ pos?: string }>`
+  width: 50px;
+  justify-self: end;
+  transition: 0.3s;
+`;
+
+export function Navigation() {
+  const [collapsed, setCollapsed] = useState(false);
   const width = collapsed ? 50 : 200;
+
+  function toggleNavigation() {
+    setCollapsed(!collapsed);
+  }
 
   function NavItem({ to, icon, text, visible = true }: NavItemType) {
     const resolved = useResolvedPath(to);
@@ -66,11 +82,13 @@ export function Navigation({ collapsed }: NavigationProps) {
       <StyledLink to={to} $isActive={match !== null}>
         <StyledTooltip placement="right" title={tooltipText}>
           {icon}
-          {text}
+          {!collapsed && text}
         </StyledTooltip>
       </StyledLink>
     );
   }
+
+  const toggleButtonPos = collapsed ? 'start' : 'end';
 
   return (
     <Wrapper width={width}>
@@ -79,6 +97,11 @@ export function Navigation({ collapsed }: NavigationProps) {
           <NavItem {...navItem} key={navItem.to.replace(/[^a-zA-Z0-9]/g, '_')} />
         ))}
       </StyledList>
+      <StyledNavigationToggleButton
+        collapsed={collapsed}
+        pos={toggleButtonPos}
+        onClick={toggleNavigation}
+      />
     </Wrapper>
   );
 }

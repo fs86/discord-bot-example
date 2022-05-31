@@ -6,7 +6,7 @@ export interface NavItemType {
   to: string;
   icon: ReactElement;
   text: string;
-  showWhen?: boolean;
+  visible?: boolean;
 }
 
 export function getNavigationItems(): NavItemType[] {
@@ -18,13 +18,12 @@ export function getNavigationItems(): NavItemType[] {
       icon: <Home size={iconSize} />,
       to: '/',
       text: 'Home',
-      showWhen: selectedGuild !== undefined,
     },
     {
       icon: <ChartBar size={iconSize} />,
       to: '/guild',
       text: 'Servereinstellungen',
-      showWhen: selectedGuild !== undefined,
+      visible: selectedGuild !== undefined,
     },
   ];
 }

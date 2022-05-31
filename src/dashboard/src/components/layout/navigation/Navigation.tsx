@@ -53,12 +53,12 @@ const StyledTooltip = styled(Tooltip)`
 export function Navigation({ collapsed }: NavigationProps) {
   const width = collapsed ? 50 : 200;
 
-  function NavItem({ to, icon, text, showWhen = true }: NavItemType) {
+  function NavItem({ to, icon, text, visible = true }: NavItemType) {
     const resolved = useResolvedPath(to);
     const match = useMatch({ path: resolved.pathname, end: true });
     const tooltipText = collapsed ? text : undefined;
 
-    if (!showWhen) {
+    if (!visible) {
       return null;
     }
 
@@ -76,7 +76,7 @@ export function Navigation({ collapsed }: NavigationProps) {
     <Wrapper width={width}>
       <StyledList>
         {getNavigationItems().map((navItem) => (
-          <NavItem {...navItem} key={navItem.to} />
+          <NavItem {...navItem} key={navItem.to.replace(/[^a-zA-Z0-9]/g, '_')} />
         ))}
       </StyledList>
     </Wrapper>

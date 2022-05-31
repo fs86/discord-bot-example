@@ -2,9 +2,8 @@ import {
   MenuFoldOutlined as AntdMenuFoldOutlined,
   MenuUnfoldOutlined as AntdMenuUnfoldOutlined,
 } from '@ant-design/icons';
+import { LinkButton } from '@components/LinkButton';
 import styled, { css } from 'styled-components';
-
-import { LinkButton } from './LinkButton';
 
 interface NavigationToggleButtonProps {
   collapsed: boolean;

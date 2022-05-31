@@ -1,12 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { useAuth } from 'react-oidc-context';
-import {
-  DiscordProfileButton,
-  Link,
-  Navigation,
-  NavigationToggleButton,
-  ServerSelection,
-} from '@components';
+import { DiscordProfileButton, Link, ServerSelection } from '@components';
+import { Navigation, NavigationToggleButton } from '@components/layout';
 import { up } from 'styled-breakpoints';
 import styled from 'styled-components';
 

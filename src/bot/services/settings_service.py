@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, List
 
 from beanie.operators import In
 
@@ -52,7 +52,7 @@ class SettingsService:
 
     # DE: Aktualisert die Einstellungen für den angegebenen Server.
     # EN: Updates the settings for the specified server.
-    async def update(self, guild_id: int, settings: dict):
+    async def update(self, guild_id: int, settings: dict[str, Any]):
         server_settings = await self.__get_server_settings(guild_id)
         server_settings.values.bot_prefix = settings["bot_prefix"]
         server_settings.save()

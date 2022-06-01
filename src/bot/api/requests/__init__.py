@@ -1,1 +1,1 @@
-from .guild_settings import GuildSettings as GuildSettings
+from .guild_settings_request import GuildSettingsRequest as GuildSettingsRequest

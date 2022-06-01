@@ -1,5 +1,5 @@
 from pydantic import BaseModel
 
 
-class GuildSettings(BaseModel):
+class GuildSettingsRequest(BaseModel):
     bot_prefix: str

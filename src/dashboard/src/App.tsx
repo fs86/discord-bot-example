@@ -1,9 +1,9 @@
 import { useAuth } from 'react-oidc-context';
+import { Layout } from '@components/layout';
 import { GuildSelectionContextProvider } from '@context-providers/GuildSelectionContext';
 import { LandingPage } from '@pages/LandingPage';
 
 import { GlobalStyles } from './GlobalStyles';
-import { Layout } from './Layout';
 import { Routes } from './Routes';
 
 function App() {

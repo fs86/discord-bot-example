@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { useAuth } from 'react-oidc-context';
 import { DiscordProfileButton } from '@components';
-import { Header, Navigation } from '@components/layout';
+import { getNavigationItems, Header, Navigation } from '@components/layout';
 import styled from 'styled-components';
 
 interface LayoutProps {
@@ -42,7 +42,7 @@ export function Layout({ children }: LayoutProps) {
     <Wrapper>
       <Header title="Dashboard" actionBarContent={<DiscordProfileButton size={32} />} />
       <Main>
-        <Navigation />
+        <Navigation items={getNavigationItems()} />
         <Content>{children}</Content>
       </Main>
     </Wrapper>

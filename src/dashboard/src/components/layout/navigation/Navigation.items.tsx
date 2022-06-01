@@ -1,13 +1,7 @@
-import { ReactElement } from 'react';
 import { useGuildSelection } from '@context-providers';
 import { ChartBar, Home } from '@styled-icons/fa-solid';
 
-export interface NavItemType {
-  to: string;
-  icon: ReactElement;
-  text: string;
-  visible?: boolean;
-}
+import { NavItemType } from './Navigation';
 
 export function getNavigationItems(): NavItemType[] {
   const { selectedGuild } = useGuildSelection();

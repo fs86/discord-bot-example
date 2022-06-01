@@ -1,10 +1,21 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import { NavLink, useMatch, useResolvedPath } from 'react-router-dom';
 import { Tooltip } from 'antd';
 import styled, { css } from 'styled-components';
 
-import { getNavigationItems, NavItemType } from './Navigation.items';
 import { NavigationToggleButton } from './NavigationToggleButton';
+
+export interface NavItemType {
+  to: string;
+  icon: ReactElement;
+  text: string;
+  visible?: boolean;
+}
+
+interface NavigationProps {
+  items: NavItemType[];
+  width?: number;
+}
 
 const Wrapper = styled.div<{ width: number }>`
   display: grid;
@@ -57,9 +68,9 @@ const StyledNavigationToggleButton = styled(NavigationToggleButton)<{ pos?: stri
   transition: 0.3s;
 `;
 
-export function Navigation() {
+export function Navigation({ items, width = 200 }: NavigationProps) {
   const [collapsed, setCollapsed] = useState(false);
-  const width = collapsed ? 50 : 200;
+  const navWidth = collapsed ? 50 : width;
 
   function toggleNavigation() {
     setCollapsed(!collapsed);
@@ -87,9 +98,9 @@ export function Navigation() {
   const toggleButtonPos = collapsed ? 'start' : 'end';
 
   return (
-    <Wrapper width={width}>
+    <Wrapper width={navWidth}>
       <StyledList>
-        {getNavigationItems().map((navItem) => (
+        {items.map((navItem) => (
           <NavItem {...navItem} key={navItem.to.replace(/[^a-zA-Z0-9]/g, '_')} />
         ))}
       </StyledList>

@@ -8,7 +8,7 @@ from services import PermissionService, SettingsService
 
 class Container(containers.DeclarativeContainer):
     modules = [".dependencies"]
-    packages = ["api.endpoints"]
+    packages = ["api.endpoints", "api.helpers"]
 
     wiring_config = containers.WiringConfiguration(modules=modules, packages=packages)
 

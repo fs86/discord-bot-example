@@ -7,21 +7,12 @@ from fastapi_discord import DiscordOAuthClient, Guild, User
 
 from api.containers import Container
 from api.exceptions import InvalidPermissions
-from api.viewmodels import UserProfileInfo, UserVm
 from services.permission_service import PermissionService
 
 
 @inject
-async def get_user(
-    request: Request,
-    discord: DiscordOAuthClient = Depends(Provide[Container.discord]),
-    permission_service: PermissionService = Depends(Provide[Container.permission_service]),
-):
-    user = await discord.user(request)
-    is_admin = await permission_service.is_admin(int(user.id))
-    user_profile_info = UserProfileInfo(is_admin=is_admin)
-
-    return UserVm.from_user(user, profile_info=user_profile_info)
+async def get_user(request: Request, discord: DiscordOAuthClient = Depends(Provide[Container.discord])):
+    return await discord.user(request)
 
 
 @inject

@@ -13,7 +13,7 @@ class UserProfileInfo:
         ...
 
 
-class UserVm(User):
+class UserResponse(User):
     profile_info: Optional[UserProfileInfo]
 
     def __init__(self, **data: Any):
@@ -21,7 +21,7 @@ class UserVm(User):
 
     @staticmethod
     def from_user(user: User, profile_info: UserProfileInfo = UserProfileInfo()):
-        user_vm = UserVm(**user.__dict__)
+        user_vm = UserResponse(**user.__dict__)
         user_vm.profile_info = profile_info
 
         return user_vm

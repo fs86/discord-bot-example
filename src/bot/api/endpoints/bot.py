@@ -7,6 +7,7 @@ from fastapi_discord import Guild
 
 from api.containers import Container
 from api.dependencies import get_guilds, get_user, is_admin, is_authenticated
+from api.requests import GuildSettings
 from api.viewmodels import UserVm
 from services import SettingsService
 
@@ -45,6 +46,9 @@ async def get_guilds(
 @router.post("/guilds/{guild_id}")
 @inject
 async def update_guild(
-    guild_id: int, prefix: str, settings_service: SettingsService = Depends(Provide[Container.settings_service])
+    guild_id: int,
+    guild_settings: GuildSettings,
+    settings_service: SettingsService = Depends(Provide[Container.settings_service]),
 ):
-    await settings_service.set(guild_id=guild_id, key="bot_prefix", value=prefix)
+    # await settings_service.set(guild_id=guild_id, key="bot_prefix", value=guild_settings.bot_prefix)
+    await settings_service.update(guild_id, guild_settings.__dict__)

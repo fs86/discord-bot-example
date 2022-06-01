@@ -50,6 +50,13 @@ class SettingsService:
         setattr(server_settings.values, key, value)
         await server_settings.save()
 
+    # DE: Aktualisert die Einstellungen für den angegebenen Server.
+    # EN: Updates the settings for the specified server.
+    async def update(self, guild_id: int, settings: dict):
+        server_settings = await self.__get_server_settings(guild_id)
+        server_settings.values.bot_prefix = settings["bot_prefix"]
+        server_settings.save()
+
     # DE: Prüft, für welche Server bereits Einstellungen gespeichert wurden und gibt die Server IDs als Liste zurück.
     # EN: Checks for which servers settings have already been saved and returns the server IDs as a list.
     async def which(self):

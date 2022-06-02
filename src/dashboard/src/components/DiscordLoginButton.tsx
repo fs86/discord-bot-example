@@ -1,7 +1,9 @@
 import { ButtonHTMLAttributes } from 'react';
 import { useAuth } from 'react-oidc-context';
-import { Discord as DiscordIcon } from '@styled-icons/fa-brands';
+// import { Discord as DiscordIcon } from '@styled-icons/fa-brands';
 import styled from 'styled-components';
+
+import { DiscordIcon } from './DiscordIcon';
 
 const StyledDiscordIcon = styled(DiscordIcon)`
   margin-right: 0.5rem;
@@ -40,7 +42,7 @@ export function DiscordLoginButton({
 
   return (
     <StyledDiscordButton onClick={handleOnClick} {...props}>
-      <StyledDiscordIcon size={24} />
+      <StyledDiscordIcon />
       {children}
     </StyledDiscordButton>
   );

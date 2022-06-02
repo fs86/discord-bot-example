@@ -19,11 +19,6 @@ export default defineConfig({
       output: {
         manualChunks: {
           antd: ['antd', '@ant-design/icons'],
-          styledicons: [
-            '@styled-icons/fa-brands',
-            '@styled-icons/fa-regular',
-            '@styled-icons/fa-solid',
-          ],
         },
       },
     },

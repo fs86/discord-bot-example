@@ -1,5 +1,6 @@
 import { ReactElement, useState } from 'react';
 import { NavLink, useMatch, useResolvedPath } from 'react-router-dom';
+import { ScrollContainer } from '@components/common/ScrollContainer';
 import { Tooltip } from 'antd';
 import styled, { css } from 'styled-components';
 
@@ -23,14 +24,30 @@ const Wrapper = styled.div<{ width: number }>`
   background-color: ${({ theme }) => theme.colors.navigation.background};
   color: ${({ theme }) => theme.colors.foreground};
   width: ${({ width }) => width}px;
-  padding-top: 1rem;
+  overflow: hidden;
   transition: 0.3s;
   margin: 0;
 `;
 
+// const Content = styled.div`
+//   height: 100%;
+//   overflow-y: auto;
+//   padding-top: 1rem;
+// `;
+
+const Content = styled(ScrollContainer)`
+  height: 100%;
+  padding-top: 1rem;
+`;
+
+const ToggleButtonWrapper = styled.div`
+  border-top: 3px solid ${({ theme }) => theme.colors.background};
+  display: flex;
+  justify-content: end;
+`;
+
 const StyledList = styled.ul`
   list-style-type: none;
-  border-bottom: 3px solid ${({ theme }) => theme.colors.background};
   padding: 0;
   margin: 0;
 `;
@@ -64,6 +81,7 @@ const StyledTooltip = styled(Tooltip)`
 
 const StyledNavigationToggleButton = styled(NavigationToggleButton)<{ pos?: string }>`
   width: 50px;
+  height: 50px;
   justify-self: end;
   transition: 0.3s;
 `;
@@ -99,16 +117,20 @@ export function Navigation({ items, width = 200 }: NavigationProps) {
 
   return (
     <Wrapper width={navWidth}>
-      <StyledList>
-        {items.map((navItem) => (
-          <NavItem {...navItem} key={navItem.to.replace(/[^a-zA-Z0-9]/g, '_')} />
-        ))}
-      </StyledList>
-      <StyledNavigationToggleButton
-        collapsed={collapsed}
-        pos={toggleButtonPos}
-        onClick={toggleNavigation}
-      />
+      <Content>
+        <StyledList>
+          {items.map((navItem) => (
+            <NavItem {...navItem} key={navItem.to.replace(/[^a-zA-Z0-9]/g, '_')} />
+          ))}
+        </StyledList>
+      </Content>
+      <ToggleButtonWrapper>
+        <StyledNavigationToggleButton
+          collapsed={collapsed}
+          pos={toggleButtonPos}
+          onClick={toggleNavigation}
+        />
+      </ToggleButtonWrapper>
     </Wrapper>
   );
 }

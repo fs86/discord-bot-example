@@ -19,5 +19,65 @@ export function getNavigationItems(): NavItemType[] {
       text: 'Servereinstellungen',
       visible: selectedGuild !== undefined,
     },
+    {
+      icon: <ChartBar size={iconSize} />,
+      to: '/dummy',
+      text: 'DUMMY',
+    },
+    {
+      icon: <ChartBar size={iconSize} />,
+      to: '/dummy',
+      text: 'DUMMY',
+    },
+    {
+      icon: <ChartBar size={iconSize} />,
+      to: '/dummy',
+      text: 'DUMMY',
+    },
+    {
+      icon: <ChartBar size={iconSize} />,
+      to: '/dummy',
+      text: 'DUMMY',
+    },
+    {
+      icon: <ChartBar size={iconSize} />,
+      to: '/dummy',
+      text: 'DUMMY',
+    },
+    {
+      icon: <ChartBar size={iconSize} />,
+      to: '/dummy',
+      text: 'DUMMY',
+    },
+    {
+      icon: <ChartBar size={iconSize} />,
+      to: '/dummy',
+      text: 'DUMMY',
+    },
+    {
+      icon: <ChartBar size={iconSize} />,
+      to: '/dummy',
+      text: 'DUMMY',
+    },
+    {
+      icon: <ChartBar size={iconSize} />,
+      to: '/dummy',
+      text: 'DUMMY',
+    },
+    {
+      icon: <ChartBar size={iconSize} />,
+      to: '/dummy',
+      text: 'DUMMY',
+    },
+    {
+      icon: <ChartBar size={iconSize} />,
+      to: '/dummy',
+      text: 'DUMMY',
+    },
+    {
+      icon: <ChartBar size={iconSize} />,
+      to: '/dummy',
+      text: 'DUMMY',
+    },
   ];
 }

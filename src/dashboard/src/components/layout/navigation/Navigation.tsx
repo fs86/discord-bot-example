@@ -103,12 +103,12 @@ export function Navigation({ items, width = 200 }: NavigationProps) {
     }
 
     return (
-      <StyledLink to={to} $isActive={match !== null}>
-        <StyledTooltip placement="right" title={tooltipText}>
+      <StyledTooltip placement="right" title={tooltipText}>
+        <StyledLink to={to} $isActive={match !== null}>
           {icon}
           {!collapsed && text}
-        </StyledTooltip>
-      </StyledLink>
+        </StyledLink>
+      </StyledTooltip>
     );
   }
 

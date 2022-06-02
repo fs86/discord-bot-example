@@ -117,7 +117,7 @@ export function Navigation({ items, width = 200 }: NavigationProps) {
 
   return (
     <Wrapper width={navWidth}>
-      <Content>
+      <Content autoHide>
         <StyledList>
           {items.map((navItem) => (
             <NavItem {...navItem} key={navItem.to.replace(/[^a-zA-Z0-9]/g, '_')} />

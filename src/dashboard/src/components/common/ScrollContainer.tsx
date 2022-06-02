@@ -8,12 +8,10 @@ interface ScrollContainerProps {
 
 const Wrapper = styled.div`
   overflow-y: auto;
-
   scrollbar-width: thin;
 
   &::-webkit-scrollbar {
-    width: 2px;
-    height: 2px;
+    width: 8px;
   }
 
   &::-webkit-scrollbar-button {
@@ -22,31 +20,19 @@ const Wrapper = styled.div`
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #e1e1e1;
-    border: 0px none #ffffff;
-    border-radius: 50px;
+    background: #77787b;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: #ffffff;
+    background: #656669;
   }
 
   &::-webkit-scrollbar-thumb:active {
-    background: #000000;
+    background: #434448;
   }
 
   &::-webkit-scrollbar-track {
-    background: #666666;
-    border: 0px none #ffffff;
-    border-radius: 50px;
-  }
-
-  &::-webkit-scrollbar-track:hover {
-    background: #666666;
-  }
-
-  &::-webkit-scrollbar-track:active {
-    background: #333333;
+    background: #1f2226;
   }
 
   &::-webkit-scrollbar-corner {

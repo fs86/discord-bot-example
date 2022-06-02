@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { useAuth } from 'react-oidc-context';
 import { DiscordProfileButton } from '@components';
+import { ScrollContainer } from '@components/common/ScrollContainer';
 import { getNavigationItems, Header, Navigation } from '@components/layout';
 import styled from 'styled-components';
 
@@ -20,7 +21,7 @@ const Main = styled.main`
   grid-template-columns: min-content 1fr;
 `;
 
-const Content = styled.div`
+const Content = styled(ScrollContainer)`
   background-color: ${({ theme }) => theme.colors.content.background};
   color: ${({ theme }) => theme.colors.foreground};
   padding: 1.5rem;

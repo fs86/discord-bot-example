@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 interface ScrollContainerProps {
   children: ReactNode;
-  autoHide?: boolean;
+  autoHideScrollbar?: boolean;
   className?: string;
 }
 
-const Wrapper = styled.div<{ autoHide: boolean }>`
+const Wrapper = styled.div<{ autoHideScrollbar: boolean }>`
   overflow-y: auto;
   scrollbar-width: thin;
 
@@ -19,7 +19,7 @@ const Wrapper = styled.div<{ autoHide: boolean }>`
 
   &::-webkit-scrollbar {
     width: 8px;
-    display: ${({ autoHide }) => (autoHide ? 'none' : 'block')};
+    display: ${({ autoHideScrollbar }) => (autoHideScrollbar ? 'none' : 'block')};
   }
 
   &::-webkit-scrollbar-button {
@@ -48,9 +48,13 @@ const Wrapper = styled.div<{ autoHide: boolean }>`
   }
 `;
 
-export function ScrollContainer({ children, autoHide = false, className }: ScrollContainerProps) {
+export function ScrollContainer({
+  children,
+  autoHideScrollbar = false,
+  className,
+}: ScrollContainerProps) {
   return (
-    <Wrapper className={className} autoHide={autoHide}>
+    <Wrapper className={className} autoHideScrollbar={autoHideScrollbar}>
       {children}
     </Wrapper>
   );

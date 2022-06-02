@@ -79,5 +79,20 @@ export function getNavigationItems(): NavItemType[] {
       to: '/dummy',
       text: 'DUMMY',
     },
+    {
+      icon: <ChartBar size={iconSize} />,
+      to: '/dummy',
+      text: 'DUMMY',
+    },
+    {
+      icon: <ChartBar size={iconSize} />,
+      to: '/dummy',
+      text: 'DUMMY',
+    },
+    {
+      icon: <ChartBar size={iconSize} />,
+      to: '/dummy',
+      text: 'DUMMY',
+    },
   ];
 }

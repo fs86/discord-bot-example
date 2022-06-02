@@ -1,6 +1,5 @@
 import { ReactElement, useState } from 'react';
 import { NavLink, useMatch, useResolvedPath } from 'react-router-dom';
-import { ScrollContainer } from '@components/common/ScrollContainer';
 import { Tooltip } from 'antd';
 import styled, { css } from 'styled-components';
 
@@ -29,15 +28,15 @@ const Wrapper = styled.div<{ width: number }>`
   margin: 0;
 `;
 
-// const Content = styled.div`
-//   height: 100%;
-//   overflow-y: auto;
-//   padding-top: 1rem;
-// `;
-
-const Content = styled(ScrollContainer)`
+const Content = styled.div`
   height: 100%;
+  overflow-y: auto;
   padding-top: 1rem;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const ToggleButtonWrapper = styled.div`
@@ -117,7 +116,7 @@ export function Navigation({ items, width = 200 }: NavigationProps) {
 
   return (
     <Wrapper width={navWidth}>
-      <Content autoHideScrollbar>
+      <Content>
         <StyledList>
           {items.map((navItem) => (
             <NavItem {...navItem} key={navItem.to.replace(/[^a-zA-Z0-9]/g, '_')} />

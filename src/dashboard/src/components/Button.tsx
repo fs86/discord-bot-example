@@ -8,7 +8,6 @@ interface ButtonProps {
   className?: string;
 }
 
-// eslint-disable-next-line no-empty-pattern
 export function Button({ type, onClick, children, ...props }: ButtonProps) {
   return (
     <AntdButton type={type} onClick={onClick} {...props}>

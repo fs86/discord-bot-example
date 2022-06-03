@@ -7,30 +7,26 @@ from fastapi import APIRouter, Depends
 from fastapi_discord import Guild
 
 from api.containers import Container
-from api.dependencies import get_guilds, get_user, is_admin, is_authenticated
+from api.dependencies import get_user, get_user_guilds, is_admin, is_authenticated
+from api.exceptions import RequiresGuildOwner
 from api.helpers.user_helper import get_profile_info
 from api.requests import GuildSettingsRequest
-from api.responses.user_response import UserResponse
 from services import SettingsService
+from services.permission_service import PermissionService
 
 router = APIRouter(
-    prefix="/bot",
-    tags=["Bot"],
-    dependencies=[Depends(is_admin)],
+    prefix="/guilds",
+    tags=["Guilds"],
+    dependencies=[Depends(is_authenticated)],
     responses={404: {"description": "Not found"}},
 )
 
 
-@router.get("/")
-async def get_info():
-    ...
-
-
-@router.get("/guilds", dependencies=[Depends(is_authenticated)])
+@router.get("/", dependencies=[Depends(is_authenticated)])
 @inject
 async def get_guilds(
     user: User = Depends(get_user),
-    guilds: List[Guild] = Depends(get_guilds),
+    guilds: List[Guild] = Depends(get_user_guilds),
     ipc_client: ipc.Client = Depends(Provide[Container.ipc_client]),
 ):
     bot_guilds = await ipc_client.request("get_guild_ids")
@@ -44,15 +40,20 @@ async def get_guilds(
     return bot_guilds
 
 
-# /bot/guilds/43432456837573537
-
-
 @router.post("/guilds/{guild_id}")
 @inject
 async def update_guild(
     guild_id: int,
     request: GuildSettingsRequest,
+    user_guilds: List[Guild] = Depends(get_user_guilds),
     settings_service: SettingsService = Depends(Provide[Container.settings_service]),
 ):
+    guilds_with_owner_rights = [int(guild.id) for guild in user_guilds if guild.owner]
+
+    if guild_id not in guilds_with_owner_rights:
+        raise RequiresGuildOwner
+
     settings = request.__dict__
-    await settings_service.update(guild_id, settings)
+    # await settings_service.update(guild_id, settings)
+
+    return "Ok"

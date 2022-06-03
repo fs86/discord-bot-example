@@ -16,7 +16,7 @@ async def get_user(request: Request, discord: DiscordOAuthClient = Depends(Provi
 
 
 @inject
-async def get_guilds(
+async def get_user_guilds(
     request: Request, discord: DiscordOAuthClient = Depends(Provide[Container.discord])
 ) -> List[Guild]:
     return await discord.guilds(request)

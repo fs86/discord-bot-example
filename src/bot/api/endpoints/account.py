@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, Depends
 from fastapi_discord import Guild, User
 
-from api.dependencies import get_guilds, get_user, is_authenticated
+from api.dependencies import get_user_guilds, get_user, is_authenticated
 from api.helpers import get_profile_info
 from api.responses import UserResponse
 
@@ -22,5 +22,5 @@ async def get_info(user: User = Depends(get_user)):
 
 
 @router.get("/guilds", response_model=List[Guild])
-async def get_guilds(guilds=Depends(get_guilds)):
+async def get_user_guilds(guilds=Depends(get_user_guilds)):
     return guilds

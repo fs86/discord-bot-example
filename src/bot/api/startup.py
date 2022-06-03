@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from fastapi_discord import Unauthorized
 
 from api.containers import Container
-from api.exceptions import InvalidPermissions
+from api.exceptions import InvalidPermissions, RequiresGuildOwner
 from api.routes import router as api_router
 
 app = FastAPI()
@@ -27,5 +27,6 @@ async def unauthorized_error_handler(_, __):
 
 
 @app.exception_handler(InvalidPermissions)
+@app.exception_handler(RequiresGuildOwner)
 async def invalid_permissions_error_handler(_, __):
     return JSONResponse({"error": "Forbidden"}, status_code=403)

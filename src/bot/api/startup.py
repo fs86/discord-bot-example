@@ -7,7 +7,7 @@ from api.containers import Container
 from api.exceptions import InvalidPermissions, RequiresGuildOwner
 from api.routes import router as api_router
 
-app = FastAPI()
+app = FastAPI(swagger_ui_parameters={"persistAuthorization": True})
 app.container = Container()
 
 app.add_middleware(

@@ -1,8 +1,9 @@
 import { ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@components';
+import { FormField } from '@components/common/FormField';
 import { useGuildSelection } from '@context-providers/GuildSelectionContext';
-import { updateGuild } from '@services/botService';
+import { updateGuild } from '@services/guildService';
 import { Input, Tabs } from 'antd';
 import styled from 'styled-components';
 
@@ -22,7 +23,7 @@ export function GuildSettings() {
 
   async function handleOnSaveClick() {
     if (selectedGuild?.id) {
-      await updateGuild(selectedGuild?.id, botPrefix);
+      await updateGuild(selectedGuild?.id, { botPrefix: botPrefix });
     }
   }
 
@@ -34,10 +35,15 @@ export function GuildSettings() {
         <>
           <Tabs>
             <TabPane tab={t('tabs.general.title')} key="general">
-              <Input
-                addonBefore={t('tabs.general.botPrefixLabel')}
-                onChange={handleOnPrefixChange}
-              />
+              <FormField>
+                <Input
+                  addonBefore={t('tabs.general.botPrefixLabel')}
+                  onChange={handleOnPrefixChange}
+                />
+              </FormField>
+              <FormField>
+                <Input addonBefore={t('tabs.general.botDisplayName')} />
+              </FormField>
             </TabPane>
             <TabPane tab={t('tabs.roles.title')} key="roles">
               ¯\_(ツ)_/¯

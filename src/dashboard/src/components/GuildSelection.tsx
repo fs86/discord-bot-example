@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useQuery } from 'react-query';
 import { useGuildSelection } from '@context-providers/GuildSelectionContext';
-import { getGuilds } from '@services/botService';
+import { getGuilds } from '@services/guildService';
 import { Guild } from '@viewmodels/discord';
 
 import { Select, SelectProps } from './Select';

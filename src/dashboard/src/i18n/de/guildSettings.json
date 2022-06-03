@@ -3,7 +3,8 @@
   "tabs": {
     "general": {
       "title": "Allgemeine Einstellungen",
-      "botPrefixLabel": "Bot Prefix:"
+      "botPrefixLabel": "Prefix:",
+      "botDisplayName": "Anzeigename:"
     },
     "roles": {
       "title": "Rollenzuordnung"

@@ -1,25 +1,28 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
+type ScrollbarBehavior = 'visible' | 'hidden' | 'hideOnBlur';
+
 interface ScrollContainerProps {
   children: ReactNode;
-  autoHideScrollbar?: boolean;
+  scrollbar?: ScrollbarBehavior;
   className?: string;
 }
 
-const Wrapper = styled.div<{ autoHideScrollbar: boolean }>`
+const Wrapper = styled.div<{ scrollbar: ScrollbarBehavior }>`
   overflow-y: auto;
-  scrollbar-width: thin;
+  scrollbar-width: ${({ scrollbar }) => (scrollbar == 'hidden' ? 'none' : 'thin')};
 
   &:hover {
     &::-webkit-scrollbar {
-      display: block;
+      display: ${({ scrollbar }) => (scrollbar == 'hidden' ? 'none' : 'block')};
     }
   }
 
   &::-webkit-scrollbar {
     width: 8px;
-    display: ${({ autoHideScrollbar }) => (autoHideScrollbar ? 'none' : 'block')};
+    display: ${({ scrollbar }) =>
+      scrollbar === 'hidden' || scrollbar === 'hideOnBlur' ? 'none' : 'block'};
   }
 
   &::-webkit-scrollbar-button {
@@ -50,11 +53,11 @@ const Wrapper = styled.div<{ autoHideScrollbar: boolean }>`
 
 export function ScrollContainer({
   children,
-  autoHideScrollbar = false,
+  scrollbar = 'visible',
   className,
 }: ScrollContainerProps) {
   return (
-    <Wrapper className={className} autoHideScrollbar={autoHideScrollbar}>
+    <Wrapper scrollbar={scrollbar} className={className}>
       {children}
     </Wrapper>
   );

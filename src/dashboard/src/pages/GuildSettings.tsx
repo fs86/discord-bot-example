@@ -2,6 +2,7 @@ import { ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@components';
 import { FormField } from '@components/common/FormField';
+import { NotImplemented } from '@components/common/NotImplemented';
 import { useGuildSelection } from '@context-providers/GuildSelectionContext';
 import { updateGuild } from '@services/guildService';
 import { Input, Tabs } from 'antd';
@@ -46,7 +47,7 @@ export function GuildSettings() {
               </FormField>
             </TabPane>
             <TabPane tab={t('tabs.roles.title')} key="roles">
-              ¯\_(ツ)_/¯
+              <NotImplemented />
             </TabPane>
           </Tabs>
           <SaveButton type="primary" onClick={handleOnSaveClick}>

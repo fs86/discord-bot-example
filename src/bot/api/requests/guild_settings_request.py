@@ -1,11 +1,6 @@
-from pydantic import BaseModel
-
-from api.utils import to_camel
+from .common import BaseRequest
 
 
-class GuildSettingsRequest(BaseModel):
+class GuildSettingsRequest(BaseRequest):
     bot_prefix: str
     bot_display_name: str
-
-    class Config:
-        alias_generator = to_camel

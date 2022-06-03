@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 const ChartContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, min-content);
   text-align: center;
 `;
 
@@ -36,17 +36,7 @@ export function Home() {
       <ChartContainer>
         <div>
           <h3>Join / Leave Verhalten der letzten 7 Tage</h3>
-          <LineChart
-            data={leaveJoinStats}
-            height={300}
-            width={500}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
+          <LineChart data={leaveJoinStats} height={300} width={500} margin={{ left: -15 }}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="day" />
             <YAxis />

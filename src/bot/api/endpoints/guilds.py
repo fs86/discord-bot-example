@@ -40,7 +40,7 @@ async def get_guilds(
     return bot_guilds
 
 
-@router.post("/guilds/{guild_id}")
+@router.post("/{guild_id}")
 @inject
 async def update_guild(
     guild_id: int,

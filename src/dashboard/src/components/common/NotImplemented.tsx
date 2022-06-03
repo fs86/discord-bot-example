@@ -6,6 +6,7 @@ const Wrapper = styled.div`
   grid-template-rows: repeat(2, min-content);
   border: 2px solid yellow;
   border-radius: 5px;
+  white-space: pre-line;
 `;
 
 const Header = styled.div`

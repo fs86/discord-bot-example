@@ -1,8 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button } from '@components';
-import { FormField } from '@components/common/FormField';
-import { NotImplemented } from '@components/common/NotImplemented';
+import { FormField, NotImplemented } from '@components/common';
 import { useGuildSelection } from '@context-providers/GuildSelectionContext';
 import { updateGuild } from '@services/guildService';
 import { Input, Tabs } from 'antd';

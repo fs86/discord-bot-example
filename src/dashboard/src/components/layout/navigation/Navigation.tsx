@@ -1,6 +1,6 @@
 import { ReactElement, useState } from 'react';
 import { NavLink, useMatch, useResolvedPath } from 'react-router-dom';
-import { ScrollContainer } from '@components/common/ScrollContainer';
+import { ScrollContainer } from '@components/common';
 import { Tooltip } from 'antd';
 import styled, { css } from 'styled-components';
 

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { useAuth } from 'react-oidc-context';
 import { DiscordProfileButton } from '@components';
-import { ScrollContainer } from '@components/common/ScrollContainer';
+import { ScrollContainer } from '@components/common';
 import { getNavigationItems, Header, Navigation } from '@components/layout';
 import styled from 'styled-components';
 

@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   border: 2px solid yellow;
   border-radius: 5px;
   white-space: pre-line;
+  margin-bottom: 1rem;
 `;
 
 const Header = styled.div`

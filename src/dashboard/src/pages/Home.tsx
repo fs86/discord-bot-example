@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { NotImplemented } from '@components/common';
 
 export function Home() {
   const { t } = useTranslation('home');
@@ -6,6 +7,7 @@ export function Home() {
   return (
     <>
       <h1>{t('pageTitle')}</h1>
+      <NotImplemented />
       Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
       invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
       justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem

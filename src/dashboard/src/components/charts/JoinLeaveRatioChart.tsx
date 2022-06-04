@@ -21,8 +21,14 @@ export function JoinLeaveRatioChart({ title, data }: JoinLeaveRatioChartProps) {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="joins" stroke="#82ca9d" activeDot={{ r: 8 }} />
-        <Line type="monotone" dataKey="leaves" stroke="#8884d8" activeDot={{ r: 8 }} />
+        <Line type="monotone" dataKey="joins" name="Joins" stroke="#82ca9d" activeDot={{ r: 6 }} />
+        <Line
+          type="monotone"
+          dataKey="leaves"
+          name="Leaves"
+          stroke="#8884d8"
+          activeDot={{ r: 6 }}
+        />
       </LineChart>
     </Card>
   );

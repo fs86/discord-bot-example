@@ -17,13 +17,13 @@ function getDate(subtractDays: number) {
 }
 
 const joinLeaveStats = [
-  { day: getDate(6), joins: 2400, leaves: 4000 },
-  { day: getDate(5), joins: 1398, leaves: 3000 },
-  { day: getDate(4), joins: 9800, leaves: 2000 },
-  { day: getDate(3), joins: 3908, leaves: 2780 },
-  { day: getDate(2), joins: 4800, leaves: 1890 },
-  { day: getDate(1), joins: 3800, leaves: 2390 },
-  { day: getDate(0), joins: 4300, leaves: 3490 },
+  { day: getDate(6), joins: 98, leaves: 2 },
+  { day: getDate(5), joins: 82, leaves: 12 },
+  { day: getDate(4), joins: 45, leaves: 12 },
+  { day: getDate(3), joins: 78, leaves: 45 },
+  { day: getDate(2), joins: 14, leaves: 52 },
+  { day: getDate(1), joins: 130, leaves: 19 },
+  { day: getDate(0), joins: 92, leaves: 9 },
 ];
 
 export function Home() {

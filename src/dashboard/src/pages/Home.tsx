@@ -34,7 +34,14 @@ export function Home() {
       <h1>{t('pageTitle')}</h1>
       <NotImplemented />
       <ChartContainer>
-        <JoinLeaveRatioChart title={t('charts.joinLeaveRatio.title')} data={joinLeaveStats} />
+        <JoinLeaveRatioChart
+          title={t('charts.joinLeaveRatio.title')}
+          lines={{
+            joins: { dataKey: 'joins', name: 'Joins' },
+            leaves: { dataKey: 'leaves', name: 'Leaves' },
+          }}
+          data={joinLeaveStats}
+        />
       </ChartContainer>
     </>
   );

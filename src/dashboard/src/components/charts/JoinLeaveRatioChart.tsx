@@ -1,18 +1,24 @@
 import { Card } from '@components';
 import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 
-type JoinLeaveDataItem = {
+interface DataItem {
   day: string;
   joins: number;
   leaves: number;
-};
+}
+
+interface LineDefinition {
+  dataKey: string;
+  name: string;
+}
 
 interface JoinLeaveRatioChartProps {
   title?: string;
-  data: JoinLeaveDataItem[];
+  data: DataItem[];
+  lines: { joins: LineDefinition; leaves: LineDefinition };
 }
 
-export function JoinLeaveRatioChart({ title, data }: JoinLeaveRatioChartProps) {
+export function JoinLeaveRatioChart({ title, data, lines }: JoinLeaveRatioChartProps) {
   return (
     <Card title={title} bordered={false}>
       <LineChart data={data} height={300} width={500} margin={{ left: -15 }}>
@@ -21,11 +27,17 @@ export function JoinLeaveRatioChart({ title, data }: JoinLeaveRatioChartProps) {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="joins" name="Joins" stroke="#82ca9d" activeDot={{ r: 6 }} />
         <Line
           type="monotone"
-          dataKey="leaves"
-          name="Leaves"
+          dataKey={lines.joins.dataKey}
+          name={lines.joins.name}
+          stroke="#82ca9d"
+          activeDot={{ r: 6 }}
+        />
+        <Line
+          type="monotone"
+          dataKey={lines.leaves.dataKey}
+          name={lines.leaves.name}
           stroke="#8884d8"
           activeDot={{ r: 6 }}
         />

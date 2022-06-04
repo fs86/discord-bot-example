@@ -21,7 +21,7 @@ interface JoinLeaveRatioChartProps {
 export function JoinLeaveRatioChart({ title, data, lines }: JoinLeaveRatioChartProps) {
   return (
     <Card title={title} bordered={false}>
-      <LineChart data={data} height={300} width={500} margin={{ left: -15 }}>
+      <LineChart data={data} height={300} width={500} margin={{ left: -30 }}>
         <CartesianGrid stroke="#575757" strokeDasharray="3 3" />
         <XAxis dataKey="day" />
         <YAxis />

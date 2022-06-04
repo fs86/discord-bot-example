@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { JoinLeaveRatioChart } from '@components/charts';
+import { JoinLeaveRatioChart, MessagesChart } from '@components/charts';
 import { NotImplemented } from '@components/common';
 import { DateTime } from 'luxon';
 import styled from 'styled-components';
@@ -8,6 +8,7 @@ const ChartContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, min-content);
   text-align: center;
+  gap: 2rem;
 `;
 
 const now = DateTime.now();
@@ -36,12 +37,13 @@ export function Home() {
       <ChartContainer>
         <JoinLeaveRatioChart
           title={t('charts.joinLeaveRatio.title')}
-          lines={{
-            joins: { dataKey: 'joins', name: 'Joins' },
-            leaves: { dataKey: 'leaves', name: 'Leaves' },
-          }}
           data={joinLeaveStats}
+          lines={{
+            joins: { dataKey: 'joins', name: t('charts.joinLeaveRatio.lines.joins') },
+            leaves: { dataKey: 'leaves', name: t('charts.joinLeaveRatio.lines.leaves') },
+          }}
         />
+        <MessagesChart title={t('charts.messages.title')} />
       </ChartContainer>
     </>
   );

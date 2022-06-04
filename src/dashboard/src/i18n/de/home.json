@@ -2,7 +2,14 @@
   "pageTitle": "Home",
   "charts": {
     "joinLeaveRatio": {
-      "title": "Join / Leave Verhalten der letzten 7 Tage"
+      "title": "Join / Leave Verhalten der letzten 7 Tage",
+      "lines": {
+        "joins": "Server beigetreten",
+        "leaves": "Server verlassen"
+      }
+    },
+    "messages": {
+      "title": "Nachrichten der letzten 7 Tage"
     }
   }
 }

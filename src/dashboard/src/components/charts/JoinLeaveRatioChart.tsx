@@ -16,12 +16,20 @@ interface JoinLeaveRatioChartProps {
   title?: string;
   data: DataItem[];
   lines: { joins: LineDefinition; leaves: LineDefinition };
+  width?: number;
+  height?: number;
 }
 
-export function JoinLeaveRatioChart({ title, data, lines }: JoinLeaveRatioChartProps) {
+export function JoinLeaveRatioChart({
+  title,
+  data,
+  lines,
+  width = 500,
+  height = 300,
+}: JoinLeaveRatioChartProps) {
   return (
     <Card title={title} bordered={false}>
-      <LineChart data={data} height={300} width={500} margin={{ left: -30 }}>
+      <LineChart data={data} height={height} width={width} margin={{ left: -30 }}>
         <CartesianGrid stroke="#575757" strokeDasharray="3 3" />
         <XAxis dataKey="day" />
         <YAxis />

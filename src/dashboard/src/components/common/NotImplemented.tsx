@@ -4,8 +4,8 @@ import styled from 'styled-components';
 const Wrapper = styled.div`
   display: grid;
   grid-template-rows: repeat(3, min-content);
-  border: 2px solid yellow;
-  border-radius: 5px;
+  border: 1px solid yellow;
+  border-radius: 3px;
   white-space: pre-line;
   margin-bottom: 1rem;
 `;

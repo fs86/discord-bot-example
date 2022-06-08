@@ -15,6 +15,7 @@ export interface NavItemType {
 
 interface NavigationProps {
   items: NavItemType[];
+  collapsedWidth?: number;
   width?: number;
 }
 
@@ -48,10 +49,11 @@ const StyledList = styled.ul`
 
 const StyledLink = styled(NavLink)<{ $isActive?: boolean }>`
   display: block;
-  padding: 1rem 0;
   white-space: nowrap;
   transition: 0.3s;
   color: ${({ theme }) => theme.colors.foreground};
+  height: 50px;
+  align-items: center;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.navigation.itemHoveredBackground};
@@ -68,21 +70,21 @@ const StyledLink = styled(NavLink)<{ $isActive?: boolean }>`
   }
 `;
 
-const StyledTooltip = styled(Tooltip)`
+const StyledTooltip = styled(Tooltip)<{ collapsedWidth: number }>`
   display: grid;
-  grid-template-columns: 50px 1fr;
+  grid-template-columns: ${({ collapsedWidth }) => collapsedWidth}px 1fr;
 `;
 
-const StyledNavigationToggleButton = styled(NavigationToggleButton)<{ pos?: string }>`
-  width: 50px;
+const StyledNavigationToggleButton = styled(NavigationToggleButton)<{ collapsedWidth: number }>`
+  width: ${({ collapsedWidth }) => collapsedWidth}px;
   height: 50px;
   justify-self: end;
   transition: 0.3s;
 `;
 
-export function Navigation({ items, width = 200 }: NavigationProps) {
+export function Navigation({ items, collapsedWidth = 50, width = 200 }: NavigationProps) {
   const [collapsed, setCollapsed] = useState(false);
-  const navWidth = collapsed ? 50 : width;
+  const navWidth = collapsed ? collapsedWidth : width;
 
   function toggleNavigation() {
     setCollapsed(!collapsed);
@@ -98,7 +100,7 @@ export function Navigation({ items, width = 200 }: NavigationProps) {
     }
 
     return (
-      <StyledTooltip placement="right" title={tooltipText}>
+      <StyledTooltip collapsedWidth={collapsedWidth} placement="right" title={tooltipText}>
         <StyledLink to={to} $isActive={match !== null}>
           {icon}
           {!collapsed && text}
@@ -106,8 +108,6 @@ export function Navigation({ items, width = 200 }: NavigationProps) {
       </StyledTooltip>
     );
   }
-
-  const toggleButtonPos = collapsed ? 'start' : 'end';
 
   return (
     <Wrapper width={navWidth}>
@@ -121,7 +121,7 @@ export function Navigation({ items, width = 200 }: NavigationProps) {
       <ToggleButtonWrapper>
         <StyledNavigationToggleButton
           collapsed={collapsed}
-          pos={toggleButtonPos}
+          collapsedWidth={collapsedWidth}
           onClick={toggleNavigation}
         />
       </ToggleButtonWrapper>

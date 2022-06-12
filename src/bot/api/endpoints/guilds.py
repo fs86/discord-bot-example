@@ -72,3 +72,11 @@ async def get_guild_settings(
 ):
     settings = await settings_service.get(guild_id)
     return settings.values
+
+
+@router.get("/{guild_id}/channels")
+async def get_guild_channels(guild_id: int):
+    return [
+        {"id": 476236636437667, "name": "Channel 1"},
+        {"id": 456743563786774, "name": "Channel 2"},
+    ]

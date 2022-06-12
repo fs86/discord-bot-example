@@ -1,5 +1,5 @@
 import { endpoint } from '@helpers/apiHelper';
-import { GuildSettings } from '@viewmodels';
+import { GuildChannel, GuildSettings } from '@viewmodels';
 import { Guild } from '@viewmodels/discord';
 import axios from 'axios';
 
@@ -14,5 +14,10 @@ export async function updateGuildSettings(guildId: string, settings: GuildSettin
 
 export async function getGuildSettings(guildId: string) {
   const response = await axios.get<GuildSettings>(endpoint(`/guilds/${guildId}/settings`));
+  return response.data;
+}
+
+export async function getGuildChannels(guildId: string) {
+  const response = await axios.get<GuildChannel[]>(endpoint(`/guilds/${guildId}/channels`));
   return response.data;
 }

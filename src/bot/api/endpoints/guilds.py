@@ -60,11 +60,6 @@ async def update_guild_settings(
     return "Ok"
 
 
-class TestModel(BaseModel):
-    bot_prefix: str
-    bot_display_name: str
-
-
 @router.get("/{guild_id}/settings", response_model=GuildSettingsResponse, response_model_exclude_unset=True)
 @inject
 async def get_guild_settings(

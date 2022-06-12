@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { Button } from '@components';
@@ -18,9 +18,17 @@ export function GuildSettingsPage() {
   const { selectedGuild } = useGuildSelection();
   const [guildSettings, setGuildSettings] = useState<GuildSettings>();
 
+  // useQuery(
+  //   ['getGuilds', selectedGuild?.id],
+  //   () => (selectedGuild?.id ? getGuildSettings(selectedGuild?.id) : undefined),
+  //   { onSuccess: onGuildSettingsLoaded }
+  // );
+
   useQuery(
     ['getGuilds', selectedGuild?.id],
-    () => (selectedGuild?.id ? getGuildSettings(selectedGuild?.id) : undefined),
+    function () {
+      return selectedGuild?.id ? getGuildSettings(selectedGuild?.id) : undefined;
+    },
     { onSuccess: onGuildSettingsLoaded }
   );
 
@@ -40,10 +48,6 @@ export function GuildSettingsPage() {
       updateGuildSettings(selectedGuild?.id, guildSettings);
     }
   }
-
-  useEffect(() => {
-    console.log(guildSettings);
-  }, [guildSettings]);
 
   const { TabPane } = Tabs;
 

@@ -18,17 +18,9 @@ export function GuildSettingsPage() {
   const { selectedGuild } = useGuildSelection();
   const [guildSettings, setGuildSettings] = useState<GuildSettings>();
 
-  // useQuery(
-  //   ['getGuilds', selectedGuild?.id],
-  //   () => (selectedGuild?.id ? getGuildSettings(selectedGuild?.id) : undefined),
-  //   { onSuccess: onGuildSettingsLoaded }
-  // );
-
   useQuery(
     ['getGuilds', selectedGuild?.id],
-    function () {
-      return selectedGuild?.id ? getGuildSettings(selectedGuild?.id) : undefined;
-    },
+    () => (selectedGuild?.id ? getGuildSettings(selectedGuild?.id) : undefined),
     { onSuccess: onGuildSettingsLoaded }
   );
 

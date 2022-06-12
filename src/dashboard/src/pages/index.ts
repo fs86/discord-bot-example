@@ -1,4 +1,4 @@
 export * from './common/404';
-export * from './GuildSettings';
-export * from './Home';
+export * from './GuildSettingsPage';
 export * from './LandingPage';
+export * from './OverviewPage';

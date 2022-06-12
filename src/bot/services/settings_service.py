@@ -55,6 +55,7 @@ class SettingsService:
     async def update(self, guild_id: int, settings: dict[str, Any]):
         server_settings = await self.__get_server_settings(guild_id)
         server_settings.values.bot_prefix = settings["bot_prefix"]
+        server_settings.values.bot_display_name = settings["bot_display_name"]
         server_settings.save()
 
     # DE: Prüft, für welche Server bereits Einstellungen gespeichert wurden und gibt die Server IDs als Liste zurück.

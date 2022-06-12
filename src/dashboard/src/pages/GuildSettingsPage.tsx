@@ -1,9 +1,11 @@
 import { ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useQuery } from 'react-query';
 import { Button } from '@components';
 import { FormField, NotImplemented } from '@components/common';
 import { useGuildSelection } from '@context-providers/GuildSelectionContext';
-import { updateGuild } from '@services/guildService';
+import { getGuildSettings, updateGuildSettings } from '@services/guildService';
+import { GuildSettings } from '@viewmodels';
 import { Input, Tabs } from 'antd';
 import styled from 'styled-components';
 
@@ -11,21 +13,33 @@ const SaveButton = styled(Button)`
   margin-top: 1rem;
 `;
 
-export function GuildSettings() {
+export function GuildSettingsPage() {
   const { t } = useTranslation('guildSettings');
   const { selectedGuild } = useGuildSelection();
-  const [botPrefix, setBotPrefix] = useState('');
+  const { data } = useQuery(
+    ['getGuilds', selectedGuild?.id],
+    () => (selectedGuild?.id ? getGuildSettings(selectedGuild?.id) : undefined),
+    { onSuccess: onGuildSettingsLoaded }
+  );
+
+  function onGuildSettingsLoaded(data: GuildSettings) {
+    debugger;
+    console.log(data);
+  }
+
+  //const [botPrefix, setBotPrefix] = useState('');
+  // const [guildSettings, setGuildSettings] = useState<GuildSettings>();
   const { TabPane } = Tabs;
 
-  function handleOnPrefixChange(event: ChangeEvent<HTMLInputElement>) {
-    setBotPrefix(event.target.value);
-  }
+  // function handleOnPrefixChange(event: ChangeEvent<HTMLInputElement>) {
+  //   setBotPrefix(event.target.value);
+  // }
 
-  async function handleOnSaveClick() {
-    if (selectedGuild?.id) {
-      await updateGuild(selectedGuild?.id, { botPrefix: botPrefix });
-    }
-  }
+  // async function handleOnSaveClick() {
+  //   if (selectedGuild?.id) {
+  //     await updateGuildSettings(selectedGuild?.id, { botPrefix: botPrefix });
+  //   }
+  // }
 
   return (
     <>
@@ -38,7 +52,7 @@ export function GuildSettings() {
               <FormField>
                 <Input
                   addonBefore={t('tabs.general.botPrefixLabel')}
-                  onChange={handleOnPrefixChange}
+                  // onChange={handleOnPrefixChange}
                 />
               </FormField>
               <FormField>
@@ -49,7 +63,7 @@ export function GuildSettings() {
               <NotImplemented />
             </TabPane>
           </Tabs>
-          <SaveButton type="primary" onClick={handleOnSaveClick}>
+          <SaveButton type="primary" onClick={() => console.log('test')}>
             {t('saveButton')}
           </SaveButton>
         </>

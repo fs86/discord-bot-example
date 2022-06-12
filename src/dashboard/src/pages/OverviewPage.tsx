@@ -27,7 +27,7 @@ const joinLeaveStats = [
   { day: getDate(0), joins: 92, leaves: 9 },
 ];
 
-export function Home() {
+export function OverviewPage() {
   const { t } = useTranslation('home');
 
   return (

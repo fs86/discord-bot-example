@@ -5,14 +5,15 @@ from discord import User
 from discord.ext import ipc
 from fastapi import APIRouter, Depends
 from fastapi_discord import Guild
+from pydantic import BaseModel
 
 from api.containers import Container
-from api.dependencies import get_user, get_user_guilds, is_admin, is_authenticated
+from api.dependencies import get_user, get_user_guilds, is_authenticated
 from api.exceptions import RequiresGuildOwner
 from api.helpers.user_helper import get_profile_info
 from api.requests import GuildSettingsRequest
+from api.responses.guild_settings_response import GuildSettingsResponse
 from services import SettingsService
-from services.permission_service import PermissionService
 
 router = APIRouter(
     prefix="/guilds",
@@ -40,9 +41,9 @@ async def get_guilds(
     return bot_guilds
 
 
-@router.post("/{guild_id}")
+@router.post("/{guild_id}/settings")
 @inject
-async def update_guild(
+async def update_guild_settings(
     guild_id: int,
     request: GuildSettingsRequest,
     user_guilds: List[Guild] = Depends(get_user_guilds),
@@ -54,6 +55,20 @@ async def update_guild(
         raise RequiresGuildOwner
 
     settings = request.__dict__
-    # await settings_service.update(guild_id, settings)
+    await settings_service.update(guild_id, settings)
 
     return "Ok"
+
+
+class TestModel(BaseModel):
+    bot_prefix: str
+    bot_display_name: str
+
+
+@router.get("/{guild_id}/settings", response_model=GuildSettingsResponse, response_model_exclude_unset=True)
+@inject
+async def get_guild_settings(
+    guild_id: int, settings_service: SettingsService = Depends(Provide[Container.settings_service])
+):
+    settings = await settings_service.get(guild_id)
+    return settings.values

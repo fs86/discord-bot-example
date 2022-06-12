@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { useRoutes } from 'react-router-dom';
 import { useGuildSelection } from '@context-providers/GuildSelectionContext';
-import { GuildSettings, Home, NotFound } from '@pages';
+import { GuildSettingsPage, NotFound, OverviewPage } from '@pages';
 
 function when(
   condition: boolean,
@@ -15,8 +15,8 @@ export function Routes() {
   const { selectedGuild } = useGuildSelection();
 
   const routes = useRoutes([
-    { path: '/', element: <Home /> },
-    { path: '/guild', element: when(selectedGuild !== undefined, <GuildSettings />) },
+    { path: '/', element: <OverviewPage /> },
+    { path: '/guild', element: when(selectedGuild !== undefined, <GuildSettingsPage />) },
     { path: '*', element: <NotFound /> },
   ]);
 

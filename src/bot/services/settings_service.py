@@ -56,7 +56,7 @@ class SettingsService:
         server_settings = await self.__get_server_settings(guild_id)
         server_settings.values.bot_prefix = settings["bot_prefix"]
         server_settings.values.bot_display_name = settings["bot_display_name"]
-        server_settings.save()
+        await server_settings.save()
 
     # DE: Prüft, für welche Server bereits Einstellungen gespeichert wurden und gibt die Server IDs als Liste zurück.
     # EN: Checks for which servers settings have already been saved and returns the server IDs as a list.

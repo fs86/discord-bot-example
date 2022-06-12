@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { Button } from '@components';
@@ -16,30 +16,36 @@ const SaveButton = styled(Button)`
 export function GuildSettingsPage() {
   const { t } = useTranslation('guildSettings');
   const { selectedGuild } = useGuildSelection();
-  const { data } = useQuery(
+  const [guildSettings, setGuildSettings] = useState<GuildSettings>();
+
+  useQuery(
     ['getGuilds', selectedGuild?.id],
     () => (selectedGuild?.id ? getGuildSettings(selectedGuild?.id) : undefined),
     { onSuccess: onGuildSettingsLoaded }
   );
 
   function onGuildSettingsLoaded(data: GuildSettings) {
-    debugger;
-    console.log(data);
+    setGuildSettings(data);
   }
 
-  //const [botPrefix, setBotPrefix] = useState('');
-  // const [guildSettings, setGuildSettings] = useState<GuildSettings>();
+  function updateGuildSettingsState(prop: string, value: string) {
+    setGuildSettings((prevState) => ({
+      ...prevState,
+      [prop]: value,
+    }));
+  }
+
+  function handleOnSaveClick() {
+    if (selectedGuild && guildSettings) {
+      updateGuildSettings(selectedGuild?.id, guildSettings);
+    }
+  }
+
+  useEffect(() => {
+    console.log(guildSettings);
+  }, [guildSettings]);
+
   const { TabPane } = Tabs;
-
-  // function handleOnPrefixChange(event: ChangeEvent<HTMLInputElement>) {
-  //   setBotPrefix(event.target.value);
-  // }
-
-  // async function handleOnSaveClick() {
-  //   if (selectedGuild?.id) {
-  //     await updateGuildSettings(selectedGuild?.id, { botPrefix: botPrefix });
-  //   }
-  // }
 
   return (
     <>
@@ -52,18 +58,25 @@ export function GuildSettingsPage() {
               <FormField>
                 <Input
                   addonBefore={t('tabs.general.botPrefixLabel')}
-                  // onChange={handleOnPrefixChange}
+                  onChange={(event) => updateGuildSettingsState('botPrefix', event.target.value)}
+                  value={guildSettings?.botPrefix}
                 />
               </FormField>
               <FormField>
-                <Input addonBefore={t('tabs.general.botDisplayName')} />
+                <Input
+                  addonBefore={t('tabs.general.botDisplayName')}
+                  onChange={(event) =>
+                    updateGuildSettingsState('botDisplayName', event.target.value)
+                  }
+                  value={guildSettings?.botDisplayName}
+                />
               </FormField>
             </TabPane>
             <TabPane tab={t('tabs.roles.title')} key="roles">
               <NotImplemented />
             </TabPane>
           </Tabs>
-          <SaveButton type="primary" onClick={() => console.log('test')}>
+          <SaveButton type="primary" onClick={handleOnSaveClick}>
             {t('saveButton')}
           </SaveButton>
         </>

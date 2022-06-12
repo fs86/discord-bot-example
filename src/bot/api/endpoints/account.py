@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, Depends
 from fastapi_discord import Guild, User
 
-from api.dependencies import get_user_guilds, get_user, is_authenticated
+from api.dependencies import get_user, get_user_guilds, is_authenticated
 from api.helpers import get_profile_info
 from api.responses import UserResponse
 

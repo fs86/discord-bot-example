@@ -1,26 +1,29 @@
-from dataclasses import dataclass
-from typing import Any, Optional
+from typing import Optional
 
 from fastapi_discord import User
 
+from .common import BaseResponse
 
-@dataclass
-class UserProfileInfo:
+
+class UserProfileInfo(BaseResponse):
     is_admin: bool
 
-    def __init__(self, **kwargs) -> None:
-        self.__dict__.update(kwargs)
 
-
-class UserResponse(User):
+class UserResponse(BaseResponse):
+    id: str
+    username: str
+    discriminator: str
+    avatar: Optional[str]
+    avatar_url: Optional[str]
+    locale: str
+    email: Optional[str]
+    bot: Optional[bool]
+    mfa_enabled: bool
+    flags: int
+    premium_type: Optional[int]
+    public_flags: int
     profile_info: Optional[UserProfileInfo]
 
-    def __init__(self, **data: Any):
-        super().__init__(**data)
-
     @staticmethod
-    def from_user(user: User, profile_info: UserProfileInfo = UserProfileInfo()):
-        user_vm = UserResponse(**user.__dict__)
-        user_vm.profile_info = profile_info
-
-        return user_vm
+    def from_user(user: User, profile_info: UserProfileInfo):
+        return user.__dict__ | {"profile_info": profile_info.__dict__}

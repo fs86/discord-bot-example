@@ -10,7 +10,6 @@ class UserProfileInfo:
 
     def __init__(self, **kwargs) -> None:
         self.__dict__.update(kwargs)
-        ...
 
 
 class UserResponse(User):

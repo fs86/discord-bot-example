@@ -2,7 +2,7 @@ from typing import Any, List
 
 from beanie.operators import In
 
-from models import ServerSettings, ServerSettingsValues
+from models import GuildSettings, GuildSettingsValues
 
 
 class SettingsService:
@@ -33,10 +33,10 @@ class SettingsService:
                 server_settings_new.append(self.__get_new(guild_id))
 
         if len(server_settings_new) > 0:
-            await ServerSettings.insert_many(server_settings_new)
+            await GuildSettings.insert_many(server_settings_new)
 
         if len(server_settings_old) > 0:
-            await ServerSettings.find(In(ServerSettings.guild_id, server_settings_old)).delete_many()
+            await GuildSettings.find(In(GuildSettings.guild_id, server_settings_old)).delete_many()
 
     # DE: Liefert alle Einstellungen für den angegebenen Server.
     # EN: Returns all settings for the specified server.
@@ -61,15 +61,15 @@ class SettingsService:
     # DE: Prüft, für welche Server bereits Einstellungen gespeichert wurden und gibt die Server IDs als Liste zurück.
     # EN: Checks for which servers settings have already been saved and returns the server IDs as a list.
     async def which(self):
-        server_settings = await ServerSettings.find().to_list()
+        server_settings = await GuildSettings.find().to_list()
         return [settings.guild_id for settings in server_settings]
 
     # DE: Erstellt ein neues 'ServerSettings' Objekt und gibt es zurück. Das Objekt wird zu diesem Zeitpunkt noch nicht auf der Datenbank gespeichert.
     # EN: Creates a new 'ServerSettings' object and returns it. The object is not yet stored in the database at this point.
     def __get_new(self, guild_id: int):
-        return ServerSettings(guild_id=guild_id, values=ServerSettingsValues())
+        return GuildSettings(guild_id=guild_id, values=GuildSettingsValues())
 
     # DE: Ermittelt den Datenbankeintrag für die angegebene Server ID.
     # EN: Determines the database entry for the specified server id.
     async def __get_server_settings(self, guild_id: int, fetch_links: bool = True):
-        return await ServerSettings.find_one(ServerSettings.guild_id == guild_id, fetch_links=fetch_links)
+        return await GuildSettings.find_one(GuildSettings.guild_id == guild_id, fetch_links=fetch_links)

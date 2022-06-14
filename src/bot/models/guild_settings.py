@@ -5,15 +5,15 @@ from beanie import Document, Indexed
 from pydantic import BaseModel
 
 
-class ServerSettingsValues(BaseModel):
+class GuildSettingsValues(BaseModel):
     bot_prefix: str = "."
     bot_display_name: str
     ticket_category: str = "Tickets"
 
 
-class ServerSettings(Document):
+class GuildSettings(Document):
     guild_id: Indexed(int)
-    values: ServerSettingsValues = {}
+    values: GuildSettingsValues = {}
 
     class Collection:
         name = "settings"

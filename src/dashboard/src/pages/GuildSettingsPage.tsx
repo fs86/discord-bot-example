@@ -60,11 +60,11 @@ export function GuildSettingsPage() {
               </FormField>
               <FormField>
                 <Input
-                  addonBefore={t('tabs.general.botDisplayName')}
+                  addonBefore={t('tabs.general.ticketCategoryLabel')}
                   onChange={(event) =>
-                    updateGuildSettingsState('botDisplayName', event.target.value)
+                    updateGuildSettingsState('ticketCategory', event.target.value)
                   }
-                  value={guildSettings?.botDisplayName}
+                  value={guildSettings?.ticketCategory}
                 />
               </FormField>
             </TabPane>

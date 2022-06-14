@@ -4,7 +4,7 @@
     "general": {
       "title": "Allgemeine Einstellungen",
       "botPrefixLabel": "Prefix:",
-      "botDisplayName": "Anzeigename:"
+      "ticketCategoryLabel": "Ticket Kategorie:"
     },
     "roles": {
       "title": "Rollenzuordnung"

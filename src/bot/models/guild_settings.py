@@ -7,7 +7,6 @@ from pydantic import BaseModel
 
 class GuildSettingsValues(BaseModel):
     bot_prefix: str = "."
-    bot_display_name: str
     ticket_category: str = "Tickets"
 
 

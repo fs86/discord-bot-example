@@ -1,5 +1,6 @@
 import { getPropertyValue } from '@helpers';
 import { Select as AntdSelect } from 'antd';
+import styled from 'styled-components';
 
 import { FieldWithLabel, FieldWithLabelProps } from './common/FieldWithLabel';
 
@@ -13,6 +14,10 @@ export interface SelectProps<T> extends Omit<FieldWithLabelProps, 'children'> {
   onChange?: (value: T) => void;
   className?: string;
 }
+
+const StyledSelect = styled(AntdSelect)`
+  width: 100%;
+`;
 
 export function Select<T>({
   id,
@@ -37,7 +42,7 @@ export function Select<T>({
 
   return (
     <FieldWithLabel width={width} className={className} {...props}>
-      <AntdSelect
+      <StyledSelect
         id={id}
         onChange={handleOnChange}
         placeholder={placeholder}
@@ -54,7 +59,7 @@ export function Select<T>({
             </Option>
           );
         })}
-      </AntdSelect>
+      </StyledSelect>
     </FieldWithLabel>
   );
 }

@@ -8,7 +8,7 @@ import { GuildSettings } from '@viewmodels';
 import { Tabs } from 'antd';
 import styled from 'styled-components';
 
-import { GuildSettingsPageGeneralTab } from './GuildSettingsPageGeneralTab';
+import { GuildSettingsPageBotTab } from './GuildSettingsPageBotTab';
 import { GuildSettingsPageRolesTab } from './GuildSettingsPageRolesTab';
 
 const SaveButton = styled(Button)`
@@ -52,8 +52,8 @@ export function GuildSettingsPage() {
       {selectedGuild && (
         <>
           <Tabs>
-            <TabPane tab={t('tabs.general.title')} key="general">
-              <GuildSettingsPageGeneralTab
+            <TabPane tab={t('tabs.bot.title')} key="bot">
+              <GuildSettingsPageBotTab
                 guildSettings={guildSettings}
                 onChange={(event) => update(event.target.name, event.target.value)}
               />

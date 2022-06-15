@@ -1,10 +1,15 @@
 {
   "pageTitle": "Servereinstellungen",
   "tabs": {
-    "general": {
-      "title": "Allgemeine Einstellungen",
+    "bot": {
+      "title": "Bot Einstellungen",
+      "generalSectionTitle": "Allgemein",
+      "activitySelectionTitle": "Aktivität",
       "botPrefixLabel": "Prefix:",
-      "ticketCategoryLabel": "Ticket Kategorie:"
+      "ticketCategoryLabel": "Ticket Kategorie:",
+      "activityIntervalLabel": "Aktivitätsintervall:",
+      "activityIntervalSuffix": "Minuten",
+      "activityStatusLabel": "Aktivitätsstatus (ein Wert pro Zeile):"
     },
     "roles": {
       "title": "Rollenzuordnung"

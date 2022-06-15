@@ -14,6 +14,7 @@ const Wrapper = styled.div<{ width: number; labelPosition: 'top' | 'left' }>`
   display: grid;
   width: ${({ width }) => width}px;
   align-items: center;
+  width: 100%;
 
   ${({ labelPosition }) =>
     labelPosition === 'left' &&

@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { Button } from '@components';
-import { FormField, NotImplemented } from '@components/common';
 import { useGuildSelection } from '@context-providers/GuildSelectionContext';
 import { getGuildSettings, updateGuildSettings } from '@services/guildService';
 import { GuildSettings } from '@viewmodels';
-import { Input, Tabs } from 'antd';
+import { Tabs } from 'antd';
 import styled from 'styled-components';
+
+import { GuildSettingsPageGeneralTab } from './GuildSettingsPageGeneralTab';
+import { GuildSettingsPageRolesTab } from './GuildSettingsPageRolesTab';
 
 const SaveButton = styled(Button)`
   margin-top: 1rem;
@@ -16,7 +18,7 @@ const SaveButton = styled(Button)`
 export function GuildSettingsPage() {
   const { t } = useTranslation('guildSettings');
   const { selectedGuild } = useGuildSelection();
-  const [guildSettings, setGuildSettings] = useState<GuildSettings>();
+  const [guildSettings, setGuildSettings] = useState<GuildSettings>({});
 
   useQuery(
     ['getGuilds', selectedGuild?.id],
@@ -28,7 +30,7 @@ export function GuildSettingsPage() {
     setGuildSettings(data);
   }
 
-  function updateGuildSettingsState(prop: string, value: string) {
+  function update(prop: string, value: string) {
     setGuildSettings((prevState) => ({
       ...prevState,
       [prop]: value,
@@ -51,25 +53,13 @@ export function GuildSettingsPage() {
         <>
           <Tabs>
             <TabPane tab={t('tabs.general.title')} key="general">
-              <FormField>
-                <Input
-                  addonBefore={t('tabs.general.botPrefixLabel')}
-                  onChange={(event) => updateGuildSettingsState('botPrefix', event.target.value)}
-                  value={guildSettings?.botPrefix}
-                />
-              </FormField>
-              <FormField>
-                <Input
-                  addonBefore={t('tabs.general.ticketCategoryLabel')}
-                  onChange={(event) =>
-                    updateGuildSettingsState('ticketCategory', event.target.value)
-                  }
-                  value={guildSettings?.ticketCategory}
-                />
-              </FormField>
+              <GuildSettingsPageGeneralTab
+                guildSettings={guildSettings}
+                onChange={(event) => update(event.target.name, event.target.value)}
+              />
             </TabPane>
             <TabPane tab={t('tabs.roles.title')} key="roles">
-              <NotImplemented />
+              <GuildSettingsPageRolesTab guildSettings={guildSettings} />
             </TabPane>
           </Tabs>
           <SaveButton type="primary" onClick={handleOnSaveClick}>

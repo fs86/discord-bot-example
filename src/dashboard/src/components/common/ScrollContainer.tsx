@@ -1,6 +1,8 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
+import { scrollBarStyle } from './shared-styles/scrollBarStyle';
+
 type ScrollbarBehavior = 'visible' | 'hidden' | 'hideOnBlur';
 
 interface ScrollContainerProps {
@@ -12,6 +14,7 @@ interface ScrollContainerProps {
 const Wrapper = styled.div<{ scrollbar: ScrollbarBehavior }>`
   overflow-y: auto;
   scrollbar-width: ${({ scrollbar }) => (scrollbar == 'hidden' ? 'none' : 'thin')};
+  ${scrollBarStyle}
 
   &:hover {
     &::-webkit-scrollbar {
@@ -23,31 +26,6 @@ const Wrapper = styled.div<{ scrollbar: ScrollbarBehavior }>`
     width: 8px;
     display: ${({ scrollbar }) =>
       scrollbar === 'hidden' || scrollbar === 'hideOnBlur' ? 'none' : 'block'};
-  }
-
-  &::-webkit-scrollbar-button {
-    width: 0px;
-    height: 0px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: #77787b;
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: #656669;
-  }
-
-  &::-webkit-scrollbar-thumb:active {
-    background: #434448;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: #1f2226;
-  }
-
-  &::-webkit-scrollbar-corner {
-    background: transparent;
   }
 `;
 

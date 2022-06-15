@@ -49,7 +49,7 @@ export function GuildSettingsPageBotTab({
             max={30}
           />
         </FormField>
-        <TextArea label={t('tabs.bot.activityStatusLabel')} />
+        <TextArea label={t('tabs.bot.activityStatusLabel')} rows={5} />
       </div>
     </Wrapper>
   );

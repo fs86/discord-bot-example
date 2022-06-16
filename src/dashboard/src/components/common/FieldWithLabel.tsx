@@ -14,6 +14,7 @@ export interface FieldWithLabelProps {
 const Wrapper = styled.div<{ width: number; labelPosition: 'top' | 'left'; inline: boolean }>`
   display: grid;
   width: ${({ width }) => width}px;
+  margin-bottom: ${({ inline }) => !inline && '1rem'};
   align-items: center;
   width: 100%;
 

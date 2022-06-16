@@ -54,7 +54,13 @@ export function GuildSettingsPageBotTab({
           />
         </FormField>
         <TextArea label={t('tabs.bot.activityStatusLabel')} rows={5} /> */}
-        <Select data={channels} placeholder="Channel" valueField="id" textField="name" />
+        <Select
+          data={channels}
+          addonBefore="Channel"
+          placeholder="Channel"
+          valueField="id"
+          textField="name"
+        />
 
         <TextArea label={t('tabs.bot.welcomeMessageLabel')} rows={5} />
       </div>

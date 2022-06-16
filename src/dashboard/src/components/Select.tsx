@@ -2,22 +2,23 @@ import { getPropertyValue } from '@helpers';
 import { Select as AntdSelect } from 'antd';
 import styled from 'styled-components';
 
-import { FieldWithLabel, FieldWithLabelProps } from './common/FieldWithLabel';
+import { FieldWithAddon, FieldWithAddonProps } from './common/FieldWithAddon';
 
-export interface SelectProps<T> extends Omit<FieldWithLabelProps, 'children'> {
+export interface SelectProps<T> extends Omit<FieldWithAddonProps, 'children' | 'width'> {
   valueField: string;
   textField: string;
   placeholder?: string;
   borderless?: boolean;
   showArrow?: boolean;
-  width?: number;
+  width?: number | string;
   data?: T[];
   onChange?: (value: T) => void;
   className?: string;
 }
 
-const StyledSelect = styled(AntdSelect)`
-  width: 100%;
+const StyledSelect = styled(AntdSelect)<{ width?: number | string }>`
+  /* width: 100%; */
+  width: ${({ width }) => width};
 `;
 
 export function Select<T>({
@@ -26,14 +27,16 @@ export function Select<T>({
   textField,
   placeholder,
   borderless,
+  addonBefore,
+  addonAfter,
   showArrow = true,
-  width = 120,
+  width = '100%',
   data,
   onChange,
   className,
-  ...props
 }: SelectProps<T>) {
   const { Option } = AntdSelect;
+  const componentWidth = typeof width === 'number' ? `${width}px` : width;
 
   function handleOnChange(value: unknown) {
     const element = data?.find(
@@ -43,13 +46,14 @@ export function Select<T>({
   }
 
   return (
-    <FieldWithLabel width={width} className={className} {...props}>
+    <FieldWithAddon addonBefore={addonBefore} addonAfter={addonAfter}>
       <StyledSelect
         id={id}
         onChange={handleOnChange}
         placeholder={placeholder}
         bordered={!borderless}
         showArrow={showArrow}
+        width={componentWidth}
       >
         {data?.map((item: T) => {
           const value = getPropertyValue<T, string>(item, valueField);
@@ -62,6 +66,6 @@ export function Select<T>({
           );
         })}
       </StyledSelect>
-    </FieldWithLabel>
+    </FieldWithAddon>
   );
 }

@@ -22,6 +22,7 @@ export function GuildSelection({ width = 200, ...props }: ServerSelectionProps) 
       textField="name"
       width={width}
       onChange={handleOnChange}
+      showArrow={false}
       borderless
       {...props}
     />

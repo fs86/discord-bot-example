@@ -1,7 +1,6 @@
 import { ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Input, InputNumber, TextArea } from '@components';
-import { FormField } from '@components/common';
+import { Input, Select, TextArea } from '@components';
 import { GuildSettings } from '@viewmodels';
 import styled from 'styled-components';
 
@@ -15,6 +14,17 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
 `;
+
+const channels = [
+  {
+    id: 12345,
+    name: 'test1',
+  },
+  {
+    id: 23456,
+    name: 'test2',
+  },
+];
 
 export function GuildSettingsPageBotTab({
   guildSettings,
@@ -32,16 +42,10 @@ export function GuildSettingsPageBotTab({
           onChange={onChange}
           value={guildSettings?.botPrefix}
         />
-        <Input
-          name="ticketCategory"
-          addonBefore={t('tabs.bot.ticketCategoryLabel')}
-          onChange={onChange}
-          value={guildSettings?.ticketCategory}
-        />
       </div>
       <div>
-        <h2>{t('tabs.bot.activitySelectionTitle')}</h2>
-        <FormField>
+        <h2>{t('tabs.bot.welcomeSectionTitle')}</h2>
+        {/* <FormField>
           <InputNumber
             addonBefore={t('tabs.bot.activityIntervalLabel')}
             addonAfter={t('tabs.bot.activityIntervalSuffix')}
@@ -49,7 +53,10 @@ export function GuildSettingsPageBotTab({
             max={30}
           />
         </FormField>
-        <TextArea label={t('tabs.bot.activityStatusLabel')} rows={5} />
+        <TextArea label={t('tabs.bot.activityStatusLabel')} rows={5} /> */}
+        <Select data={channels} placeholder="Channel" valueField="id" textField="name" />
+
+        <TextArea label={t('tabs.bot.welcomeMessageLabel')} rows={5} />
       </div>
     </Wrapper>
   );

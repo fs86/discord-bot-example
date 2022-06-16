@@ -1,4 +1,5 @@
 export interface GuildSettings {
   botPrefix?: string;
-  ticketCategory?: string;
+  welcomeChannelId?: number;
+  welcomeMessage?: number;
 }

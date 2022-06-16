@@ -7,7 +7,8 @@ from pydantic import BaseModel
 
 class GuildSettingsValues(BaseModel):
     bot_prefix: str = "."
-    ticket_category: str = "Tickets"
+    welcome_channel_id: int = None
+    welcome_message: str = None
 
 
 class GuildSettings(Document):

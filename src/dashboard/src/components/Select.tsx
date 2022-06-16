@@ -9,6 +9,7 @@ export interface SelectProps<T> extends Omit<FieldWithLabelProps, 'children'> {
   textField: string;
   placeholder?: string;
   borderless?: boolean;
+  showArrow?: boolean;
   width?: number;
   data?: T[];
   onChange?: (value: T) => void;
@@ -25,6 +26,7 @@ export function Select<T>({
   textField,
   placeholder,
   borderless,
+  showArrow = true,
   width = 120,
   data,
   onChange,
@@ -47,7 +49,7 @@ export function Select<T>({
         onChange={handleOnChange}
         placeholder={placeholder}
         bordered={!borderless}
-        showArrow={false}
+        showArrow={showArrow}
       >
         {data?.map((item: T) => {
           const value = getPropertyValue<T, string>(item, valueField);

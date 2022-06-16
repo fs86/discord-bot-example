@@ -4,12 +4,10 @@
     "bot": {
       "title": "Bot Einstellungen",
       "generalSectionTitle": "Allgemein",
-      "activitySelectionTitle": "Aktivität",
+      "welcomeSectionTitle": "Willkommensnachricht",
       "botPrefixLabel": "Prefix:",
-      "ticketCategoryLabel": "Ticket Kategorie:",
-      "activityIntervalLabel": "Aktivitätsintervall:",
-      "activityIntervalSuffix": "Minuten",
-      "activityStatusLabel": "Aktivitätsstatus (ein Wert pro Zeile):"
+      "welcomeChannelLabel": "Channel",
+      "welcomeMessageLabel": "Willkommensnachricht"
     },
     "roles": {
       "title": "Rollenzuordnung"

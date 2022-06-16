@@ -55,6 +55,7 @@ export function Header({ title, actionBarContent }: HeaderProps) {
           id="guildSelection"
           width={200}
           placeholder="Klicke hier, um einen Server auszuwählen"
+          inline
         />
       </GuildSelectionBar>
 

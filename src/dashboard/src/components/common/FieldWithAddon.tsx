@@ -5,12 +5,14 @@ export interface FieldWithAddonProps {
   id?: string;
   addonBefore?: string;
   addonAfter?: string;
+  inline?: boolean;
   children?: ReactNode;
 }
 
-const DefaultWrapper = styled.div`
+const DefaultWrapper = styled.div<{ inline: boolean }>`
   display: grid;
   grid-template-columns: 1fr;
+  margin-bottom: ${({ inline }) => !inline && '1rem'};
 `;
 
 const WrapperWithBeforeAddon = styled(DefaultWrapper)`
@@ -64,7 +66,12 @@ const AddonAfter = styled.span`
   border-left: 0;
 `;
 
-export function FieldWithAddon({ addonBefore, addonAfter, children }: FieldWithAddonProps) {
+export function FieldWithAddon({
+  addonBefore,
+  addonAfter,
+  inline = false,
+  children,
+}: FieldWithAddonProps) {
   function getWrapper() {
     if (addonBefore && addonAfter) {
       return WrapperWithBothAddons;
@@ -80,7 +87,7 @@ export function FieldWithAddon({ addonBefore, addonAfter, children }: FieldWithA
   const Wrapper = getWrapper();
 
   return (
-    <Wrapper>
+    <Wrapper inline={inline}>
       {addonBefore && <AddonBefore>{addonBefore}</AddonBefore>}
       {children}
       {addonAfter && <AddonAfter>{addonAfter}</AddonAfter>}

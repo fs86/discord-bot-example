@@ -17,7 +17,6 @@ export interface SelectProps<T> extends Omit<FieldWithAddonProps, 'children' | '
 }
 
 const StyledSelect = styled(AntdSelect)<{ width?: number | string }>`
-  /* width: 100%; */
   width: ${({ width }) => width};
 `;
 
@@ -33,7 +32,7 @@ export function Select<T>({
   width = '100%',
   data,
   onChange,
-  className,
+  ...props
 }: SelectProps<T>) {
   const { Option } = AntdSelect;
   const componentWidth = typeof width === 'number' ? `${width}px` : width;
@@ -46,7 +45,7 @@ export function Select<T>({
   }
 
   return (
-    <FieldWithAddon addonBefore={addonBefore} addonAfter={addonAfter}>
+    <FieldWithAddon addonBefore={addonBefore} addonAfter={addonAfter} {...props}>
       <StyledSelect
         id={id}
         onChange={handleOnChange}

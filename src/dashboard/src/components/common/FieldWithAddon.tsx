@@ -19,8 +19,8 @@ const WrapperWithBeforeAddon = styled(DefaultWrapper)`
   grid-template-columns: min-content 1fr;
 
   .ant-select-selector {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
   }
 `;
 
@@ -28,8 +28,8 @@ const WrapperWithAfterAddon = styled(DefaultWrapper)`
   grid-template-columns: 1fr min-content;
 
   .ant-select-selector {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
   }
 `;
 

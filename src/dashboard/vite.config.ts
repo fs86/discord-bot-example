@@ -26,7 +26,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           antd: ['antd', '@ant-design/icons'],
-          recharts: ['recharts'],
+          chartjs: ['chart.js', 'react-chartjs-2'],
         },
       },
     },

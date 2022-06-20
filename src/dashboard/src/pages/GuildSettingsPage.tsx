@@ -16,7 +16,7 @@ const SaveButton = styled(Button)`
 `;
 
 export function GuildSettingsPage() {
-  const { t } = useTranslation('guildSettings');
+  const { t } = useTranslation('guildSettingsPage');
   const { selectedGuild } = useGuildSelection();
   const [guildSettings, setGuildSettings] = useState<GuildSettings>({});
 

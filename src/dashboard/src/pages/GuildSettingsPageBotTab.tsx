@@ -30,7 +30,7 @@ export function GuildSettingsPageBotTab({
   guildSettings,
   onChange,
 }: GuildSettingsPageGeneralTabProps) {
-  const { t } = useTranslation('guildSettings');
+  const { t } = useTranslation('guildSettingsPage');
 
   return (
     <Wrapper>

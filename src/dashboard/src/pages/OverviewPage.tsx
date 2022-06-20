@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { JoinLeaveRatioChart, MessagesChart } from '@components/charts';
 import { NotImplemented } from '@components/common';
-import { getRandomInt } from '@helpers';
-import { DateTime } from 'luxon';
+import { useGuildSelection } from '@context-providers';
 import styled from 'styled-components';
+
+import { getJoinLeaveRatioMockData } from './OverviewPage.mock';
 
 const ChartContainer = styled.div`
   display: grid;
@@ -12,18 +14,14 @@ const ChartContainer = styled.div`
   gap: 2rem;
 `;
 
-const now = DateTime.now();
-
-function getDate(subtractDays: number) {
-  return now.minus({ days: subtractDays }).toFormat('dd.MM.');
-}
-
-const joinLeaveStats = Array.from({ length: 7 }, (_x, i) => {
-  return { day: getDate(i), joins: getRandomInt(0, 200), leaves: getRandomInt(0, 200) };
-}).reverse();
-
 export function OverviewPage() {
-  const { t } = useTranslation('home');
+  const { t } = useTranslation('overviewPage');
+  const { selectedGuild } = useGuildSelection();
+  const [joinLeaveRatioData, setJoinLeaveRatioData] = useState(getJoinLeaveRatioMockData());
+
+  useEffect(() => {
+    setJoinLeaveRatioData(getJoinLeaveRatioMockData());
+  }, [selectedGuild]);
 
   return (
     <>
@@ -32,7 +30,7 @@ export function OverviewPage() {
       <ChartContainer>
         <JoinLeaveRatioChart
           title={t('charts.joinLeaveRatio.title')}
-          data={joinLeaveStats}
+          data={joinLeaveRatioData}
           lines={{
             joins: { name: t('charts.joinLeaveRatio.lines.joins') },
             leaves: { name: t('charts.joinLeaveRatio.lines.leaves') },

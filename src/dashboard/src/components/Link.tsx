@@ -8,13 +8,13 @@ interface LinkProps extends RouterLinkProps {
 
 const StyledLink = styled(RouterLink)<{ $disableHover: boolean }>`
   color: ${({ theme }) => theme.colors.foreground};
-  font-size: inherit;
+  /* font-size: inherit; */
   font-family: inherit;
   text-decoration: none;
   transition: 0.3s;
 
   &:hover {
-    color: unset;
+    color: ${({ theme }) => theme.colors.foreground} !important;
   }
 
   ${({ $disableHover }) =>

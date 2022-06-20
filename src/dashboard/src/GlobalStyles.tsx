@@ -23,6 +23,10 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
   }
+
+  a:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 export function GlobalStyles({ appName, children }: StylesProps) {

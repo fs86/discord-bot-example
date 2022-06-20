@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { GuildSelectionDialog } from '@components';
 import { JoinLeaveRatioChart, MessagesChart } from '@components/charts';
 import { NotImplemented } from '@components/common';
 import { useGuildSelection } from '@context-providers';
@@ -18,15 +19,25 @@ export function OverviewPage() {
   const { t } = useTranslation('overviewPage');
   const { selectedGuild } = useGuildSelection();
   const [joinLeaveRatioData, setJoinLeaveRatioData] = useState(getJoinLeaveRatioMockData());
+  const [guildSelectionDialogVisible, setGuildSelectionDialogVisible] = useState(false);
 
   useEffect(() => {
     setJoinLeaveRatioData(getJoinLeaveRatioMockData());
   }, [selectedGuild]);
 
+  function showGuildSelectionDialog() {
+    setGuildSelectionDialogVisible(true);
+  }
+
   return (
     <>
       <h1>{t('pageTitle')}</h1>
       <NotImplemented />
+
+      <button onClick={showGuildSelectionDialog}>Select Guild</button>
+
+      <GuildSelectionDialog visible={guildSelectionDialogVisible} />
+
       <ChartContainer>
         <JoinLeaveRatioChart
           title={t('charts.joinLeaveRatio.title')}

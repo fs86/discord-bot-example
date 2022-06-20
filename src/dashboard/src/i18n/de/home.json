@@ -4,8 +4,8 @@
     "joinLeaveRatio": {
       "title": "Join / Leave Verhalten der letzten 7 Tage",
       "lines": {
-        "joins": "Server beigetreten",
-        "leaves": "Server verlassen"
+        "joins": "beigetreten",
+        "leaves": "verlassen"
       }
     },
     "messages": {

@@ -1,12 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { JoinLeaveRatioChart, MessagesChart } from '@components/charts';
 import { NotImplemented } from '@components/common';
+import { getRandomInt } from '@helpers';
 import { DateTime } from 'luxon';
 import styled from 'styled-components';
 
 const ChartContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, min-content);
+  grid-template-columns: repeat(2, 500px);
   text-align: center;
   gap: 2rem;
 `;
@@ -17,15 +18,9 @@ function getDate(subtractDays: number) {
   return now.minus({ days: subtractDays }).toFormat('dd.MM.');
 }
 
-const joinLeaveStats = [
-  { day: getDate(6), joins: 98, leaves: 2 },
-  { day: getDate(5), joins: 82, leaves: 12 },
-  { day: getDate(4), joins: 45, leaves: 12 },
-  { day: getDate(3), joins: 78, leaves: 45 },
-  { day: getDate(2), joins: 14, leaves: 52 },
-  { day: getDate(1), joins: 130, leaves: 19 },
-  { day: getDate(0), joins: 92, leaves: 9 },
-];
+const joinLeaveStats = Array.from({ length: 7 }, (_x, i) => {
+  return { day: getDate(i), joins: getRandomInt(0, 200), leaves: getRandomInt(0, 200) };
+}).reverse();
 
 export function OverviewPage() {
   const { t } = useTranslation('home');
@@ -39,8 +34,8 @@ export function OverviewPage() {
           title={t('charts.joinLeaveRatio.title')}
           data={joinLeaveStats}
           lines={{
-            joins: { dataKey: 'joins', name: t('charts.joinLeaveRatio.lines.joins') },
-            leaves: { dataKey: 'leaves', name: t('charts.joinLeaveRatio.lines.leaves') },
+            joins: { name: t('charts.joinLeaveRatio.lines.joins') },
+            leaves: { name: t('charts.joinLeaveRatio.lines.leaves') },
           }}
         />
         <MessagesChart title={t('charts.messages.title')} />

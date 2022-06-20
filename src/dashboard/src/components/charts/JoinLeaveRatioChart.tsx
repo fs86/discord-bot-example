@@ -1,5 +1,15 @@
+import { Line } from 'react-chartjs-2';
 import { Card } from '@components';
-import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
+import {
+  CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+} from 'chart.js';
 
 interface DataItem {
   day: string;
@@ -8,7 +18,6 @@ interface DataItem {
 }
 
 interface LineDefinition {
-  dataKey: string;
   name: string;
 }
 
@@ -16,40 +25,41 @@ interface JoinLeaveRatioChartProps {
   title?: string;
   data: DataItem[];
   lines: { joins: LineDefinition; leaves: LineDefinition };
-  width?: number;
-  height?: number;
 }
 
-export function JoinLeaveRatioChart({
-  title,
-  data,
-  lines,
-  width = 500,
-  height = 300,
-}: JoinLeaveRatioChartProps) {
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
+export function JoinLeaveRatioChart({ title, lines, data }: JoinLeaveRatioChartProps) {
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'bottom' as const,
+      },
+    },
+  };
+
+  const lineData = {
+    labels: data.map((d) => d.day),
+    datasets: [
+      {
+        label: lines.joins.name,
+        data: data.map((d) => d.leaves),
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+      {
+        label: lines.leaves.name,
+        data: data.map((d) => d.joins),
+        borderColor: 'rgb(255, 99, 132)',
+        backgroundColor: 'rgba(255, 99, 132, 0.5)',
+      },
+    ],
+  };
+
   return (
     <Card title={title} bordered={false}>
-      <LineChart data={data} height={height} width={width} margin={{ left: -30 }}>
-        <CartesianGrid stroke="#575757" strokeDasharray="3 3" />
-        <XAxis dataKey="day" />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        <Line
-          type="monotone"
-          dataKey={lines.joins.dataKey}
-          name={lines.joins.name}
-          stroke="#82ca9d"
-          activeDot={{ r: 6 }}
-        />
-        <Line
-          type="monotone"
-          dataKey={lines.leaves.dataKey}
-          name={lines.leaves.name}
-          stroke="#8884d8"
-          activeDot={{ r: 6 }}
-        />
-      </LineChart>
+      <Line options={options} data={lineData} />
     </Card>
   );
 }

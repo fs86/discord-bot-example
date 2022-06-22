@@ -8,7 +8,7 @@ const StyledButton = styled.button<{ underline: boolean }>`
   line-height: 1;
   color: ${({ theme }) => theme.colors.foreground};
   border-bottom: ${({ underline, theme }) =>
-    underline ? `1px dashed ${theme.colors.foreground}` : 'none'};
+    underline ? `1px solid ${theme.colors.foreground}` : 'none'};
 
   font-size: inherit;
   font-family: inherit;

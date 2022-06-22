@@ -16,7 +16,7 @@ const ChartContainer = styled.div`
 
 export function OverviewPage() {
   const { t } = useTranslation('overviewPage');
-  const { selectedGuild, showGuildSelection } = useGuildSelection();
+  const { selectedGuild } = useGuildSelection();
   const [joinLeaveRatioData, setJoinLeaveRatioData] = useState(getJoinLeaveRatioMockData());
 
   useEffect(() => {
@@ -27,8 +27,6 @@ export function OverviewPage() {
     <>
       <h1>{t('pageTitle')}</h1>
       <NotImplemented />
-
-      <button onClick={showGuildSelection}>Select Guild</button>
 
       <ChartContainer>
         <JoinLeaveRatioChart

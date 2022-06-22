@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { useGuildSelection } from '@context-providers';
 import { getGuilds } from '@services/guildService';
 import { Guild } from '@viewmodels/discord';
-import { Modal as AntdModal } from 'antd';
+import { Alert, Modal } from 'antd';
 import styled from 'styled-components';
 
 import { Select } from './Select';
@@ -15,10 +15,8 @@ interface GuildSelectionDialogProps {
   onOk: () => void;
 }
 
-const Modal = styled(AntdModal)`
-  .ant-modal-close {
-    display: none;
-  }
+const StyledAlert = styled(Alert)`
+  margin-bottom: 1rem;
 `;
 
 export function GuildSelectionDialog({ visible, onCancel, onOk }: GuildSelectionDialogProps) {
@@ -26,6 +24,12 @@ export function GuildSelectionDialog({ visible, onCancel, onOk }: GuildSelection
   const { data } = useQuery('getGuilds', getGuilds);
   const { selectedGuild, setSelectedGuild } = useGuildSelection();
   const [localSelectedGuild, setLocalSelectedGuild] = useState<Guild>();
+
+  const forceUserInput = selectedGuild === undefined;
+
+  useEffect(() => {
+    console.log('forceUserInput', forceUserInput);
+  }, [forceUserInput]);
 
   function handleOnChange(guild: Guild) {
     setLocalSelectedGuild(guild);
@@ -41,6 +45,10 @@ export function GuildSelectionDialog({ visible, onCancel, onOk }: GuildSelection
     onOk && onOk();
   }
 
+  const okButtonDisabled = forceUserInput && localSelectedGuild == undefined;
+  const cancelButtonDisabled = forceUserInput;
+  const maskClosable = !forceUserInput;
+
   return (
     <Modal
       title={t('title')}
@@ -49,7 +57,12 @@ export function GuildSelectionDialog({ visible, onCancel, onOk }: GuildSelection
       onOk={handleOnOk}
       okText={t('buttons.ok')}
       cancelText={t('buttons.cancel')}
+      okButtonProps={{ disabled: okButtonDisabled }}
+      cancelButtonProps={{ disabled: cancelButtonDisabled }}
+      maskClosable={maskClosable}
+      closable={false}
     >
+      <StyledAlert closable type="info" message={t('infotext')} />
       <Select
         data={data}
         valueField="id"
@@ -57,6 +70,7 @@ export function GuildSelectionDialog({ visible, onCancel, onOk }: GuildSelection
         onChange={handleOnChange}
         value={localSelectedGuild}
         placeholder={t('placeholder')}
+        inline
       />
     </Modal>
   );

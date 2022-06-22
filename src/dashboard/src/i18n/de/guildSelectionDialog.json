@@ -1,6 +1,7 @@
 {
   "title": "Bitte wähle einen Server aus",
   "placeholder": "Discord Server",
+  "infotext": "Alle über das Dashboard verfügbaren Einstellungen und Auswertungen sind serverspezifisch.",
   "buttons": {
     "ok": "Auswählen",
     "cancel": "Abbrechen"

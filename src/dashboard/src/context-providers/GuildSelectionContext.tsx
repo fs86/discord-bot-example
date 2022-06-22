@@ -18,11 +18,9 @@ export const GuildSelectionContextProvider = ({ children }: GuildSelectionContex
   const [guild, setGuild] = useState<Guild>();
   const [dialogVisible, setDialogVisible] = useState(false);
 
-  const contextValue = {
-    selectedGuild: guild,
-    setSelectedGuild: setGuild,
-    showGuildSelection: () => setDialogVisible(true),
-  };
+  function showGuildSelection() {
+    setDialogVisible(true);
+  }
 
   function handleOnCancel() {
     setDialogVisible(false);
@@ -31,6 +29,12 @@ export const GuildSelectionContextProvider = ({ children }: GuildSelectionContex
   function handleOnOk() {
     setDialogVisible(false);
   }
+
+  const contextValue = {
+    selectedGuild: guild,
+    setSelectedGuild: setGuild,
+    showGuildSelection: showGuildSelection,
+  };
 
   return (
     <GuildSelectionContext.Provider value={contextValue}>

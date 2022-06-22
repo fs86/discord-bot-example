@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { useRoutes } from 'react-router-dom';
 import { useGuildSelection } from '@context-providers/GuildSelectionContext';
-import { GuildSettingsPage, NotFound, OverviewPage } from '@pages';
+import { GuildSelectionPage, GuildSettingsPage, NotFound, OverviewPage } from '@pages';
 
 function when(
   condition: boolean,
@@ -11,12 +11,15 @@ function when(
   return condition ? component : fallback;
 }
 
-export function Routes() {
+function requiresSelectedGuild(component: JSX.Element) {
   const { selectedGuild } = useGuildSelection();
+  return selectedGuild ? component : <GuildSelectionPage />;
+}
 
+export function Routes() {
   const routes = useRoutes([
-    { path: '/', element: <OverviewPage /> },
-    { path: '/guild', element: when(selectedGuild !== undefined, <GuildSettingsPage />) },
+    { path: '/', element: requiresSelectedGuild(<OverviewPage />) },
+    { path: '/guild', element: requiresSelectedGuild(<GuildSettingsPage />) },
     { path: '*', element: <NotFound /> },
   ]);
 

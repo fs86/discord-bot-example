@@ -7,7 +7,7 @@ export function getNavigationItems(): NavItemType[] {
   const { selectedGuild } = useGuildSelection();
 
   return [
-    { icon: <HomeOutlined />, to: '/', text: 'Home' },
+    { icon: <HomeOutlined />, to: '/', text: 'Übersicht' },
     {
       icon: <ToolOutlined />,
       to: '/guild',

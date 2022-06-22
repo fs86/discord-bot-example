@@ -1,0 +1,8 @@
+{
+  "title": "Bitte wähle einen Server aus",
+  "placeholder": "Discord Server",
+  "buttons": {
+    "ok": "Auswählen",
+    "cancel": "Abbrechen"
+  }
+}

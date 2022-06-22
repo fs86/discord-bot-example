@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 import { useGuildSelection } from '@context-providers';
 import { getGuilds } from '@services/guildService';
@@ -21,6 +22,7 @@ const Modal = styled(AntdModal)`
 `;
 
 export function GuildSelectionDialog({ visible, onCancel, onOk }: GuildSelectionDialogProps) {
+  const { t } = useTranslation('guildSelectionDialog');
   const { data } = useQuery('getGuilds', getGuilds);
   const { selectedGuild, setSelectedGuild } = useGuildSelection();
   const [localSelectedGuild, setLocalSelectedGuild] = useState<Guild>();
@@ -39,16 +41,14 @@ export function GuildSelectionDialog({ visible, onCancel, onOk }: GuildSelection
     onOk && onOk();
   }
 
-  useEffect(() => {
-    console.log('INIT');
-  }, []);
-
   return (
     <Modal
-      title="Bitte wähle einen Server aus"
+      title={t('title')}
       visible={visible}
       onCancel={handleOnCancel}
       onOk={handleOnOk}
+      okText={t('buttons.ok')}
+      cancelText={t('buttons.cancel')}
     >
       <Select
         data={data}
@@ -56,7 +56,7 @@ export function GuildSelectionDialog({ visible, onCancel, onOk }: GuildSelection
         textField="name"
         onChange={handleOnChange}
         value={localSelectedGuild}
-        placeholder="Discord Server"
+        placeholder={t('placeholder')}
       />
     </Modal>
   );

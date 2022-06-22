@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Alert } from 'antd';
+import { Alert } from '@components';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`

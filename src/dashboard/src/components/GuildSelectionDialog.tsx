@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
+import { Alert } from '@components';
 import { useGuildSelection } from '@context-providers';
 import { getGuilds } from '@services/guildService';
 import { Guild } from '@viewmodels/discord';
-import { Alert, Modal } from 'antd';
+import { Modal } from 'antd';
 import styled from 'styled-components';
 
 import { Select } from './Select';

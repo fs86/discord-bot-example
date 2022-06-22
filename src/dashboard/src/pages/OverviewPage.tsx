@@ -27,7 +27,6 @@ export function OverviewPage() {
     <>
       <h1>{t('pageTitle')}</h1>
       <NotImplemented />
-
       <ChartContainer>
         <JoinLeaveRatioChart
           title={t('charts.joinLeaveRatio.title')}

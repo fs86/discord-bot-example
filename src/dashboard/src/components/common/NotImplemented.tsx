@@ -28,6 +28,10 @@ export function NotImplemented() {
             <StyledLink href={t('discord.link')} target="_blank">
               {t('discord.label')}
             </StyledLink>
+            {' | '}
+            <StyledLink href={t('docs.link')} target="_blank">
+              {t('docs.label')}
+            </StyledLink>
           </>
         }
       />

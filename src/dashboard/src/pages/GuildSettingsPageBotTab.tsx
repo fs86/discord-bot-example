@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Input, Select, TextArea } from '@components';
+import { Input, InputNumber, Select, TextArea } from '@components';
 import { GuildSettings } from '@viewmodels';
 import styled from 'styled-components';
 
@@ -42,18 +42,23 @@ export function GuildSettingsPageBotTab({
           onChange={onChange}
           value={guildSettings?.botPrefix}
         />
+        <h2>Verwarnungen</h2>
+        <InputNumber name="maxWarnCount" addonBefore="Max. Anzahl" min={2} max={10} />
+        <InputNumber
+          name="warnBanDuration"
+          addonBefore="Dauer des Bans"
+          addonAfter="Minuten"
+          min={30}
+          max={10080}
+        />
+        <TextArea
+          label="Nachicht"
+          rows={5}
+          value="Hallo {user},&#13;&#10;Du wurdest verwarnt und hast nun insgesamt {warn_count} Verwarnungen.&#13;&#10;Begründung: {reason}"
+        />
       </div>
       <div>
         <h2>{t('tabs.bot.welcomeSectionTitle')}</h2>
-        {/* <FormField>
-          <InputNumber
-            addonBefore={t('tabs.bot.activityIntervalLabel')}
-            addonAfter={t('tabs.bot.activityIntervalSuffix')}
-            min={1}
-            max={30}
-          />
-        </FormField>
-        <TextArea label={t('tabs.bot.activityStatusLabel')} rows={5} /> */}
         <Select
           data={channels}
           addonBefore="Channel"
@@ -61,8 +66,16 @@ export function GuildSettingsPageBotTab({
           valueField="id"
           textField="name"
         />
-
         <TextArea label={t('tabs.bot.welcomeMessageLabel')} rows={5} />
+        <h2>Abschiedsnachricht</h2>
+        <Select
+          data={channels}
+          addonBefore="Channel"
+          placeholder="Channel"
+          valueField="id"
+          textField="name"
+        />
+        <TextArea label="Abschiedsnachricht" rows={5} />
       </div>
     </Wrapper>
   );

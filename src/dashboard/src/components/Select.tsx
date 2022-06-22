@@ -13,6 +13,7 @@ export interface SelectProps<T> extends Omit<FieldWithAddonProps, 'children' | '
   width?: number | string;
   data?: T[];
   defaultValue?: T;
+  value?: T;
   onChange?: (value: T) => void;
   className?: string;
 }
@@ -33,6 +34,7 @@ export function Select<T>({
   width = '100%',
   data,
   defaultValue,
+  value,
   onChange,
   ...props
 }: SelectProps<T>) {
@@ -43,8 +45,11 @@ export function Select<T>({
     const element = data?.find(
       (item: T) => getPropertyValue<T, string>(item, valueField) === value
     );
+
     onChange && onChange(element as T);
   }
+
+  const rawValue = value && getPropertyValue<T, string>(value, valueField);
 
   return (
     <FieldWithAddon addonBefore={addonBefore} addonAfter={addonAfter} {...props}>
@@ -56,14 +61,15 @@ export function Select<T>({
         showArrow={showArrow}
         width={componentWidth}
         defaultValue={defaultValue}
+        value={rawValue}
       >
         {data?.map((item: T) => {
-          const value = getPropertyValue<T, string>(item, valueField);
-          const text = getPropertyValue<T, string>(item, textField);
+          const itemValue = getPropertyValue<T, string>(item, valueField);
+          const itemText = getPropertyValue<T, string>(item, textField);
 
           return (
-            <Option value={value} key={value}>
-              {text}
+            <Option value={itemValue} key={itemValue}>
+              {itemText}
             </Option>
           );
         })}

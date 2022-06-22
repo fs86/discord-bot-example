@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import { GuildSelection, Link } from '@components';
+import { Link, LinkButton } from '@components';
+import { useGuildSelection } from '@context-providers';
 import styled from 'styled-components';
 
 interface HeaderProps {
@@ -9,7 +10,6 @@ interface HeaderProps {
 
 const StyledHeader = styled.header`
   display: grid;
-  /* grid-template-columns: repeat(2, min-content) 1fr; */
   grid-template-columns: min-content 1fr min-content;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.header.background};
@@ -37,29 +37,31 @@ const ActionBar = styled.div`
 `;
 
 const GuildSelectionBar = styled.div`
-  display: grid;
-  grid-template-columns: min-content 1fr;
+  display: flex;
   align-items: center;
   font-weight: normal;
 `;
 
+const GuildSelectionLabel = styled.label`
+  margin-right: 0.5rem;
+`;
+
 export function Header({ title, actionBarContent }: HeaderProps) {
+  const { selectedGuild, showGuildSelection } = useGuildSelection();
+
   return (
     <StyledHeader>
       <HomeLink to="/" disableHover>
         {title}
       </HomeLink>
       <GuildSelectionBar>
-        <label htmlFor="guildSelection">Guild:</label>
-        <GuildSelection
-          id="guildSelection"
-          width={200}
-          placeholder="Klicke hier, um einen Server auszuwählen"
-          borderless
-          inline
-        />
+        {selectedGuild && (
+          <>
+            <GuildSelectionLabel htmlFor="guildSelection">Guild:</GuildSelectionLabel>
+            <LinkButton onClick={showGuildSelection}>{selectedGuild?.name}</LinkButton>
+          </>
+        )}
       </GuildSelectionBar>
-
       <ActionBar>{actionBarContent}</ActionBar>
     </StyledHeader>
   );

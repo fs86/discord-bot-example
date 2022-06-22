@@ -29,6 +29,14 @@ export function OverviewPage() {
     setGuildSelectionDialogVisible(true);
   }
 
+  function handleGuildSelectionOnCancelClick() {
+    setGuildSelectionDialogVisible(false);
+  }
+
+  function handleGuildSelectionOnOkClick() {
+    setGuildSelectionDialogVisible(false);
+  }
+
   return (
     <>
       <h1>{t('pageTitle')}</h1>
@@ -36,7 +44,11 @@ export function OverviewPage() {
 
       <button onClick={showGuildSelectionDialog}>Select Guild</button>
 
-      <GuildSelectionDialog visible={guildSelectionDialogVisible} />
+      <GuildSelectionDialog
+        visible={guildSelectionDialogVisible}
+        onCancel={handleGuildSelectionOnCancelClick}
+        onOk={handleGuildSelectionOnOkClick}
+      />
 
       <ChartContainer>
         <JoinLeaveRatioChart

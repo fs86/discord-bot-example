@@ -8,6 +8,7 @@ import { Routes } from './Routes';
 
 function App() {
   const { isAuthenticated, isLoading, error } = useAuth();
+
   if (isLoading) {
     return <>Loading ...</>;
   }

@@ -12,6 +12,7 @@ export interface SelectProps<T> extends Omit<FieldWithAddonProps, 'children' | '
   showArrow?: boolean;
   width?: number | string;
   data?: T[];
+  defaultValue?: T;
   onChange?: (value: T) => void;
   className?: string;
 }
@@ -31,6 +32,7 @@ export function Select<T>({
   showArrow = true,
   width = '100%',
   data,
+  defaultValue,
   onChange,
   ...props
 }: SelectProps<T>) {
@@ -53,6 +55,7 @@ export function Select<T>({
         bordered={!borderless}
         showArrow={showArrow}
         width={componentWidth}
+        defaultValue={defaultValue}
       >
         {data?.map((item: T) => {
           const value = getPropertyValue<T, string>(item, valueField);

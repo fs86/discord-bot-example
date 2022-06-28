@@ -7,7 +7,7 @@ export function usePersistedState<T>(
 ): [T, Dispatch<SetStateAction<T>>] {
   const storage = type == 'local' ? window.localStorage : window.sessionStorage;
 
-  const [value, setValue] = useState(() => {
+  const [value, setValue] = useState<T>(() => {
     const persistedValue = storage.getItem(key);
     return persistedValue !== null ? JSON.parse(persistedValue) : initialState;
   });

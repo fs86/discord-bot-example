@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 export function usePersistedState<T>(
   key: string,
   type: 'local' | 'session' = 'local',
-  initialState?: T | (() => T)
+  initialState?: T
 ): [T, Dispatch<SetStateAction<T>>] {
   const storage = type == 'local' ? window.localStorage : window.sessionStorage;
 

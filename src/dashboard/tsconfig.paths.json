@@ -8,6 +8,8 @@
       "@context-providers/*": ["context-providers/*"],
       "@helpers": ["helpers"],
       "@helpers/*": ["helpers/*"],
+      "@hooks": ["hooks"],
+      "@hooks/*": ["hooks/*"],
       "@pages": ["pages"],
       "@pages/*": ["pages/*"],
       "@services": ["services"],

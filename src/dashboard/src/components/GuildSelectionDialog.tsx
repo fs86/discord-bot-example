@@ -24,13 +24,13 @@ export function GuildSelectionDialog({ visible, onCancel, onOk }: GuildSelection
   const { t } = useTranslation('guildSelectionDialog');
   const { data } = useQuery('getGuilds', getGuilds);
   const { selectedGuild, setSelectedGuild } = useGuildSelection();
-  const [localSelectedGuild, setLocalSelectedGuild] = useState<Guild>();
+  const [localSelectedGuild, setLocalSelectedGuild] = useState(selectedGuild);
 
   const forceUserInput = selectedGuild === undefined;
 
   useEffect(() => {
-    console.log('forceUserInput', forceUserInput);
-  }, [forceUserInput]);
+    console.log('selectedGuild', selectedGuild);
+  }, [selectedGuild]);
 
   function handleOnChange(guild: Guild) {
     setLocalSelectedGuild(guild);

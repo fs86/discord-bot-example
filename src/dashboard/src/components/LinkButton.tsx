@@ -1,7 +1,15 @@
 import { ReactNode } from 'react';
 import styled from 'styled-components';
 
-const StyledButton = styled.button<{ underline: boolean }>`
+export interface LinkButtonProps {
+  onClick: () => void;
+  underline?: boolean;
+  children: ReactNode;
+  inline?: boolean;
+  className?: string;
+}
+
+const StyledButton = styled.button<{ underline: boolean; inline?: boolean }>`
   padding: 0;
   border: 0;
   background: none;
@@ -9,6 +17,8 @@ const StyledButton = styled.button<{ underline: boolean }>`
   color: ${({ theme }) => theme.colors.foreground};
   border-bottom: ${({ underline, theme }) =>
     underline ? `1px solid ${theme.colors.foreground}` : 'none'};
+
+  margin-bottom: ${({ inline }) => (inline ? 0 : '1rem')};
 
   font-size: inherit;
   font-family: inherit;
@@ -21,16 +31,15 @@ const StyledButton = styled.button<{ underline: boolean }>`
   }
 `;
 
-export interface LinkButtonProps {
-  onClick: () => void;
-  underline?: boolean;
-  children: ReactNode;
-  className?: string;
-}
-
-export function LinkButton({ onClick, underline = false, children, className }: LinkButtonProps) {
+export function LinkButton({
+  onClick,
+  underline = false,
+  inline = false,
+  children,
+  className,
+}: LinkButtonProps) {
   return (
-    <StyledButton onClick={onClick} underline={underline} className={className}>
+    <StyledButton onClick={onClick} underline={underline} inline={inline} className={className}>
       {children}
     </StyledButton>
   );

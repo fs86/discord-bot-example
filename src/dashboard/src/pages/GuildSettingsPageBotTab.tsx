@@ -1,6 +1,7 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Input, InputNumber, Select, TextArea } from '@components';
+import { Input, InputNumber, LinkButton, Select, TextArea } from '@components';
+import { UserMessageDialog } from '@components/UserMessageDialog';
 import { GuildSettings } from '@viewmodels';
 import styled from 'styled-components';
 
@@ -31,6 +32,16 @@ export function GuildSettingsPageBotTab({
   onChange,
 }: GuildSettingsPageGeneralTabProps) {
   const { t } = useTranslation('guildSettingsPage');
+  const [welcomeMessageDialogVisible, setWelcomeMessageDialogVisible] = useState(false);
+  const [leaveMessageDialogVisible, setLeaveMessageDialogVisible] = useState(false);
+
+  function showWelcomeMessageDialog() {
+    setWelcomeMessageDialogVisible(true);
+  }
+
+  function showLeaveMessageDialog() {
+    setLeaveMessageDialogVisible(true);
+  }
 
   return (
     <Wrapper>
@@ -42,20 +53,7 @@ export function GuildSettingsPageBotTab({
           onChange={onChange}
           value={guildSettings?.botPrefix}
         />
-        <h2>Verwarnungen</h2>
-        <InputNumber name="maxWarnCount" addonBefore="Max. Anzahl" min={2} max={10} />
-        <InputNumber
-          name="warnBanDuration"
-          addonBefore="Dauer des Bans"
-          addonAfter="Minuten"
-          min={30}
-          max={10080}
-        />
-        <TextArea
-          label="Nachicht"
-          rows={5}
-          value="Hallo {user},&#13;&#10;Du wurdest verwarnt und hast nun insgesamt {warn_count} Verwarnungen.&#13;&#10;Begründung: {reason}"
-        />
+        <Input name="botNickname" addonBefore="Nickname" onChange={onChange} />
       </div>
       <div>
         <h2>{t('tabs.bot.welcomeSectionTitle')}</h2>
@@ -66,7 +64,11 @@ export function GuildSettingsPageBotTab({
           valueField="id"
           textField="name"
         />
-        <TextArea label={t('tabs.bot.welcomeMessageLabel')} rows={5} />
+        <LinkButton onClick={showWelcomeMessageDialog}>Nachricht bearbeiten</LinkButton>
+        <UserMessageDialog
+          title={t('tabs.bot.welcomeMessageDialogTitle')}
+          visible={welcomeMessageDialogVisible}
+        />
         <h2>Abschiedsnachricht</h2>
         <Select
           data={channels}
@@ -75,7 +77,11 @@ export function GuildSettingsPageBotTab({
           valueField="id"
           textField="name"
         />
-        <TextArea label="Abschiedsnachricht" rows={5} />
+        <LinkButton onClick={showLeaveMessageDialog}>Nachricht bearbeiten</LinkButton>
+        <UserMessageDialog
+          title={t('tabs.bot.leaveMessageDialogTitle')}
+          visible={leaveMessageDialogVisible}
+        />
       </div>
     </Wrapper>
   );

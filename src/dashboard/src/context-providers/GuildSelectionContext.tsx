@@ -1,5 +1,6 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import { GuildSelectionDialog } from '@components';
+import { usePersistedState } from '@hooks';
 import { Guild } from '@viewmodels/discord';
 
 interface GuildSelectionContextProviderProps {
@@ -15,7 +16,7 @@ interface GuildSelectionContextType {
 const GuildSelectionContext = createContext({} as GuildSelectionContextType);
 
 export const GuildSelectionContextProvider = ({ children }: GuildSelectionContextProviderProps) => {
-  const [guild, setGuild] = useState<Guild>();
+  const [guild, setGuild] = usePersistedState<Guild>('selectedGuild', 'session');
   const [dialogVisible, setDialogVisible] = useState(false);
 
   function showGuildSelection() {

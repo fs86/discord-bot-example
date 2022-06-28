@@ -16,7 +16,7 @@ interface GuildSelectionContextType {
 const GuildSelectionContext = createContext({} as GuildSelectionContextType);
 
 export const GuildSelectionContextProvider = ({ children }: GuildSelectionContextProviderProps) => {
-  const [guild, setGuild] = usePersistedState<Guild>('selectedGuild', 'session');
+  const [guild, setGuild] = usePersistedState<Guild>('selectedGuild');
   const [dialogVisible, setDialogVisible] = useState(false);
 
   function showGuildSelection() {

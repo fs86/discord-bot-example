@@ -62,7 +62,9 @@ export function DiscordProfileButton({ size }: DiscordProfileButtonProps) {
     <Wrapper size={size}>
       <Content className="content">
         <Link to="/@me">Account Info</Link>&nbsp;|&nbsp;
-        <LinkButton onClick={handleOnLogoutClick}>Log out</LinkButton>
+        <LinkButton onClick={handleOnLogoutClick} inline>
+          Log out
+        </LinkButton>
       </Content>
       <Avatar className="avatar" size={size} avatarUrl={avatarUrl} />
     </Wrapper>

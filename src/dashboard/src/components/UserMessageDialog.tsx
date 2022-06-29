@@ -1,6 +1,6 @@
-import { Modal } from 'antd';
 import styled from 'styled-components';
 
+import { Dialog } from './Dialog';
 import { TextArea } from './TextArea';
 
 interface UserMessageDialogProps {
@@ -26,12 +26,12 @@ const Description = styled.span``;
 
 export function UserMessageDialog({ title, value, visible }: UserMessageDialogProps) {
   return (
-    <Modal title={title} closable={false} visible={visible} width={800}>
+    <Dialog title={title} visible={visible} width={800}>
       <TextArea rows={10} value={value} />
       <UserProperty>
         <Placeholder>{'{name}'}</Placeholder>
         <Description>Name des Members</Description>
       </UserProperty>
-    </Modal>
+    </Dialog>
   );
 }

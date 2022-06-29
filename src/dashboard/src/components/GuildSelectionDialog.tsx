@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
-import { Alert } from '@components';
+import { Alert, Dialog } from '@components';
 import { useGuildSelection } from '@context-providers';
 import { getGuilds } from '@services/guildService';
 import { Guild } from '@viewmodels/discord';
-import { Modal } from 'antd';
 import styled from 'styled-components';
 
 import { Select } from './Select';
@@ -51,17 +50,17 @@ export function GuildSelectionDialog({ visible, onCancel, onOk }: GuildSelection
   const maskClosable = !forceUserInput;
 
   return (
-    <Modal
+    <Dialog
       title={t('title')}
       visible={visible}
       onCancel={handleOnCancel}
       onOk={handleOnOk}
       okText={t('buttons.ok')}
       cancelText={t('buttons.cancel')}
-      okButtonProps={{ disabled: okButtonDisabled }}
-      cancelButtonProps={{ disabled: cancelButtonDisabled }}
-      maskClosable={maskClosable}
-      closable={false}
+      okButtonDisabled={okButtonDisabled}
+      cancelButtonDisabled={cancelButtonDisabled}
+      closeOnClickOutside={maskClosable}
+      showCloseButton={!cancelButtonDisabled}
     >
       <StyledAlert closable type="info" message={t('infotext')} />
       <Select
@@ -73,6 +72,6 @@ export function GuildSelectionDialog({ visible, onCancel, onOk }: GuildSelection
         placeholder={t('placeholder')}
         inline
       />
-    </Modal>
+    </Dialog>
   );
 }

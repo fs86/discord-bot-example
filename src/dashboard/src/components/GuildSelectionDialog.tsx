@@ -27,10 +27,6 @@ export function GuildSelectionDialog({ visible, onCancel, onOk }: GuildSelection
 
   const forceUserInput = selectedGuild === undefined;
 
-  useEffect(() => {
-    console.log('selectedGuild', selectedGuild);
-  }, [selectedGuild]);
-
   function handleOnChange(guild: Guild) {
     setLocalSelectedGuild(guild);
   }

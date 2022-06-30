@@ -5,12 +5,15 @@ interface ButtonProps {
   type?: 'default' | 'primary' | 'ghost' | 'dashed' | 'link' | 'text';
   onClick?: MouseEventHandler<HTMLElement>;
   children?: ReactNode;
+  submit?: boolean;
   className?: string;
 }
 
-export function Button({ type, onClick, children, ...props }: ButtonProps) {
+export function Button({ type, onClick, children, submit = false, ...props }: ButtonProps) {
+  const htmlType = submit ? 'submit' : 'button';
+
   return (
-    <AntdButton type={type} onClick={onClick} {...props}>
+    <AntdButton type={type} htmlType={htmlType} onClick={onClick} {...props}>
       {children}
     </AntdButton>
   );

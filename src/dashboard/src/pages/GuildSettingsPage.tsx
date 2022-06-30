@@ -6,6 +6,7 @@ import { useGuildSelection } from '@context-providers/GuildSelectionContext';
 import { getGuildSettings, updateGuildSettings } from '@services/guildService';
 import { GuildSettings } from '@viewmodels';
 import { Tabs } from 'antd';
+import { Formik } from 'formik';
 import styled from 'styled-components';
 
 import { GuildSettingsPageBotTab } from './GuildSettingsPageBotTab';
@@ -15,32 +16,25 @@ const SaveButton = styled(Button)`
   margin-top: 1rem;
 `;
 
+const GuildSettingsForm = styled.form``;
+
 export function GuildSettingsPage() {
   const { t } = useTranslation('guildSettingsPage');
   const { selectedGuild } = useGuildSelection();
   const [guildSettings, setGuildSettings] = useState<GuildSettings>({});
 
-  useQuery(
+  const { isLoading } = useQuery(
     ['getGuilds', selectedGuild?.id],
     () => (selectedGuild?.id ? getGuildSettings(selectedGuild?.id) : undefined),
     { onSuccess: onGuildSettingsLoaded }
   );
 
+  async function handleOnSubmit(values: GuildSettings) {
+    selectedGuild && (await updateGuildSettings(selectedGuild.id, values));
+  }
+
   function onGuildSettingsLoaded(data: GuildSettings) {
     setGuildSettings(data);
-  }
-
-  function update(prop: string, value: string) {
-    setGuildSettings((prevState) => ({
-      ...prevState,
-      [prop]: value,
-    }));
-  }
-
-  function handleOnSaveClick() {
-    if (selectedGuild && guildSettings) {
-      updateGuildSettings(selectedGuild?.id, guildSettings);
-    }
   }
 
   const { TabPane } = Tabs;
@@ -49,23 +43,38 @@ export function GuildSettingsPage() {
     <>
       <h1>{t('pageTitle')}</h1>
 
-      {selectedGuild && (
-        <>
-          <Tabs>
-            <TabPane tab={t('tabs.bot.title')} key="bot">
-              <GuildSettingsPageBotTab
-                guildSettings={guildSettings}
-                onChange={(event) => update(event.target.name, event.target.value)}
-              />
-            </TabPane>
-            <TabPane tab={t('tabs.roles.title')} key="roles">
-              <GuildSettingsPageRolesTab guildSettings={guildSettings} />
-            </TabPane>
-          </Tabs>
-          <SaveButton type="primary" onClick={handleOnSaveClick}>
-            {t('saveButton')}
-          </SaveButton>
-        </>
+      {selectedGuild && !isLoading && (
+        <Formik
+          initialValues={
+            {
+              botPrefix: guildSettings?.botPrefix,
+              botNickname: guildSettings?.botNickname,
+              welcomeChannelId: guildSettings?.welcomeChannelId,
+              welcomeMessage: guildSettings?.welcomeMessage,
+              leaveChannelId: guildSettings?.leaveChannelId,
+              leaveMessage: guildSettings?.leaveMessage,
+            } as GuildSettings
+          }
+          onSubmit={handleOnSubmit}
+        >
+          {({ values, handleSubmit, handleChange }) => {
+            return (
+              <GuildSettingsForm onSubmit={handleSubmit}>
+                <Tabs>
+                  <TabPane tab={t('tabs.bot.title')} key="bot">
+                    <GuildSettingsPageBotTab guildSettings={values} onChange={handleChange} />
+                  </TabPane>
+                  <TabPane tab={t('tabs.roles.title')} key="roles">
+                    <GuildSettingsPageRolesTab guildSettings={values} />
+                  </TabPane>
+                </Tabs>
+                <SaveButton type="primary" submit>
+                  {t('saveButton')}
+                </SaveButton>
+              </GuildSettingsForm>
+            );
+          }}
+        </Formik>
       )}
     </>
   );

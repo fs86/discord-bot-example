@@ -1,5 +1,4 @@
 import { InputNumber as AntdInputNumber } from 'antd';
-import styled from 'styled-components';
 
 import { FieldWithLabel, FieldWithLabelProps, FormField } from './common';
 

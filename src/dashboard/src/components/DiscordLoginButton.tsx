@@ -1,6 +1,5 @@
 import { ButtonHTMLAttributes } from 'react';
 import { useAuth } from 'react-oidc-context';
-// import { Discord as DiscordIcon } from '@styled-icons/fa-brands';
 import styled from 'styled-components';
 
 import { DiscordIcon } from './DiscordIcon';

@@ -1,10 +1,10 @@
-import { useMemo } from 'react';
+import { useEffect } from 'react';
 import { useGuildSelection } from '@context-providers';
 
 export function GuildSelectionPage() {
   const { selectedGuild, showGuildSelection } = useGuildSelection();
 
-  useMemo(() => {
+  useEffect(() => {
     showGuildSelection && showGuildSelection();
   }, [selectedGuild]);
 

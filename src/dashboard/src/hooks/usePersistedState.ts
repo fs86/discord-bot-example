@@ -9,7 +9,10 @@ export function usePersistedState<T>(
 
   const [value, setValue] = useState<T>(() => {
     const persistedValue = storage.getItem(key);
-    return persistedValue !== null ? JSON.parse(persistedValue) : initialState;
+
+    return persistedValue !== null && persistedValue !== 'undefined'
+      ? JSON.parse(persistedValue)
+      : initialState;
   });
 
   useEffect(() => {

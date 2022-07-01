@@ -61,7 +61,7 @@ export function GuildSettingsPageBotTab({
           valueField="id"
           textField="name"
           onChange={handleChange}
-          value={welcomeChannel}
+          value={welcomeChannel?.id}
         />
         <LinkButton onClick={() => setWelcomeMessageDialogVisible(true)}>
           Nachricht bearbeiten
@@ -77,7 +77,8 @@ export function GuildSettingsPageBotTab({
           placeholder="Channel"
           valueField="id"
           textField="name"
-          value={leaveChannel}
+          onChange={handleChange}
+          value={leaveChannel?.id}
         />
         <LinkButton onClick={() => setLeaveMessageDialogVisible(true)}>
           Nachricht bearbeiten

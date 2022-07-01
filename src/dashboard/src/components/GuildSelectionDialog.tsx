@@ -27,7 +27,7 @@ export function GuildSelectionDialog({ visible, onCancel, onOk }: GuildSelection
 
   const forceUserInput = selectedGuild === undefined;
 
-  function handleOnChange(guild: Guild) {
+  function handleOnChange(_value: string, guild: Guild) {
     setLocalSelectedGuild(guild);
   }
 
@@ -64,7 +64,7 @@ export function GuildSelectionDialog({ visible, onCancel, onOk }: GuildSelection
         valueField="id"
         textField="name"
         onChange={handleOnChange}
-        value={localSelectedGuild}
+        value={localSelectedGuild?.id}
         placeholder={t('placeholder')}
         inline
       />

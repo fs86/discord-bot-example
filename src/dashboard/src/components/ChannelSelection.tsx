@@ -5,7 +5,7 @@ import { getGuildChannels } from '@services/guildService';
 import { GuildChannel } from '@viewmodels';
 
 interface ChannelSelectionProps
-  extends Omit<SelectProps<GuildChannel>, 'data' | 'valueField' | 'textField'> {
+  extends Omit<SelectProps<number, GuildChannel>, 'data' | 'valueField' | 'textField'> {
   guildId: string;
 }
 

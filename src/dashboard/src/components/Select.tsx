@@ -4,17 +4,18 @@ import styled from 'styled-components';
 
 import { FieldWithAddon, FieldWithAddonProps } from './common/FieldWithAddon';
 
-export interface SelectProps<T> extends Omit<FieldWithAddonProps, 'children' | 'width'> {
+export interface SelectProps<TValue, TOption>
+  extends Omit<FieldWithAddonProps, 'children' | 'width'> {
   valueField: string;
   textField: string;
   placeholder?: string;
   borderless?: boolean;
   showArrow?: boolean;
   width?: number | string;
-  data?: T[];
-  defaultValue?: T;
-  value?: T;
-  onChange?: (value: T) => void;
+  data?: TOption[];
+  defaultValue?: unknown;
+  value?: unknown;
+  onChange?: (value: TValue, option: TOption) => void;
   className?: string;
 }
 
@@ -22,7 +23,7 @@ const StyledSelect = styled(AntdSelect)<{ width?: number | string }>`
   width: ${({ width }) => width};
 `;
 
-export function Select<T>({
+export function Select<TValue, TOption>({
   id,
   valueField,
   textField,
@@ -37,19 +38,17 @@ export function Select<T>({
   value,
   onChange,
   ...props
-}: SelectProps<T>) {
+}: SelectProps<TValue, TOption>) {
   const { Option } = AntdSelect;
   const componentWidth = typeof width === 'number' ? `${width}px` : width;
 
-  function handleOnChange(value: unknown) {
+  function handleOnChange(value: unknown, option: unknown) {
     const element = data?.find(
-      (item: T) => getPropertyValue<T, string>(item, valueField) === value
+      (item: TOption) => getPropertyValue<TOption, string>(item, valueField) === value
     );
 
-    onChange && onChange(element as T);
+    onChange && onChange(value as TValue, element as TOption);
   }
-
-  const rawValue = value && getPropertyValue<T, string>(value, valueField);
 
   return (
     <FieldWithAddon addonBefore={addonBefore} addonAfter={addonAfter} {...props}>
@@ -61,11 +60,11 @@ export function Select<T>({
         showArrow={showArrow}
         width={componentWidth}
         defaultValue={defaultValue}
-        value={rawValue}
+        value={value}
       >
-        {data?.map((item: T) => {
-          const itemValue = getPropertyValue<T, string>(item, valueField);
-          const itemText = getPropertyValue<T, string>(item, textField);
+        {data?.map((item: TOption) => {
+          const itemValue = getPropertyValue<TOption, string>(item, valueField);
+          const itemText = getPropertyValue<TOption, string>(item, textField);
 
           return (
             <Option value={itemValue} key={itemValue}>

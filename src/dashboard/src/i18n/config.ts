@@ -3,6 +3,7 @@ import i18n from 'i18next';
 
 import guildSelectionDialog from './de/guildSelectionDialog.json';
 import guildSettingsPage from './de/guildSettingsPage.json';
+import guildSettingsPageBotTab from './de/guildSettingsPageBotTab.json';
 import landingPage from './de/landingPage.json';
 import notFound from './de/notFound.json';
 import notImplemented from './de/notImplemented.json';
@@ -12,6 +13,7 @@ export const resources = {
   de: {
     guildSelectionDialog,
     guildSettingsPage,
+    guildSettingsPageBotTab,
     overviewPage,
     landingPage,
     notFound,
@@ -24,6 +26,7 @@ i18n.use(initReactI18next).init({
   ns: [
     'guildSelectionDialog',
     'guildSettingsPage',
+    'guildSettingsPageBotTab',
     'overviewPage',
     'landingPage',
     'notFound',

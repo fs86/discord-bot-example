@@ -6,6 +6,7 @@ interface ButtonProps {
   onClick?: MouseEventHandler<HTMLElement>;
   children?: ReactNode;
   submit?: boolean;
+  disabled?: boolean;
   className?: string;
 }
 

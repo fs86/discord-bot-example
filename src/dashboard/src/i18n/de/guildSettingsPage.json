@@ -1,17 +1,7 @@
 {
   "pageTitle": "Servereinstellungen",
   "tabs": {
-    "bot": {
-      "title": "Bot Einstellungen",
-      "generalSectionTitle": "Allgemein",
-      "welcomeSectionTitle": "Willkommensnachricht",
-      "botPrefixLabel": "Prefix:",
-      "welcomeChannelLabel": "Channel",
-      "welcomeMessageLabel": "Willkommensnachricht"
-    },
-    "roles": {
-      "title": "Rollenzuordnung"
-    }
-  },
-  "saveButton": "Speichern"
+    "bot": "Bot Einstellungen",
+    "roles": "Rollenzuordnung"
+  }
 }

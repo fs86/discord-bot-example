@@ -1,0 +1,26 @@
+{
+  "general": {
+    "title": "Allgemein",
+    "prefixLabel": "Prefix",
+    "nicknameLabel": "Nickname"
+  },
+  "welcome": {
+    "title": "Willkommensnachricht",
+    "channelLabel": "Channel",
+    "channelPlaceholder": "Channel",
+    "dialog": {
+      "title": "Willkommensnachricht bearbeiten",
+      "linkText": "Nachricht bearbeiten"
+    }
+  },
+  "leave": {
+    "title": "Abschiedsnachricht",
+    "channelLabel": "Channel",
+    "channelPlaceholder": "Channel",
+    "dialog": {
+      "title": "Abschiedsnachricht bearbeiten",
+      "linkText": "Nachricht bearbeiten"
+    }
+  },
+  "saveButton": "Speichern"
+}

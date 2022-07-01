@@ -95,5 +95,3 @@ export function GuildSettingsPageBotTab({
     </Wrapper>
   );
 }
-
-//export default connect(GuildSettingsPageBotTab);

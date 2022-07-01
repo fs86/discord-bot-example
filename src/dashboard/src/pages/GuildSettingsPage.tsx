@@ -35,6 +35,7 @@ export function GuildSettingsPage() {
   }
 
   function onGuildSettingsLoaded(data: GuildSettings) {
+    console.log('onGuildSettingsLoaded', data);
     setGuildSettings(data);
   }
 
@@ -58,12 +59,16 @@ export function GuildSettingsPage() {
           }
           onSubmit={handleOnSubmit}
         >
-          {({ values, handleSubmit, handleChange }) => {
+          {({ values, handleSubmit, handleChange, setFieldValue }) => {
             return (
               <GuildSettingsForm onSubmit={handleSubmit}>
                 <Tabs>
                   <TabPane tab={t('tabs.bot.title')} key="bot">
-                    <GuildSettingsPageBotTab values={values} handleChange={handleChange} />
+                    <GuildSettingsPageBotTab
+                      values={values}
+                      handleChange={handleChange}
+                      setFieldValue={setFieldValue}
+                    />
                   </TabPane>
                   <TabPane tab={t('tabs.roles.title')} key="roles">
                     <GuildSettingsPageRolesTab guildSettings={values} />

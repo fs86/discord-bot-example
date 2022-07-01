@@ -6,7 +6,10 @@ import { GuildSettings } from '@viewmodels';
 import { FormikProps } from 'formik';
 import styled from 'styled-components';
 
-type GuildSettingsPageGeneralTabProps = Pick<FormikProps<GuildSettings>, 'values' | 'handleChange'>;
+type GuildSettingsPageGeneralTabProps = Pick<
+  FormikProps<GuildSettings>,
+  'values' | 'handleChange' | 'setFieldValue'
+>;
 
 const Wrapper = styled.div`
   display: grid;
@@ -28,6 +31,7 @@ const channels = [
 export function GuildSettingsPageBotTab({
   values: guildSettings,
   handleChange,
+  setFieldValue,
 }: GuildSettingsPageGeneralTabProps) {
   const { t } = useTranslation('guildSettingsPage');
   const [welcomeMessageDialogVisible, setWelcomeMessageDialogVisible] = useState(false);
@@ -55,12 +59,13 @@ export function GuildSettingsPageBotTab({
       <div>
         <h2>{t('tabs.bot.welcomeSectionTitle')}</h2>
         <Select
+          id="welcomeChannelId"
           data={channels}
           addonBefore="Channel"
           placeholder="Channel"
           valueField="id"
           textField="name"
-          onChange={handleChange}
+          onChange={(value) => setFieldValue('welcomeChannelId', value)}
           value={welcomeChannel?.id}
         />
         <LinkButton onClick={() => setWelcomeMessageDialogVisible(true)}>
@@ -72,12 +77,13 @@ export function GuildSettingsPageBotTab({
         />
         <h2>Abschiedsnachricht</h2>
         <Select
+          id="leaveChannelId"
           data={channels}
           addonBefore="Channel"
           placeholder="Channel"
           valueField="id"
           textField="name"
-          onChange={handleChange}
+          onChange={(value) => setFieldValue('leaveChannelId', value)}
           value={leaveChannel?.id}
         />
         <LinkButton onClick={() => setLeaveMessageDialogVisible(true)}>

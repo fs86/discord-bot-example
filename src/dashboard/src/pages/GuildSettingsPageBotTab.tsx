@@ -18,12 +18,12 @@ const Wrapper = styled.div`
 
 const channels = [
   {
-    id: 12345,
-    name: 'test1',
+    id: 123,
+    name: '123',
   },
   {
-    id: 23456,
-    name: 'test2',
+    id: 234,
+    name: '234',
   },
 ];
 
@@ -53,7 +53,12 @@ export function GuildSettingsPageBotTab({
           onChange={onChange}
           value={guildSettings?.botPrefix}
         />
-        <Input name="botNickname" addonBefore="Nickname" onChange={onChange} />
+        <Input
+          name="botNickname"
+          addonBefore="Nickname"
+          value={guildSettings?.botNickname}
+          onChange={onChange}
+        />
       </div>
       <div>
         <h2>{t('tabs.bot.welcomeSectionTitle')}</h2>
@@ -63,6 +68,9 @@ export function GuildSettingsPageBotTab({
           placeholder="Channel"
           valueField="id"
           textField="name"
+          // value={() =>
+          //   guildSettings && channels.find((x) => x.id == guildSettings.welcomeChannelId)
+          // }
         />
         <LinkButton onClick={showWelcomeMessageDialog}>Nachricht bearbeiten</LinkButton>
         <UserMessageDialog

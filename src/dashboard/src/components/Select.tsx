@@ -42,11 +42,8 @@ export function Select<TValue, TOption>({
   const { Option } = AntdSelect;
   const componentWidth = typeof width === 'number' ? `${width}px` : width;
 
-  function handleOnChange(value: unknown, option: unknown) {
-    const element = data?.find(
-      (item: TOption) => getPropertyValue<TOption, string>(item, valueField) === value
-    );
-
+  function handleOnChange(value: unknown) {
+    const element = data?.find((item) => getPropertyValue(item, valueField) === value);
     onChange && onChange(value as TValue, element as TOption);
   }
 

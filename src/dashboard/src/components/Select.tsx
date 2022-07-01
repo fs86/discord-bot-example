@@ -59,9 +59,9 @@ export function Select<TValue, TOption>({
         defaultValue={defaultValue}
         value={value}
       >
-        {data?.map((item: TOption) => {
-          const itemValue = getPropertyValue<TOption, string>(item, valueField);
-          const itemText = getPropertyValue<TOption, string>(item, textField);
+        {data?.map((item) => {
+          const itemValue = getPropertyValue(item, valueField);
+          const itemText = getPropertyValue(item, textField);
 
           return (
             <Option value={itemValue} key={itemValue}>

@@ -32,15 +32,6 @@ export function GuildSettingsPageBotTab({
   const { t } = useTranslation('guildSettingsPage');
   const [welcomeMessageDialogVisible, setWelcomeMessageDialogVisible] = useState(false);
   const [leaveMessageDialogVisible, setLeaveMessageDialogVisible] = useState(false);
-
-  function showWelcomeMessageDialog() {
-    setWelcomeMessageDialogVisible(true);
-  }
-
-  function showLeaveMessageDialog() {
-    setLeaveMessageDialogVisible(true);
-  }
-
   const welcomeChannel = channels.find((channel) => channel.id === guildSettings.welcomeChannelId);
   const leaveChannel = channels.find((channel) => channel.id === guildSettings.leaveChannelId);
 
@@ -72,7 +63,9 @@ export function GuildSettingsPageBotTab({
           onChange={handleChange}
           value={welcomeChannel}
         />
-        <LinkButton onClick={showWelcomeMessageDialog}>Nachricht bearbeiten</LinkButton>
+        <LinkButton onClick={() => setWelcomeMessageDialogVisible(true)}>
+          Nachricht bearbeiten
+        </LinkButton>
         <UserMessageDialog
           title={t('tabs.bot.welcomeMessageDialogTitle')}
           visible={welcomeMessageDialogVisible}
@@ -86,7 +79,9 @@ export function GuildSettingsPageBotTab({
           textField="name"
           value={leaveChannel}
         />
-        <LinkButton onClick={showLeaveMessageDialog}>Nachricht bearbeiten</LinkButton>
+        <LinkButton onClick={() => setLeaveMessageDialogVisible(true)}>
+          Nachricht bearbeiten
+        </LinkButton>
         <UserMessageDialog
           title={t('tabs.bot.leaveMessageDialogTitle')}
           visible={leaveMessageDialogVisible}

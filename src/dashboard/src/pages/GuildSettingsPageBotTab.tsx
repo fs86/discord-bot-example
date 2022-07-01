@@ -1,14 +1,12 @@
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Input, InputNumber, LinkButton, Select, TextArea } from '@components';
+import { Input, LinkButton, Select } from '@components';
 import { UserMessageDialog } from '@components/UserMessageDialog';
 import { GuildSettings } from '@viewmodels';
+import { FormikProps } from 'formik';
 import styled from 'styled-components';
 
-interface GuildSettingsPageGeneralTabProps {
-  guildSettings: GuildSettings;
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-}
+type GuildSettingsPageGeneralTabProps = Pick<FormikProps<GuildSettings>, 'values' | 'handleChange'>;
 
 const Wrapper = styled.div`
   display: grid;
@@ -28,8 +26,8 @@ const channels = [
 ];
 
 export function GuildSettingsPageBotTab({
-  guildSettings,
-  onChange,
+  values: guildSettings,
+  handleChange,
 }: GuildSettingsPageGeneralTabProps) {
   const { t } = useTranslation('guildSettingsPage');
   const [welcomeMessageDialogVisible, setWelcomeMessageDialogVisible] = useState(false);
@@ -43,6 +41,9 @@ export function GuildSettingsPageBotTab({
     setLeaveMessageDialogVisible(true);
   }
 
+  const welcomeChannel = channels.find((channel) => channel.id === guildSettings.welcomeChannelId);
+  const leaveChannel = channels.find((channel) => channel.id === guildSettings.leaveChannelId);
+
   return (
     <Wrapper>
       <div>
@@ -50,14 +51,14 @@ export function GuildSettingsPageBotTab({
         <Input
           name="botPrefix"
           addonBefore={t('tabs.bot.botPrefixLabel')}
-          onChange={onChange}
+          onChange={handleChange}
           value={guildSettings?.botPrefix}
         />
         <Input
           name="botNickname"
           addonBefore="Nickname"
           value={guildSettings?.botNickname}
-          onChange={onChange}
+          onChange={handleChange}
         />
       </div>
       <div>
@@ -68,9 +69,8 @@ export function GuildSettingsPageBotTab({
           placeholder="Channel"
           valueField="id"
           textField="name"
-          // value={() =>
-          //   guildSettings && channels.find((x) => x.id == guildSettings.welcomeChannelId)
-          // }
+          onChange={handleChange}
+          value={welcomeChannel}
         />
         <LinkButton onClick={showWelcomeMessageDialog}>Nachricht bearbeiten</LinkButton>
         <UserMessageDialog
@@ -84,6 +84,7 @@ export function GuildSettingsPageBotTab({
           placeholder="Channel"
           valueField="id"
           textField="name"
+          value={leaveChannel}
         />
         <LinkButton onClick={showLeaveMessageDialog}>Nachricht bearbeiten</LinkButton>
         <UserMessageDialog
@@ -94,3 +95,5 @@ export function GuildSettingsPageBotTab({
     </Wrapper>
   );
 }
+
+//export default connect(GuildSettingsPageBotTab);

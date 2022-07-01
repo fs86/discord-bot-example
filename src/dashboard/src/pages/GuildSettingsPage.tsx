@@ -30,6 +30,7 @@ export function GuildSettingsPage() {
   );
 
   async function handleOnSubmit(values: GuildSettings) {
+    console.log(values);
     selectedGuild && (await updateGuildSettings(selectedGuild.id, values));
   }
 
@@ -62,7 +63,7 @@ export function GuildSettingsPage() {
               <GuildSettingsForm onSubmit={handleSubmit}>
                 <Tabs>
                   <TabPane tab={t('tabs.bot.title')} key="bot">
-                    <GuildSettingsPageBotTab guildSettings={values} onChange={handleChange} />
+                    <GuildSettingsPageBotTab values={values} handleChange={handleChange} />
                   </TabPane>
                   <TabPane tab={t('tabs.roles.title')} key="roles">
                     <GuildSettingsPageRolesTab guildSettings={values} />

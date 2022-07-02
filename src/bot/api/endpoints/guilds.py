@@ -70,8 +70,6 @@ async def get_guild_settings(
 
 
 @router.get("/{guild_id}/channels")
-async def get_guild_channels(guild_id: int):
-    return [
-        {"id": 476236636437667, "name": "Channel 1"},
-        {"id": 456743563786774, "name": "Channel 2"},
-    ]
+@inject
+async def get_guild_channels(guild_id: int, ipc_client: ipc.Client = Depends(Provide[Container.ipc_client])):
+    return await ipc_client.request("get_guild_channels", guild_id=guild_id)

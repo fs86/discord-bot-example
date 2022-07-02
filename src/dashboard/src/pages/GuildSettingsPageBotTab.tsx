@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
-import { Button, Input, LinkButton, Select } from '@components';
+import { Button, Input, LinkButton } from '@components';
+import { ChannelSelection } from '@components/ChannelSelection';
 import { UserMessageDialog } from '@components/UserMessageDialog';
 import { useGuildSelection } from '@context-providers';
 import { getGuildSettings, updateGuildSettings } from '@services/guildService';
 import { GuildSettings } from '@viewmodels';
-import { Formik } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -19,38 +20,30 @@ const SaveButton = styled(Button)`
   margin-top: 1rem;
 `;
 
-const channels = [
-  {
-    id: 123,
-    name: '123',
-  },
-  {
-    id: 234,
-    name: '234',
-  },
-];
-
 export function GuildSettingsPageBotTab() {
   const { t } = useTranslation('guildSettingsPageBotTab');
   const { selectedGuild } = useGuildSelection();
+  const [guildSettings, setGuildSettings] = useState<GuildSettings>();
   const [welcomeMessageDialogVisible, setWelcomeMessageDialogVisible] = useState(false);
   const [leaveMessageDialogVisible, setLeaveMessageDialogVisible] = useState(false);
 
-  const { data: guildSettings } = useQuery(
+  useQuery(
     ['getGuildSettings', selectedGuild],
     () => (selectedGuild?.id ? getGuildSettings(selectedGuild?.id) : undefined),
     { onSuccess: onGuildSettingsLoaded }
   );
 
-  const welcomeChannel = channels.find((channel) => channel.id === guildSettings?.welcomeChannelId);
-  const leaveChannel = channels.find((channel) => channel.id === guildSettings?.leaveChannelId);
-
-  async function handleOnSubmit(values: GuildSettings) {
+  async function handleOnSubmit(
+    values: GuildSettings,
+    formikHelpers: FormikHelpers<GuildSettings>
+  ) {
     selectedGuild && (await updateGuildSettings(selectedGuild.id, values));
+    setGuildSettings(values);
+    formikHelpers.resetForm();
   }
 
   function onGuildSettingsLoaded(data: GuildSettings) {
-    // console.log(data);
+    setGuildSettings(data);
   }
 
   return (
@@ -91,15 +84,13 @@ export function GuildSettingsPageBotTab() {
                 </div>
                 <div>
                   <h2>{t('welcome.title')}</h2>
-                  <Select
+                  <ChannelSelection
                     id="welcomeChannelId"
-                    data={channels}
+                    guildId={selectedGuild?.id}
                     addonBefore={t('welcome.channelLabel')}
                     placeholder={t('welcome.channelPlaceholder')}
-                    valueField="id"
-                    textField="name"
                     onChange={(value) => setFieldValue('welcomeChannelId', value)}
-                    value={welcomeChannel?.id}
+                    value={guildSettings.welcomeChannelId}
                   />
                   <LinkButton onClick={() => setWelcomeMessageDialogVisible(true)}>
                     {t('welcome.dialog.linkText')}
@@ -109,15 +100,13 @@ export function GuildSettingsPageBotTab() {
                     visible={welcomeMessageDialogVisible}
                   />
                   <h2>{t('leave.title')}</h2>
-                  <Select
+                  <ChannelSelection
                     id="leaveChannelId"
-                    data={channels}
+                    guildId={selectedGuild?.id}
                     addonBefore={t('leave.channelLabel')}
                     placeholder={t('leave.channelPlaceholder')}
-                    valueField="id"
-                    textField="name"
                     onChange={(value) => setFieldValue('leaveChannelId', value)}
-                    value={leaveChannel?.id}
+                    value={guildSettings.leaveChannelId}
                   />
                   <LinkButton onClick={() => setLeaveMessageDialogVisible(true)}>
                     {t('leave.dialog.linkText')}

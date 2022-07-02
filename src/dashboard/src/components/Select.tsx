@@ -54,7 +54,7 @@ export function Select<TValue, TOption>({
         bordered={!borderless}
         showArrow={showArrow}
         width={componentWidth}
-        defaultValue={value}
+        value={value}
       >
         {data?.map((item) => {
           const itemValue = getPropertyValue(item, valueField);

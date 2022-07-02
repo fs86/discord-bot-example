@@ -1,5 +1,4 @@
 from discord.ext import commands, ipc
-from munch import munchify
 
 
 class IpcRoutes(commands.Cog):
@@ -13,6 +12,11 @@ class IpcRoutes(commands.Cog):
     @ipc.server.route()
     async def get_guild_ids(self, data):
         return [{"id": str(guild.id), "name": guild.name} for guild in self.bot.guilds]
+
+    @ipc.server.route()
+    async def get_guild_channels(self, data):
+        guild = self.bot.get_guild(data.guild_id)
+        return [{"id": str(channel.id), "name": channel.name} for channel in guild.channels]
 
 
 def setup(bot: commands.Bot):

@@ -1,8 +1,8 @@
 export interface GuildSettings {
   botPrefix?: string;
   botNickname?: string;
-  welcomeChannelId?: number;
+  welcomeChannelId?: string;
   welcomeMessage?: string;
-  leaveChannelId?: number;
+  leaveChannelId?: string;
   leaveMessage?: string;
 }

@@ -23,18 +23,17 @@ const StyledSelect = styled(AntdSelect)<{ width?: number | string }>`
 `;
 
 export function Select<TValue, TOption>({
-  id,
   valueField,
   textField,
-  placeholder,
   borderless,
   addonBefore,
   addonAfter,
   showArrow = true,
   width = '100%',
   data,
-  value,
   onChange,
+  className,
+  inline,
   ...props
 }: SelectProps<TValue, TOption>) {
   const { Option } = AntdSelect;
@@ -46,15 +45,18 @@ export function Select<TValue, TOption>({
   }
 
   return (
-    <FieldWithAddon addonBefore={addonBefore} addonAfter={addonAfter} {...props}>
+    <FieldWithAddon
+      addonBefore={addonBefore}
+      addonAfter={addonAfter}
+      className={className}
+      inline={inline}
+    >
       <StyledSelect
-        id={id}
         onChange={handleOnChange}
-        placeholder={placeholder}
         bordered={!borderless}
         showArrow={showArrow}
         width={componentWidth}
-        value={value}
+        {...props}
       >
         {data?.map((item) => {
           const itemValue = getPropertyValue(item, valueField);

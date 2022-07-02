@@ -7,6 +7,7 @@ export interface FieldWithAddonProps {
   addonAfter?: string;
   inline?: boolean;
   children?: ReactNode;
+  className?: string;
 }
 
 const DefaultWrapper = styled.div<{ inline: boolean }>`

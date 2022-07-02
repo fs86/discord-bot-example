@@ -11,7 +11,7 @@ class GuildSettingsValues(BaseModel):
     welcome_channel_id: int = None
     welcome_message: str = None
     leave_channel_id: int = None
-    leave_channel_message: str = None
+    leave_message: str = None
 
 
 class GuildSettings(Document):

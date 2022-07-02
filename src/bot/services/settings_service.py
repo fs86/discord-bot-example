@@ -54,9 +54,10 @@ class SettingsService:
     # EN: Updates the settings for the specified server.
     async def update(self, guild_id: int, settings: dict[str, Any]):
         server_settings = await self.__get_server_settings(guild_id)
-        server_settings.values.bot_prefix = settings["bot_prefix"]
-        server_settings.values.welcome_channel_id = settings["welcome_channel_id"]
-        server_settings.values.welcome_message = settings["welcome_message"]
+
+        server_settings.init_cache()
+        server_settings.values = GuildSettingsValues(**settings)
+
         await server_settings.save()
 
     # DE: Prüft, für welche Server bereits Einstellungen gespeichert wurden und gibt die Server IDs als Liste zurück.

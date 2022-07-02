@@ -33,108 +33,108 @@ const channels = [
 export function GuildSettingsPageBotTab() {
   const { t } = useTranslation('guildSettingsPageBotTab');
   const { selectedGuild } = useGuildSelection();
-  const [guildSettings, setGuildSettings] = useState<GuildSettings>();
   const [welcomeMessageDialogVisible, setWelcomeMessageDialogVisible] = useState(false);
   const [leaveMessageDialogVisible, setLeaveMessageDialogVisible] = useState(false);
-  const welcomeChannel = channels.find((channel) => channel.id === guildSettings?.welcomeChannelId);
-  const leaveChannel = channels.find((channel) => channel.id === guildSettings?.leaveChannelId);
 
-  const { isLoading } = useQuery(
-    ['getGuilds', selectedGuild?.id],
+  const { data: guildSettings } = useQuery(
+    ['getGuildSettings', selectedGuild],
     () => (selectedGuild?.id ? getGuildSettings(selectedGuild?.id) : undefined),
     { onSuccess: onGuildSettingsLoaded }
   );
+
+  const welcomeChannel = channels.find((channel) => channel.id === guildSettings?.welcomeChannelId);
+  const leaveChannel = channels.find((channel) => channel.id === guildSettings?.leaveChannelId);
 
   async function handleOnSubmit(values: GuildSettings) {
     selectedGuild && (await updateGuildSettings(selectedGuild.id, values));
   }
 
   function onGuildSettingsLoaded(data: GuildSettings) {
-    setGuildSettings(data);
+    // console.log(data);
   }
 
   return (
     <>
-      {guildSettings && (
-        <Formik
-          initialValues={
-            {
-              botPrefix: guildSettings?.botPrefix,
-              botNickname: guildSettings?.botNickname,
-              welcomeChannelId: guildSettings?.welcomeChannelId,
-              welcomeMessage: guildSettings?.welcomeMessage,
-              leaveChannelId: guildSettings?.leaveChannelId,
-              leaveMessage: guildSettings?.leaveMessage,
-            } as GuildSettings
-          }
-          onSubmit={handleOnSubmit}
-        >
-          {({ values: guildSettings, handleSubmit, handleChange, setFieldValue, dirty }) => {
-            return (
-              <form onSubmit={handleSubmit}>
-                <Wrapper>
-                  <div>
-                    <h2>{t('general.title')}</h2>
-                    <Input
-                      id="botPrefix"
-                      addonBefore={t('general.prefixLabel')}
-                      onChange={handleChange}
-                      value={guildSettings?.botPrefix}
-                    />
-                    <Input
-                      id="botNickname"
-                      addonBefore={t('general.nicknameLabel')}
-                      value={guildSettings?.botNickname}
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div>
-                    <h2>{t('welcome.title')}</h2>
-                    <Select
-                      id="welcomeChannelId"
-                      data={channels}
-                      addonBefore={t('welcome.channelLabel')}
-                      placeholder={t('welcome.channelPlaceholder')}
-                      valueField="id"
-                      textField="name"
-                      onChange={(value) => setFieldValue('welcomeChannelId', value)}
-                      value={welcomeChannel?.id}
-                    />
-                    <LinkButton onClick={() => setWelcomeMessageDialogVisible(true)}>
-                      {t('welcome.dialog.linkText')}
-                    </LinkButton>
-                    <UserMessageDialog
-                      title={t('welcome.dialog.title')}
-                      visible={welcomeMessageDialogVisible}
-                    />
-                    <h2>{t('leave.title')}</h2>
-                    <Select
-                      id="leaveChannelId"
-                      data={channels}
-                      addonBefore={t('leave.channelLabel')}
-                      placeholder={t('leave.channelPlaceholder')}
-                      valueField="id"
-                      textField="name"
-                      onChange={(value) => setFieldValue('leaveChannelId', value)}
-                      value={leaveChannel?.id}
-                    />
-                    <LinkButton onClick={() => setLeaveMessageDialogVisible(true)}>
-                      {t('leave.dialog.linkText')}
-                    </LinkButton>
-                    <UserMessageDialog
-                      title={t('leave.dialog.title')}
-                      visible={leaveMessageDialogVisible}
-                    />
-                  </div>
-                </Wrapper>
-                <SaveButton type="primary" disabled={!dirty} submit>
-                  {t('saveButton')}
-                </SaveButton>
-              </form>
-            );
-          }}
-        </Formik>
-      )}
+      <Formik
+        enableReinitialize
+        initialValues={
+          {
+            botPrefix: guildSettings?.botPrefix,
+            botNickname: guildSettings?.botNickname,
+            welcomeChannelId: guildSettings?.welcomeChannelId,
+            welcomeMessage: guildSettings?.welcomeMessage,
+            leaveChannelId: guildSettings?.leaveChannelId,
+            leaveMessage: guildSettings?.leaveMessage,
+          } as GuildSettings
+        }
+        onSubmit={handleOnSubmit}
+      >
+        {({ values: guildSettings, handleSubmit, handleChange, setFieldValue, dirty }) => {
+          console.log(guildSettings);
+          return (
+            <form onSubmit={handleSubmit}>
+              <Wrapper>
+                <div>
+                  <h2>{t('general.title')}</h2>
+                  <Input
+                    id="botPrefix"
+                    addonBefore={t('general.prefixLabel')}
+                    onChange={handleChange}
+                    value={guildSettings?.botPrefix}
+                  />
+                  <Input
+                    id="botNickname"
+                    addonBefore={t('general.nicknameLabel')}
+                    value={guildSettings?.botNickname}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div>
+                  <h2>{t('welcome.title')}</h2>
+                  <Select
+                    id="welcomeChannelId"
+                    data={channels}
+                    addonBefore={t('welcome.channelLabel')}
+                    placeholder={t('welcome.channelPlaceholder')}
+                    valueField="id"
+                    textField="name"
+                    onChange={(value) => setFieldValue('welcomeChannelId', value)}
+                    value={welcomeChannel?.id}
+                  />
+                  <LinkButton onClick={() => setWelcomeMessageDialogVisible(true)}>
+                    {t('welcome.dialog.linkText')}
+                  </LinkButton>
+                  <UserMessageDialog
+                    title={t('welcome.dialog.title')}
+                    visible={welcomeMessageDialogVisible}
+                  />
+                  <h2>{t('leave.title')}</h2>
+                  <Select
+                    id="leaveChannelId"
+                    data={channels}
+                    addonBefore={t('leave.channelLabel')}
+                    placeholder={t('leave.channelPlaceholder')}
+                    valueField="id"
+                    textField="name"
+                    onChange={(value) => setFieldValue('leaveChannelId', value)}
+                    value={leaveChannel?.id}
+                  />
+                  <LinkButton onClick={() => setLeaveMessageDialogVisible(true)}>
+                    {t('leave.dialog.linkText')}
+                  </LinkButton>
+                  <UserMessageDialog
+                    title={t('leave.dialog.title')}
+                    visible={leaveMessageDialogVisible}
+                  />
+                </div>
+              </Wrapper>
+              <SaveButton type="primary" disabled={!dirty} submit>
+                {t('saveButton')}
+              </SaveButton>
+            </form>
+          );
+        }}
+      </Formik>
     </>
   );
 }

@@ -13,7 +13,6 @@ export interface SelectProps<TValue, TOption>
   showArrow?: boolean;
   width?: number | string;
   data?: TOption[];
-  defaultValue?: unknown;
   value?: unknown;
   onChange?: (value: TValue, option: TOption) => void;
   className?: string;
@@ -34,7 +33,6 @@ export function Select<TValue, TOption>({
   showArrow = true,
   width = '100%',
   data,
-  defaultValue,
   value,
   onChange,
   ...props
@@ -56,8 +54,7 @@ export function Select<TValue, TOption>({
         bordered={!borderless}
         showArrow={showArrow}
         width={componentWidth}
-        defaultValue={defaultValue}
-        value={value}
+        defaultValue={value}
       >
         {data?.map((item) => {
           const itemValue = getPropertyValue(item, valueField);

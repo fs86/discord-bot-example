@@ -34,16 +34,16 @@ export function GuildSettingsPageBotTab() {
   );
 
   async function handleOnSubmit(
-    values: GuildSettings,
+    settings: GuildSettings,
     formikHelpers: FormikHelpers<GuildSettings>
   ) {
-    selectedGuild && (await updateGuildSettings(selectedGuild.id, values));
-    setGuildSettings(values);
+    selectedGuild && (await updateGuildSettings(selectedGuild.id, settings));
+    setGuildSettings(settings);
     formikHelpers.resetForm();
   }
 
-  function onGuildSettingsLoaded(data: GuildSettings) {
-    setGuildSettings(data);
+  function onGuildSettingsLoaded(settings: GuildSettings) {
+    setGuildSettings(settings);
   }
 
   return (

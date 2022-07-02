@@ -57,6 +57,7 @@ export function GuildSelectionDialog({ visible, onCancel, onOk }: GuildSelection
       cancelButtonDisabled={cancelButtonDisabled}
       closeOnClickOutside={maskClosable}
       showCloseButton={!cancelButtonDisabled}
+      destroyOnClose
     >
       <StyledAlert closable type="info" message={t('infotext')} />
       <Select

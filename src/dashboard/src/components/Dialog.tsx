@@ -12,6 +12,7 @@ interface DialogProps {
   cancelButtonDisabled?: boolean;
   showCloseButton?: boolean;
   closeOnClickOutside?: boolean;
+  destroyOnClose?: boolean;
   children?: ReactNode;
   width?: number;
   className?: string;

@@ -8,16 +8,16 @@ export async function getGuilds(): Promise<Guild[]> {
   return response.data;
 }
 
-export async function updateGuildSettings(guildId: string, settings: GuildSettings) {
-  await axios.post(endpoint(`/guilds/${guildId}/settings`), settings);
-}
-
 export async function getGuildSettings(guildId: string) {
   const response = await axios.get<GuildSettings>(endpoint(`/guilds/${guildId}/settings`));
   return response.data;
 }
 
-export async function getGuildChannels(guildId: string) {
-  const response = await axios.get<GuildChannel[]>(endpoint(`/guilds/${guildId}/channels`));
+export async function updateGuildSettings(guildId: string, settings: GuildSettings) {
+  await axios.post(endpoint(`/guilds/${guildId}/settings`), settings);
+}
+
+export async function getGuildTextChannels(guildId: string) {
+  const response = await axios.get<GuildChannel[]>(endpoint(`/guilds/${guildId}/textchannels`));
   return response.data;
 }

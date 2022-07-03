@@ -22,5 +22,7 @@
       "linkText": "Nachricht bearbeiten"
     }
   },
-  "saveButton": "Speichern"
+  "saveButton": "Speichern",
+  "successMessage": "Die Servereinstellungen für {{guildName}} wurden gespeichert!",
+  "errorMessage": "Die Servereinstellungen für {{guildName}} konnten nicht gespeichert werden!"
 }

@@ -14,7 +14,7 @@ export async function getGuildSettings(guildId: string) {
 }
 
 export async function updateGuildSettings(guildId: string, settings: GuildSettings) {
-  await axios.post(endpoint(`/guilds/${guildId}/settings`), settings);
+  return await axios.post(endpoint(`/guilds/${guildId}/settings`), settings);
 }
 
 export async function getGuildTextChannels(guildId: string) {

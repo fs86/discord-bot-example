@@ -7,6 +7,7 @@ import { UserMessageDialog } from '@components/UserMessageDialog';
 import { useGuildSelection } from '@context-providers';
 import { getGuildSettings, updateGuildSettings } from '@services/guildService';
 import { GuildSettings } from '@viewmodels';
+import { message } from 'antd';
 import { Formik, FormikHelpers } from 'formik';
 import styled from 'styled-components';
 
@@ -30,20 +31,26 @@ export function GuildSettingsPageBotTab() {
   useQuery(
     ['getGuildSettings', selectedGuild],
     () => (selectedGuild?.id ? getGuildSettings(selectedGuild?.id) : undefined),
-    { onSuccess: onGuildSettingsLoaded }
+    { onSuccess: (settings) => setGuildSettings(settings) }
   );
 
   async function handleOnSubmit(
     settings: GuildSettings,
     formikHelpers: FormikHelpers<GuildSettings>
   ) {
-    selectedGuild && (await updateGuildSettings(selectedGuild.id, settings));
-    setGuildSettings(settings);
-    formikHelpers.resetForm();
-  }
+    if (!selectedGuild) {
+      return;
+    }
 
-  function onGuildSettingsLoaded(settings: GuildSettings) {
-    setGuildSettings(settings);
+    const result = await updateGuildSettings(selectedGuild.id, settings);
+
+    if (result.status === 200) {
+      setGuildSettings(settings);
+      formikHelpers.resetForm();
+      message.success(t('successMessage', { guildName: selectedGuild?.name }));
+    } else {
+      message.error(t('errorMessage', { guildName: selectedGuild?.name }));
+    }
   }
 
   return (
@@ -63,7 +70,6 @@ export function GuildSettingsPageBotTab() {
         onSubmit={handleOnSubmit}
       >
         {({ values: guildSettings, handleSubmit, handleChange, setFieldValue, dirty }) => {
-          console.log(guildSettings);
           return (
             <form onSubmit={handleSubmit}>
               <Wrapper>

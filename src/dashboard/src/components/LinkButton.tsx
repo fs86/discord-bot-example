@@ -1,8 +1,8 @@
-import { ReactNode } from 'react';
+import { MouseEvent, ReactNode } from 'react';
 import styled from 'styled-components';
 
 export interface LinkButtonProps {
-  onClick: () => void;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
   underline?: boolean;
   children: ReactNode;
   inline?: boolean;
@@ -39,7 +39,13 @@ export function LinkButton({
   className,
 }: LinkButtonProps) {
   return (
-    <StyledButton onClick={onClick} underline={underline} inline={inline} className={className}>
+    <StyledButton
+      type="button"
+      onClick={onClick}
+      underline={underline}
+      inline={inline}
+      className={className}
+    >
       {children}
     </StyledButton>
   );

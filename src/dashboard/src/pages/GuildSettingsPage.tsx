@@ -1,7 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Button } from '@components';
 import { Tabs } from 'antd';
-import styled from 'styled-components';
 
 import { GuildSettingsPageBotTab } from './GuildSettingsPageBotTab';
 import { GuildSettingsPageRolesTab } from './GuildSettingsPageRolesTab';

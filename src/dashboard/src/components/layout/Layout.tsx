@@ -24,7 +24,7 @@ const Main = styled.main`
 const Content = styled(ScrollContainer)`
   background-color: ${({ theme }) => theme.colors.content.background};
   color: ${({ theme }) => theme.colors.foreground};
-  padding: 1.5rem;
+  padding: 1.5rem 3rem;
   overflow-y: auto;
 
   h1 {

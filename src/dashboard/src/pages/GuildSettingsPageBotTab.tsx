@@ -30,16 +30,13 @@ const SaveButton = styled(Button)`
 export function GuildSettingsPageBotTab() {
   const { t } = useTranslation('guildSettingsPageBotTab');
   const { selectedGuild } = useGuildSelection();
-  const [guildSettings, setGuildSettings] = useState<GuildSettings>();
   const [messageDialogVisible, setMessageDialogVisible] = useState({
     welcome: false,
     leave: false,
   });
 
-  const { isLoading } = useQuery(
-    ['getGuildSettings', selectedGuild],
-    () => (selectedGuild?.id ? getGuildSettings(selectedGuild?.id) : undefined),
-    { onSuccess: (settings) => setGuildSettings(settings) }
+  const { isLoading, data: guildSettings } = useQuery(['getGuildSettings', selectedGuild], () =>
+    selectedGuild?.id ? getGuildSettings(selectedGuild?.id) : undefined
   );
 
   async function handleOnSubmit(
@@ -53,7 +50,6 @@ export function GuildSettingsPageBotTab() {
     const result = await updateGuildSettings(selectedGuild.id, settings);
 
     if (result.status === 200) {
-      setGuildSettings(settings);
       formikHelpers.resetForm();
       message.success(t('successMessage', { guildName: selectedGuild?.name }));
     } else {
@@ -68,15 +64,10 @@ export function GuildSettingsPageBotTab() {
     }));
   }
 
-  // useEffect(() => {
-  //   console.log(guildSettings);
-  // }, [guildSettings]);
-
   return (
     <>
       {!isLoading && (
         <Formik
-          enableReinitialize
           initialValues={
             {
               botPrefix: guildSettings?.botPrefix,

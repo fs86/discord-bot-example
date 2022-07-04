@@ -65,6 +65,15 @@ async def update_guild_settings(
 async def get_guild_settings(
     guild_id: int, settings_service: SettingsService = Depends(Provide[Container.settings_service])
 ):
+    return {
+        "bot_prefix": "?",
+        "bot_nickname": "My Bot",
+        "welcome_channel_id": 123456789,
+        "welcome_message": "Test",
+        "leave_channel_id": 123456789,
+        "leave_message": "Test 1234",
+    }
+
     settings = await settings_service.get(guild_id)
     return settings.values
 

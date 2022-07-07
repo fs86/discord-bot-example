@@ -29,9 +29,6 @@ async def configure(autoload_models: bool = False, document_models: List[Union[T
 
 
 def __build_connection_string(config):
-    name = config.name if "name" in config else ""
-    prefix = "mongodb+srv" if config.use_dns_seed_list else "mongodb"
-
     params = {}
 
     if "retry_writes" in config:
@@ -40,6 +37,8 @@ def __build_connection_string(config):
     if "write_concern" in config:
         params["w"] = config.write_concern
 
+    name = config.name if "name" in config else ""
+    prefix = "mongodb+srv" if config.use_dns_seed_list else "mongodb"
     params = f"?{urllib.parse.urlencode(params)}" if len(params) > 0 else ""
 
     return f"{prefix}://{config.user}:{config.password}@{config.host}/{name}{params}"

@@ -1,3 +1,4 @@
+import urllib.parse
 from typing import TYPE_CHECKING, List, Type, Union
 
 from beanie import Document, init_beanie
@@ -28,7 +29,20 @@ async def configure(autoload_models: bool = False, document_models: List[Union[T
 
 
 def __build_connection_string(config):
-    return f"mongodb+srv://{config.user}:{config.password}" f"@{config.host}/{config.name}?retryWrites=true&w=majority"
+    name = config.name if "name" in config else ""
+    prefix = "mongodb+srv" if config.use_dns_seed_list else "mongodb"
+
+    params = {}
+
+    if "retry_writes" in config:
+        params["retryWrites"] = str(config.retry_writes).lower()
+
+    if "write_concern" in config:
+        params["w"] = config.write_concern
+
+    params = f"?{urllib.parse.urlencode(params)}" if len(params) > 0 else ""
+
+    return f"{prefix}://{config.user}:{config.password}@{config.host}/{name}{params}"
 
 
 def __get_model_classes():

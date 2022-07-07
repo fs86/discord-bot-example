@@ -10,6 +10,9 @@ db:
   name: <DATABASE NAME>
   user: <DATABASE USER>
   password: <DATABASE PASSWORD>
+  use_dns_seed_list: true
+  retry_writes: true
+  write_concern: majority
 
 bot:
   token: <BOT TOKEN>

@@ -1,6 +1,4 @@
 # Beispielprojekt: Python Discord-Bot mit React Dashboard
-
-## Worum geht es hier?
 Dieses Beispielprojekt soll dir einen Überblick darüber verschaffen, wie du den Programmcode deines Discord-Bots sauber strukturieren kannst und wie du deinen Bot mit einer Verwaltungsoberfläche (Dashboard) verknüpfen kannst. Alles, was du hier vorfindest, sind lediglich **Ideen** bzw. **Anregungen** für eine spätere Umsetzung.
 
 ## Wie führe ich das Projekt aus?

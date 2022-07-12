@@ -40,7 +40,11 @@ npm install
 yarn
 ```
 
-### 5. Konfigurationsdateien anlegen
+### 5. Bot-Einstellungen im Discord Developer vornehmen
+![oauth2settings](https://user-images.githubusercontent.com/39554311/178496754-b05724d4-b64d-4799-8094-ce8d1c9a88a9.jpg)
+
+
+### 6. Konfigurationsdateien anlegen
 Es müssen zwei Konfigurationsdateien angelegt werden. Eine für den Bot (src/bot/**config.yml**) und eine für das Dashboard (src/dashboard/**.env**). Nachfolgend findest du Beispiele der beiden Konfigurationsdateien. Werte in spitzen Klammern `< >` müssen durch echte Werte ersetzt werden.
 #### src/bot/**config.yml**
 ```yml

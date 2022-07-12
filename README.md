@@ -1,4 +1,4 @@
-# Beispielprojekt für einen Python Discord-Bot inkl. React Dashboard
+# Beispielprojekt: Python Discord-Bot mit React Dashboard
 
 
 ## 1. Python und Node.js installieren

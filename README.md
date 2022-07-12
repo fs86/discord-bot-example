@@ -42,6 +42,7 @@ yarn
 
 ### 5. Bot-Einstellungen im Discord Developer vornehmen
 ![oauth2settings](https://user-images.githubusercontent.com/39554311/178496754-b05724d4-b64d-4799-8094-ce8d1c9a88a9.jpg)
+*Client ID und Client Secret auf dem Screenshot sind natürlich schon lange nicht mehr gültig ;-)*
 
 
 ### 6. Konfigurationsdateien anlegen

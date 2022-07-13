@@ -16,25 +16,24 @@ classifiers = ["Private :: Do Not Upload"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
-beanie = "^1.10.8"
-certifi = "^2021.10.8"
+beanie = "1.11.6"
+certifi = "2022.6.15"
 discord-ext-ipc = {git = "https://github.com/krittick/discord-ext-ipc.git", rev = "main"}
-dnspython = "^2.2.1"
+dnspython = "2.2.1"
 fastapi-discord = {git = "https://github.com/Tert0/fastapi-discord.git"}
-motor = "^2.5.1"
-msgpack = "^1.0.3"
-munch = "^2.5.0"
+msgpack = "1.0.4"
+munch = "2.5.0"
 py-cord = {git = "https://github.com/Pycord-Development/pycord.git"}
-PyYAML = "^6.0"
-ujson = "^5.2.0"
-uvicorn = {extras = ["standard"], version = "^0.17.6"}
-dependency-injector = "^4.39.1"
-pyhumps = "^3.7.1"
+PyYAML = "6.0"
+ujson = "5.4.0"
+uvicorn = {extras = ["standard"], version = "0.18.2"}
+dependency-injector = "4.39.1"
+pyhumps = "3.7.2"
 
 [tool.poetry.dev-dependencies]
-black = "^22.3.0"
-isort = "^5.10.1"
-toml = "^0.10.2"
+black = "22.6.0"
+isort = "5.10.1"
+toml = "0.10.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

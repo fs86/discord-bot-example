@@ -41,6 +41,7 @@ yarn
 ```
 
 ### 5. Bot-Einstellungen im Discord Developer vornehmen
+Die nachfolgenden Einstellungen muss für den Bot vorgenommen werden, der mit dem Dashboard verbunden werden soll. Hier geht es zum Discord Developer Portal: https://discord.com/developers/applications
 ![oauth2settings](https://user-images.githubusercontent.com/39554311/178496754-b05724d4-b64d-4799-8094-ce8d1c9a88a9.jpg)
 *Client ID und Client Secret auf dem Screenshot sind natürlich schon lange nicht mehr gültig ;-)*
 

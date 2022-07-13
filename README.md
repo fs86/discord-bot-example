@@ -75,9 +75,9 @@ api:
   enabled: true
 
 oauth:
-  client_id: <CLIENT ID> # Client ID der Applikation
-  client_secret: <CLIENT SECRET> # Client Secret der Applikation
-  redirect_uri: <REDIRECT URI> # Redirect URI
+  client_id: <CLIENT ID> # Client ID der Applikation (aus dem Discord Developer Portal zu entnehmen)
+  client_secret: <CLIENT SECRET> # Client Secret der Applikation (aus dem Discord Developer Portal zu entnehmen)
+  redirect_uri: http://localhost:8000/account/callback
   scopes:
     - identify
     - email
@@ -85,7 +85,7 @@ oauth:
 ```
 #### src/dashboard/**.env**
 ```ini
-VITE_DC_CLIENT_ID=<CLIENT ID> # Client ID der Applikation
+VITE_DC_CLIENT_ID=<CLIENT ID> # Client ID der Applikation (aus dem Discord Developer Portal zu entnehmen)
 VITE_API_URL=http://127.0.0.1:8000
 VITE_LANDING_PAGE_TITLE=Bot Dashboard
 ```

@@ -86,6 +86,6 @@ oauth:
 #### src/dashboard/**.env**
 ```ini
 VITE_DC_CLIENT_ID=<CLIENT ID> # Client ID der Applikation (aus dem Discord Developer Portal zu entnehmen)
-VITE_API_URL=http://127.0.0.1:8000
+VITE_API_URL=http://localhost:8000
 VITE_LANDING_PAGE_TITLE=Bot Dashboard
 ```

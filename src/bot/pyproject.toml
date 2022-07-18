@@ -18,7 +18,7 @@ classifiers = ["Private :: Do Not Upload"]
 python = "^3.10"
 beanie = "1.11.6"
 certifi = "2022.6.15"
-discord-ext-ipc = {git = "https://github.com/krittick/discord-ext-ipc.git", rev = "main"}
+discord-ext-ipc = {git = "https://github.com/fs86/discord-ext-ipc", rev = "main"}
 dnspython = "2.2.1"
 fastapi-discord = {git = "https://github.com/Tert0/fastapi-discord.git"}
 msgpack = "1.0.4"

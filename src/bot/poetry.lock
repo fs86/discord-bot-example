@@ -176,7 +176,7 @@ yaml = ["pyyaml"]
 [[package]]
 name = "discord-ext-ipc"
 version = "2.1.1"
-description = "A discord.py extension for inter-process communication."
+description = "A pycord extension for inter-process communication."
 category = "main"
 optional = false
 python-versions = ">=3.5.3"
@@ -185,14 +185,11 @@ develop = false
 [package.dependencies]
 py-cord = "*"
 
-[package.extras]
-docs = ["sphinx", "sphinxcontrib-trio", "sphinx-rtd-theme"]
-
 [package.source]
 type = "git"
-url = "https://github.com/krittick/discord-ext-ipc.git"
+url = "https://github.com/fs86/discord-ext-ipc"
 reference = "main"
-resolved_reference = "020a85de750d4e8eb71719e4a026d923bc664aaa"
+resolved_reference = "70964fa48a609ca1c6f1e02a4bec2b8149b173ff"
 
 [[package]]
 name = "dnspython"
@@ -397,7 +394,7 @@ voice = ["PyNaCl (>=1.3.0,<1.6)"]
 type = "git"
 url = "https://github.com/Pycord-Development/pycord.git"
 reference = "master"
-resolved_reference = "751242bc464c990ee2d7335b7264fe29b30322b8"
+resolved_reference = "283db543c267d0ec51526b17a5728bed4d6516fe"
 
 [[package]]
 name = "pydantic"
@@ -589,7 +586,7 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "bc787f297f772d0babf8d3edf66d9a97544d2fc37786704fe90f1325b5e4aa51"
+content-hash = "19e6eae36e7c78f66b10dc7d6096b7bb8193014cad5d5e7d4fcd42ddebae0199"
 
 [metadata.files]
 aiocache = [

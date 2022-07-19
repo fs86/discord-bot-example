@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { Button, Input, LinkButton } from '@components';
 import { ChannelSelection } from '@components/ChannelSelection';
 import { UserMessageDialog } from '@components/UserMessageDialog';
@@ -30,13 +30,14 @@ const SaveButton = styled(Button)`
 export function GuildSettingsPageBotTab() {
   const { t } = useTranslation('guildSettingsPageBotTab');
   const { selectedGuild } = useGuildSelection();
+
   const [messageDialogVisible, setMessageDialogVisible] = useState({
     welcome: false,
     leave: false,
   });
 
-  const { isLoading, data: guildSettings } = useQuery(['getGuildSettings', selectedGuild], () =>
-    selectedGuild?.id ? getGuildSettings(selectedGuild?.id) : undefined
+  const { isLoading, data: guildSettings } = useQuery(['getGuildSettings', selectedGuild?.id], () =>
+    selectedGuild?.id ? getGuildSettings(selectedGuild.id) : undefined
   );
 
   async function handleOnSubmit(
@@ -64,24 +65,29 @@ export function GuildSettingsPageBotTab() {
     }));
   }
 
+  useEffect(() => {
+    console.log('useEffect', selectedGuild, guildSettings);
+  }, [selectedGuild]);
+
   return (
     <>
-      {!isLoading && (
+      {!isLoading && guildSettings && (
         <Formik
+          enableReinitialize
           initialValues={
             {
-              botPrefix: guildSettings?.botPrefix,
-              botNickname: guildSettings?.botNickname,
-              welcomeChannelId: guildSettings?.welcomeChannelId,
-              welcomeMessage: guildSettings?.welcomeMessage,
-              leaveChannelId: guildSettings?.leaveChannelId,
-              leaveMessage: guildSettings?.leaveMessage,
+              botPrefix: guildSettings.botPrefix,
+              botNickname: guildSettings.botNickname,
+              welcomeChannelId: guildSettings.welcomeChannelId,
+              welcomeMessage: guildSettings.welcomeMessage,
+              leaveChannelId: guildSettings.leaveChannelId,
+              leaveMessage: guildSettings.leaveMessage,
             } as GuildSettings
           }
           onSubmit={handleOnSubmit}
         >
           {({ values: guildSettings, handleSubmit, handleChange, setFieldValue, dirty }) => {
-            console.log(guildSettings);
+            console.log('Formik', selectedGuild, guildSettings);
             return (
               <form onSubmit={handleSubmit}>
                 <Wrapper>

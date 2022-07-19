@@ -25,6 +25,10 @@ export function NotImplemented() {
           <>
             {(t('content', { returnObjects: true }) as string[]).join(' ')}
             <br />
+            <StyledLink href={t('github.link')} target="_blank">
+              {t('github.label')}
+            </StyledLink>
+            {' | '}
             <StyledLink href={t('discord.link')} target="_blank">
               {t('discord.label')}
             </StyledLink>

@@ -5,7 +5,6 @@ from discord import User
 from discord.ext import ipc
 from fastapi import APIRouter, Depends
 from fastapi_discord import Guild
-from pydantic import BaseModel
 
 from api.containers import Container
 from api.dependencies import get_user, get_user_guilds, is_authenticated
@@ -47,6 +46,7 @@ async def update_guild_settings(
     guild_id: int,
     request: GuildSettingsRequest,
     user_guilds: List[Guild] = Depends(get_user_guilds),
+    ipc_client: ipc.Client = Depends(Provide[Container.ipc_client]),
     settings_service: SettingsService = Depends(Provide[Container.settings_service]),
 ):
     guilds_with_owner_rights = [int(guild.id) for guild in user_guilds if guild.owner]
@@ -55,7 +55,9 @@ async def update_guild_settings(
         raise RequiresGuildOwner
 
     settings = request.__dict__
+
     await settings_service.update(guild_id, settings)
+    await ipc_client.request("set_bot_nickname", guild_id=guild_id, bot_nickname=request.bot_nickname)
 
     return "Ok"
 
@@ -65,14 +67,14 @@ async def update_guild_settings(
 async def get_guild_settings(
     guild_id: int, settings_service: SettingsService = Depends(Provide[Container.settings_service])
 ):
-    return {
-        "bot_prefix": "?",
-        "bot_nickname": "My Bot",
-        "welcome_channel_id": 123456789,
-        "welcome_message": "Test",
-        "leave_channel_id": 123456789,
-        "leave_message": "Test 1234",
-    }
+    # return {
+    #     "bot_prefix": "?",
+    #     "bot_nickname": "My Bot",
+    #     "welcome_channel_id": 123456789,
+    #     "welcome_message": "Test",
+    #     "leave_channel_id": 123456789,
+    #     "leave_message": "Test 1234",
+    # }
 
     settings = await settings_service.get(guild_id)
     return settings.values

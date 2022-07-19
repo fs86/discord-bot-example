@@ -1,14 +1,12 @@
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useQuery, useQueryClient } from 'react-query';
-import { Button, Input, LinkButton } from '@components';
+import { useQuery } from 'react-query';
+import { Button, Input, TextArea } from '@components';
 import { ChannelSelection } from '@components/ChannelSelection';
-import { UserMessageDialog } from '@components/UserMessageDialog';
 import { useGuildSelection } from '@context-providers';
 import { getGuildSettings, updateGuildSettings } from '@services/guildService';
 import { GuildSettings } from '@viewmodels';
 import { message } from 'antd';
-import { Formik, FormikHelpers } from 'formik';
+import { Formik } from 'formik';
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
@@ -27,23 +25,29 @@ const SaveButton = styled(Button)`
   margin-top: 1rem;
 `;
 
+const UserProperty = styled.div`
+  display: flex;
+  line-height: 22px;
+  gap: 0.3rem;
+`;
+
+const Placeholder = styled.span`
+  font-family: 'Courier New', Courier, monospace;
+  background-color: #464646;
+  border-radius: 3px;
+`;
+
+const Description = styled.span``;
+
 export function GuildSettingsPageBotTab() {
   const { t } = useTranslation('guildSettingsPageBotTab');
   const { selectedGuild } = useGuildSelection();
-
-  const [messageDialogVisible, setMessageDialogVisible] = useState({
-    welcome: false,
-    leave: false,
-  });
 
   const { isLoading, data: guildSettings } = useQuery(['getGuildSettings', selectedGuild?.id], () =>
     selectedGuild?.id ? getGuildSettings(selectedGuild.id) : undefined
   );
 
-  async function handleOnSubmit(
-    settings: GuildSettings,
-    formikHelpers: FormikHelpers<GuildSettings>
-  ) {
+  async function handleOnSubmit(settings: GuildSettings) {
     if (!selectedGuild) {
       return;
     }
@@ -51,29 +55,18 @@ export function GuildSettingsPageBotTab() {
     const result = await updateGuildSettings(selectedGuild.id, settings);
 
     if (result.status === 200) {
-      formikHelpers.resetForm();
       message.success(t('successMessage', { guildName: selectedGuild?.name }));
     } else {
       message.error(t('errorMessage', { guildName: selectedGuild?.name }));
     }
   }
 
-  function showEditMessageDialog(type: keyof typeof messageDialogVisible, visible = true) {
-    setMessageDialogVisible((prevState) => ({
-      ...prevState,
-      [type]: visible,
-    }));
-  }
-
-  useEffect(() => {
-    console.log('useEffect', selectedGuild, guildSettings);
-  }, [selectedGuild]);
-
   return (
     <>
       {!isLoading && guildSettings && (
         <Formik
           enableReinitialize
+          onSubmit={handleOnSubmit}
           initialValues={
             {
               botPrefix: guildSettings.botPrefix,
@@ -84,10 +77,8 @@ export function GuildSettingsPageBotTab() {
               leaveMessage: guildSettings.leaveMessage,
             } as GuildSettings
           }
-          onSubmit={handleOnSubmit}
         >
-          {({ values: guildSettings, handleSubmit, handleChange, setFieldValue, dirty }) => {
-            console.log('Formik', selectedGuild, guildSettings);
+          {({ values: guildSettings, handleSubmit, handleChange, setFieldValue }) => {
             return (
               <form onSubmit={handleSubmit}>
                 <Wrapper>
@@ -105,6 +96,12 @@ export function GuildSettingsPageBotTab() {
                       value={guildSettings?.botNickname}
                       onChange={handleChange}
                     />
+                    <h2>Blacklist</h2>
+                    <small>
+                      Benutzer in dieser Liste können nicht mit dem Bot interagieren. Eine ID pro
+                      Zeile.
+                    </small>
+                    <TextArea id="blacklist" rows={8} />
                   </div>
                   <div>
                     <h2>{t('welcome.title')}</h2>
@@ -113,48 +110,40 @@ export function GuildSettingsPageBotTab() {
                       guildId={selectedGuild?.id}
                       addonBefore={t('welcome.channelLabel')}
                       placeholder={t('welcome.channelPlaceholder')}
-                      value={guildSettings.welcomeChannelId}
+                      value={guildSettings?.welcomeChannelId}
                       onChange={(value) => setFieldValue('welcomeChannelId', value)}
                     />
-                    <LinkButton onClick={() => showEditMessageDialog('welcome')}>
-                      {t('welcome.dialog.linkText')}
-                    </LinkButton>
-                    <UserMessageDialog
-                      title={t('welcome.dialog.title')}
-                      visible={messageDialogVisible.welcome}
-                      value={guildSettings.welcomeMessage}
-                      onCancel={() => showEditMessageDialog('welcome', false)}
-                      onOk={(value) => {
-                        setFieldValue('welcomeMessage', value);
-                        showEditMessageDialog('welcome', false);
-                      }}
+                    <TextArea
+                      id="welcomeMessage"
+                      value={guildSettings?.welcomeMessage}
+                      onChange={handleChange}
                     />
+                    <UserProperty>
+                      <Placeholder>{'{name}'}</Placeholder>
+                      <Description>Name des Members</Description>
+                    </UserProperty>
                     <h2>{t('leave.title')}</h2>
                     <ChannelSelection
                       id="leaveChannelId"
                       guildId={selectedGuild?.id}
                       addonBefore={t('leave.channelLabel')}
                       placeholder={t('leave.channelPlaceholder')}
-                      value={guildSettings.leaveChannelId}
+                      value={guildSettings?.leaveChannelId}
                       onChange={(value) => setFieldValue('leaveChannelId', value)}
                     />
-                    <LinkButton onClick={() => showEditMessageDialog('leave')}>
-                      {t('leave.dialog.linkText')}
-                    </LinkButton>
-                    <UserMessageDialog
-                      title={t('leave.dialog.title')}
-                      visible={messageDialogVisible.leave}
-                      value={guildSettings.leaveMessage}
-                      onCancel={() => showEditMessageDialog('leave', false)}
-                      onOk={(value) => {
-                        setFieldValue('leaveMessage', value);
-                        showEditMessageDialog('leave', false);
-                      }}
+                    <TextArea
+                      id="leaveMessage"
+                      value={guildSettings?.leaveMessage}
+                      onChange={handleChange}
                     />
+                    <UserProperty>
+                      <Placeholder>{'{name}'}</Placeholder>
+                      <Description>Name des Members</Description>
+                    </UserProperty>
                   </div>
                 </Wrapper>
                 <Buttons>
-                  <SaveButton type="primary" disabled={!dirty} submit>
+                  <SaveButton type="primary" submit>
                     {t('saveButton')}
                   </SaveButton>
                 </Buttons>

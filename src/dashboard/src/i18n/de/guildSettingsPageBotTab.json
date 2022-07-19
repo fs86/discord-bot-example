@@ -7,20 +7,12 @@
   "welcome": {
     "title": "Willkommensnachricht",
     "channelLabel": "Channel",
-    "channelPlaceholder": "Channel",
-    "dialog": {
-      "title": "Willkommensnachricht bearbeiten",
-      "linkText": "Nachricht bearbeiten"
-    }
+    "channelPlaceholder": "Channel"
   },
   "leave": {
     "title": "Abschiedsnachricht",
     "channelLabel": "Channel",
-    "channelPlaceholder": "Channel",
-    "dialog": {
-      "title": "Abschiedsnachricht bearbeiten",
-      "linkText": "Nachricht bearbeiten"
-    }
+    "channelPlaceholder": "Channel"
   },
   "saveButton": "Speichern",
   "successMessage": "Die Servereinstellungen für {{guildName}} wurden gespeichert!",

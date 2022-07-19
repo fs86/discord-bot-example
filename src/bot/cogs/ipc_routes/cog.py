@@ -16,7 +16,7 @@ class IpcRoutes(commands.Cog):
     @ipc.server.route()
     async def get_guild_channels(self, data):
         guild = self.bot.get_guild(data.guild_id)
-        source = guild.text_channels if data.source == "text_channels" else guild.channels
+        source = guild.text_channels if data.text_channels_only else guild.channels
 
         return [{"id": str(channel.id), "name": channel.name} for channel in source]
 

@@ -9,7 +9,7 @@ from fastapi_discord import Guild
 from api.containers import Container
 from api.dependencies import get_user, get_user_guilds, is_authenticated
 from api.exceptions import RequiresGuildOwner
-from api.helpers.user_helper import get_profile_info
+from api.helpers import ipc_helper, user_helper
 from api.requests import GuildSettingsRequest
 from api.responses.guild_settings_response import GuildSettingsResponse
 from services import SettingsService
@@ -24,15 +24,11 @@ router = APIRouter(
 
 @router.get("/", dependencies=[Depends(is_authenticated)])
 @inject
-async def get_guilds(
-    user: User = Depends(get_user),
-    guilds: List[Guild] = Depends(get_user_guilds),
-    ipc_client: ipc.Client = Depends(Provide[Container.ipc_client]),
-):
-    bot_guilds = await ipc_client.request("get_guild_ids")
+async def get_guilds(user: User = Depends(get_user), guilds: List[Guild] = Depends(get_user_guilds)):
+    bot_guilds = await ipc_helper.get_guild_ids()
     user_guild_ids = [guild.id for guild in guilds]
 
-    profile_info = await get_profile_info(user)
+    profile_info = await user_helper.get_profile_info(user)
 
     if not profile_info.is_admin:
         bot_guilds = [guild for guild in bot_guilds if guild["id"] in user_guild_ids]
@@ -46,7 +42,6 @@ async def update_guild_settings(
     guild_id: int,
     request: GuildSettingsRequest,
     user_guilds: List[Guild] = Depends(get_user_guilds),
-    ipc_client: ipc.Client = Depends(Provide[Container.ipc_client]),
     settings_service: SettingsService = Depends(Provide[Container.settings_service]),
 ):
     guilds_with_owner_rights = [int(guild.id) for guild in user_guilds if guild.owner]
@@ -57,7 +52,7 @@ async def update_guild_settings(
     settings = request.__dict__
 
     await settings_service.update(guild_id, settings)
-    await ipc_client.request("set_bot_nickname", guild_id=guild_id, bot_nickname=request.bot_nickname)
+    await ipc_helper.set_bot_nickname(guild_id, request.bot_nickname)
 
     return "Ok"
 
@@ -81,6 +76,5 @@ async def get_guild_settings(
 
 
 @router.get("/{guild_id}/textchannels")
-@inject
-async def get_guild_channels(guild_id: int, ipc_client: ipc.Client = Depends(Provide[Container.ipc_client])):
-    return await ipc_client.request("get_guild_channels", guild_id=guild_id, source="text_channels")
+async def get_guild_channels(guild_id: int):
+    return await ipc_helper.get_guild_channels(guild_id, text_channels_only=True)

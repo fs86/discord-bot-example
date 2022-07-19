@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends
 from fastapi_discord import Guild, User
 
 from api.dependencies import get_user, get_user_guilds, is_authenticated
-from api.helpers import get_profile_info
+from api.helpers import user_helper
 from api.responses.user_response import UserResponse
 
 router = APIRouter(
@@ -17,7 +17,7 @@ router = APIRouter(
 
 @router.get("/", response_model=UserResponse)
 async def get_info(user: User = Depends(get_user)):
-    profile_info = await get_profile_info(user)
+    profile_info = await user_helper.get_profile_info(user)
     return UserResponse.from_user(user, profile_info=profile_info)
 
 

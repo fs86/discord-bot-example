@@ -6,6 +6,7 @@ import { FieldWithLabel, FieldWithLabelProps, FormField } from './common';
 interface InputProps extends Omit<FieldWithLabelProps, 'children'> {
   name?: string;
   value?: string | number | readonly string[];
+  placeholder?: string;
   addonBefore?: string;
   addonAfter?: string;
   className?: string;

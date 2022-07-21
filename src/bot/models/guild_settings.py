@@ -8,6 +8,7 @@ from pydantic import BaseModel
 class GuildSettingsValues(BaseModel):
     bot_prefix: str = "."
     bot_nickname: str = None
+    blacklist: List[str] = []
     welcome_channel_id: int = None
     welcome_message: str = None
     leave_channel_id: int = None
@@ -21,7 +22,7 @@ class GuildSettings(Document):
     class Collection:
         name = "settings"
 
-    class Settings:
-        use_cache = True
-        cache_expiration_time = datetime.timedelta(minutes=30)
-        cache_capacity = 5
+    # class Settings:
+    #     use_cache = True
+    #     cache_expiration_time = datetime.timedelta(minutes=30)
+    #     cache_capacity = 5

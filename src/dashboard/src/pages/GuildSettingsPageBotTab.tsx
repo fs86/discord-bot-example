@@ -5,7 +5,7 @@ import { ChannelSelection } from '@components/ChannelSelection';
 import { useGuildSelection } from '@context-providers';
 import { getGuildSettings, updateGuildSettings } from '@services/guildService';
 import { GuildSettings } from '@viewmodels';
-import { message } from 'antd';
+import { message, Tooltip } from 'antd';
 import { Formik } from 'formik';
 import styled from 'styled-components';
 
@@ -39,13 +39,27 @@ const Placeholder = styled.span`
 
 const Description = styled.span``;
 
+const PlaceholderInfo = styled.span`
+  font-style: italic;
+  transition: 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
+`;
+
 export function GuildSettingsPageBotTab() {
   const { t } = useTranslation('guildSettingsPageBotTab');
   const { selectedGuild } = useGuildSelection();
 
-  const { isLoading, data: guildSettings } = useQuery(['getGuildSettings', selectedGuild?.id], () =>
+  const { isLoading, data } = useQuery(['getGuildSettings', selectedGuild?.id], () =>
     selectedGuild?.id ? getGuildSettings(selectedGuild.id) : undefined
   );
+
+  // function handleOnSuccess(data: GuildSettings) {
+  //   console.log('guildSettings', guildSettings);
+  // }
 
   async function handleOnSubmit(settings: GuildSettings) {
     if (!selectedGuild) {
@@ -63,22 +77,24 @@ export function GuildSettingsPageBotTab() {
 
   return (
     <>
-      {!isLoading && guildSettings && (
+      {!isLoading && (
         <Formik
           enableReinitialize
           onSubmit={handleOnSubmit}
           initialValues={
             {
-              botPrefix: guildSettings.botPrefix,
-              botNickname: guildSettings.botNickname,
-              welcomeChannelId: guildSettings.welcomeChannelId,
-              welcomeMessage: guildSettings.welcomeMessage,
-              leaveChannelId: guildSettings.leaveChannelId,
-              leaveMessage: guildSettings.leaveMessage,
+              botPrefix: data?.botPrefix,
+              botNickname: data?.botNickname,
+              blacklist: data?.blacklist,
+              welcomeChannelId: data?.welcomeChannelId,
+              welcomeMessage: data?.welcomeMessage,
+              leaveChannelId: data?.leaveChannelId,
+              leaveMessage: data?.leaveMessage,
             } as GuildSettings
           }
         >
           {({ values: guildSettings, handleSubmit, handleChange, setFieldValue }) => {
+            console.log(guildSettings.blacklist);
             return (
               <form onSubmit={handleSubmit}>
                 <Wrapper>
@@ -101,7 +117,14 @@ export function GuildSettingsPageBotTab() {
                       Benutzer in dieser Liste können nicht mit dem Bot interagieren. Eine ID pro
                       Zeile.
                     </small>
-                    <TextArea id="blacklist" rows={8} />
+                    <TextArea
+                      id="blacklist"
+                      value={guildSettings.blacklist?.join('\r\n')}
+                      onChange={(event) =>
+                        setFieldValue('blacklist', event.target.value.split('\r\n'))
+                      }
+                      rows={8}
+                    />
                   </div>
                   <div>
                     <h2>{t('welcome.title')}</h2>
@@ -135,11 +158,19 @@ export function GuildSettingsPageBotTab() {
                       id="leaveMessage"
                       value={guildSettings?.leaveMessage}
                       onChange={handleChange}
+                      footer={
+                        <>
+                          <Tooltip title="test">
+                            <PlaceholderInfo>test</PlaceholderInfo>
+                          </Tooltip>
+
+                          {/* <UserProperty>
+                            <Placeholder>{'{name}'}</Placeholder>
+                            <Description>Name des Members</Description>
+                          </UserProperty> */}
+                        </>
+                      }
                     />
-                    <UserProperty>
-                      <Placeholder>{'{name}'}</Placeholder>
-                      <Description>Name des Members</Description>
-                    </UserProperty>
                   </div>
                 </Wrapper>
                 <Buttons>

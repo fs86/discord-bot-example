@@ -77,8 +77,7 @@ async def get_guild_settings(
     #     "leave_message": "Test 1234",
     # }
 
-    settings = await settings_service.get(guild_id)
-    return settings.values
+    return await settings_service.get(guild_id)
 
 
 @router.get("/{guild_id}/textchannels")

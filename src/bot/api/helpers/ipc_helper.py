@@ -3,6 +3,7 @@ from discord.ext import ipc
 from fastapi import Depends
 
 from api.containers import Container
+from api.dependencies import get_user
 
 
 @inject

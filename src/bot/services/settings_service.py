@@ -41,7 +41,7 @@ class SettingsService:
     # DE: Liefert alle Einstellungen für den angegebenen Server.
     # EN: Returns all settings for the specified server.
     async def get(self, guild_id: int):
-        return await self.__get_guild_settings(guild_id)
+        return (await self.__get_guild_settings(guild_id)).values
 
     # DE: Aktualisiert eine Einstellungswert für den angegebenen Server.
     # EN: Updates a setting value for the specified server.

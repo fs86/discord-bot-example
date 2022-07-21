@@ -2,12 +2,18 @@ import discord
 from discord import option
 from discord.ext import commands
 
+from cogs.base_cog import BaseCog
 from core import Config
 from services import WarnService
 
 
-class WarnCog(commands.Cog):
-    def __init__(self, bot: commands.Bot):
+class WarnCog(BaseCog):
+    # def __init__(self, bot: commands.Bot):
+    #     self.bot = bot
+    #     self.warn_service = WarnService()
+
+    def __init__(self, bot: commands.Bot) -> None:
+        super().__init__()
         self.bot = bot
         self.warn_service = WarnService()
 

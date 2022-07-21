@@ -5,7 +5,7 @@ import { ChannelSelection } from '@components/ChannelSelection';
 import { useGuildSelection } from '@context-providers';
 import { getGuildSettings, updateGuildSettings } from '@services/guildService';
 import { GuildSettings } from '@viewmodels';
-import { message, Tooltip } from 'antd';
+import { message } from 'antd';
 import { Formik } from 'formik';
 import styled from 'styled-components';
 
@@ -46,7 +46,7 @@ const Placeholder = styled.span`
 
 const Description = styled.span``;
 
-const CommonUserMessagePlaceholders = () => {
+function CommonUserMessagePlaceholders() {
   return (
     <>
       <UserProperty>
@@ -59,7 +59,7 @@ const CommonUserMessagePlaceholders = () => {
       </UserProperty>
     </>
   );
-};
+}
 
 export function GuildSettingsPageBotTab() {
   const { t } = useTranslation('guildSettingsPageBotTab');
@@ -76,11 +76,9 @@ export function GuildSettingsPageBotTab() {
 
     const result = await updateGuildSettings(selectedGuild.id, settings);
 
-    if (result.status === 200) {
-      message.success(t('successMessage', { guildName: selectedGuild?.name }));
-    } else {
-      message.error(t('errorMessage', { guildName: selectedGuild?.name }));
-    }
+    result.status === 200
+      ? message.success(t('successMessage', { guildName: selectedGuild?.name }))
+      : message.error(t('errorMessage', { guildName: selectedGuild?.name }));
   }
 
   return (
@@ -102,7 +100,6 @@ export function GuildSettingsPageBotTab() {
           }
         >
           {({ values: guildSettings, handleSubmit, handleChange, setFieldValue }) => {
-            console.log(guildSettings.blacklist);
             return (
               <form onSubmit={handleSubmit}>
                 <Wrapper>
@@ -129,10 +126,14 @@ export function GuildSettingsPageBotTab() {
                     </Headline>
                     <TextArea
                       id="blacklist"
-                      value={guildSettings.blacklist?.join('\r\n')}
-                      onChange={(event) =>
-                        setFieldValue('blacklist', event.target.value.split('\r\n'))
-                      }
+                      value={guildSettings.blacklist?.join('\n')}
+                      onChange={(event) => {
+                        const value = event.target.value
+                          .split('\n')
+                          .filter((element) => element !== '');
+
+                        setFieldValue('blacklist', value);
+                      }}
                       rows={8}
                     />
                   </div>
@@ -178,18 +179,6 @@ export function GuildSettingsPageBotTab() {
                       id="leaveMessage"
                       value={guildSettings?.leaveMessage}
                       onChange={handleChange}
-                      footer={
-                        <>
-                          {/* <Tooltip title="test">
-                            <PlaceholderInfo>test</PlaceholderInfo>
-                          </Tooltip> */}
-
-                          {/* <UserProperty>
-                            <Placeholder>{'{name}'}</Placeholder>
-                            <Description>Name des Members</Description>
-                          </UserProperty> */}
-                        </>
-                      }
                     />
                   </div>
                 </Wrapper>

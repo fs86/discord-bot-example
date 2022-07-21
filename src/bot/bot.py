@@ -1,11 +1,13 @@
 from discord.ext import commands, ipc
 
 from core import Config, cogloader
+from services import SettingsService
 
 
 class Bot(commands.Bot):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         self.__ipc_server = None
 
         api_enabled = Config().api.enabled

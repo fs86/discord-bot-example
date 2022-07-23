@@ -21,14 +21,14 @@ class IpcRoutes(commands.Cog):
         return [{"id": str(channel.id), "name": channel.name} for channel in source]
 
     @ipc.server.route()
-    async def get_bot_nickname(self, data):
-        guild = self.bot.get_guild(data.guild_id)
-        return guild.me.nick or guild.me.name
-
-    @ipc.server.route()
     async def set_bot_nickname(self, data):
         guild = self.bot.get_guild(data.guild_id)
-        await guild.me.edit(nick=data.bot_nickname)
+
+        new_bot_nickname = data.bot_nickname
+        current_bot_nickname = guild.me.nick or guild.me.name
+
+        if new_bot_nickname != current_bot_nickname:
+            await guild.me.edit(nick=data.bot_nickname)
 
 
 def setup(bot: commands.Bot):

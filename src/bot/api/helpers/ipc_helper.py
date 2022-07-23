@@ -24,11 +24,6 @@ async def get_guild_channels(
 
 
 @inject
-async def get_bot_nickname(guild_id: int, ipc_client: ipc.Client = Depends(Provide[Container.ipc_client])):
-    return await ipc_client.request("get_bot_nickname", guild_id=guild_id)
-
-
-@inject
 async def set_bot_nickname(
     guild_id: int, bot_nickname: str, ipc_client: ipc.Client = Depends(Provide[Container.ipc_client])
 ):

@@ -52,13 +52,7 @@ async def update_guild_settings(
     settings = request.__dict__
 
     await settings_service.update(guild_id, settings)
-
-    try:
-        current_bot_nickname = await ipc_helper.get_bot_nickname(guild_id)
-        if current_bot_nickname != request.bot_nickname:
-            await ipc_helper.set_bot_nickname(guild_id, request.bot_nickname)
-    except Exception as exc:
-        ...
+    await ipc_helper.set_bot_nickname(guild_id, request.bot_nickname)
 
     return "Ok"
 

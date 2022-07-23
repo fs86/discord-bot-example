@@ -46,7 +46,26 @@ const Placeholder = styled.span`
 
 const Description = styled.span``;
 
-function CommonUserMessagePlaceholders() {
+function JoinMessagePlaceholders() {
+  return (
+    <>
+      <UserProperty>
+        <Placeholder>{'{member_name}'}</Placeholder>
+        <Description>Name des Members</Description>
+      </UserProperty>
+      <UserProperty>
+        <Placeholder>{'{member_mention}'}</Placeholder>
+        <Description>Zeichenfolge, die zum Erwähnen von Benutzern verwendet wird</Description>
+      </UserProperty>
+      <UserProperty>
+        <Placeholder>{'{guild_name}'}</Placeholder>
+        <Description>Name des Servers</Description>
+      </UserProperty>
+    </>
+  );
+}
+
+function LeaveMessagePlaceholders() {
   return (
     <>
       <UserProperty>
@@ -142,7 +161,7 @@ export function GuildSettingsPageBotTab() {
                       {t('welcome.title')}
                       <InfoIcon
                         title="Verfügbare Platzhalter für die Willkommensnachricht"
-                        content={<CommonUserMessagePlaceholders />}
+                        content={<JoinMessagePlaceholders />}
                         size={14}
                       />
                     </Headline>
@@ -163,7 +182,7 @@ export function GuildSettingsPageBotTab() {
                       {t('leave.title')}{' '}
                       <InfoIcon
                         title="Verfügbare Platzhalter für die Abschiedsnachricht"
-                        content={<CommonUserMessagePlaceholders />}
+                        content={<LeaveMessagePlaceholders />}
                         size={14}
                       />
                     </Headline>

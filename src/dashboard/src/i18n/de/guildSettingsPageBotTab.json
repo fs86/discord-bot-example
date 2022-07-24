@@ -4,13 +4,32 @@
     "prefixLabel": "Prefix",
     "nicknameLabel": "Nickname"
   },
+  "blacklist": {
+    "title": "Blacklist",
+    "info": "Benutzer in dieser Liste können nicht mit dem Bot interagieren. Eine ID pro Zeile."
+  },
   "welcome": {
     "title": "Willkommensnachricht",
+    "info": {
+      "title": "Verfügbare Platzhalter für die Willkommensnachricht",
+      "content": {
+        "memberName": "Name des Members",
+        "memberMention": "Zeichenfolge, die zum Erwähnen von Benutzern verwendet wird",
+        "guildName": "Name des Servers"
+      }
+    },
     "channelLabel": "Channel",
     "channelPlaceholder": "Channel"
   },
   "leave": {
     "title": "Abschiedsnachricht",
+    "info": {
+      "title": "Verfügbare Platzhalter für die Abschiedsnachricht",
+      "content": {
+        "memberName": "Name des Members",
+        "guildName": "Name des Servers"
+      }
+    },
     "channelLabel": "Channel",
     "channelPlaceholder": "Channel"
   },

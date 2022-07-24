@@ -2,8 +2,7 @@ from typing import List
 
 from dependency_injector.wiring import Provide, inject
 from discord import User
-from discord.ext import ipc
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, status
 from fastapi_discord import Guild
 
 from api.containers import Container
@@ -22,7 +21,7 @@ router = APIRouter(
 )
 
 
-@router.get("/", dependencies=[Depends(is_authenticated)])
+@router.get("/", dependencies=[Depends(is_authenticated)], status_code=status.HTTP_200_OK)
 @inject
 async def get_guilds(user: User = Depends(get_user), guilds: List[Guild] = Depends(get_user_guilds)):
     bot_guilds = await ipc_helper.get_guild_ids()
@@ -36,7 +35,7 @@ async def get_guilds(user: User = Depends(get_user), guilds: List[Guild] = Depen
     return bot_guilds
 
 
-@router.post("/{guild_id}/settings")
+@router.post("/{guild_id}/settings", status_code=status.HTTP_201_CREATED)
 @inject
 async def update_guild_settings(
     guild_id: int,
@@ -54,26 +53,20 @@ async def update_guild_settings(
     await settings_service.update(guild_id, settings)
     await ipc_helper.set_bot_nickname(guild_id, request.bot_nickname)
 
-    return "Ok"
 
-
-@router.get("/{guild_id}/settings", response_model=GuildSettingsResponse, response_model_exclude_unset=True)
+@router.get(
+    "/{guild_id}/settings",
+    response_model=GuildSettingsResponse,
+    response_model_exclude_unset=True,
+    status_code=status.HTTP_200_OK,
+)
 @inject
 async def get_guild_settings(
     guild_id: int, settings_service: SettingsService = Depends(Provide[Container.settings_service])
 ):
-    # return {
-    #     "bot_prefix": "?",
-    #     "bot_nickname": "My Bot",
-    #     "welcome_channel_id": 123456789,
-    #     "welcome_message": "Test",
-    #     "leave_channel_id": 123456789,
-    #     "leave_message": "Test 1234",
-    # }
-
     return await settings_service.get(guild_id)
 
 
-@router.get("/{guild_id}/textchannels")
-async def get_guild_channels(guild_id: int):
+@router.get("/{guild_id}/textchannels", status_code=status.HTTP_200_OK)
+async def get_guild_textchannels(guild_id: int):
     return await ipc_helper.get_guild_channels(guild_id, text_channels_only=True)

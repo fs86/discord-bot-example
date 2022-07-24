@@ -46,40 +46,6 @@ const Placeholder = styled.span`
 
 const Description = styled.span``;
 
-function JoinMessagePlaceholders() {
-  return (
-    <>
-      <UserProperty>
-        <Placeholder>{'{member_name}'}</Placeholder>
-        <Description>Name des Members</Description>
-      </UserProperty>
-      <UserProperty>
-        <Placeholder>{'{member_mention}'}</Placeholder>
-        <Description>Zeichenfolge, die zum Erwähnen von Benutzern verwendet wird</Description>
-      </UserProperty>
-      <UserProperty>
-        <Placeholder>{'{guild_name}'}</Placeholder>
-        <Description>Name des Servers</Description>
-      </UserProperty>
-    </>
-  );
-}
-
-function LeaveMessagePlaceholders() {
-  return (
-    <>
-      <UserProperty>
-        <Placeholder>{'{member_name}'}</Placeholder>
-        <Description>Name des Members</Description>
-      </UserProperty>
-      <UserProperty>
-        <Placeholder>{'{guild_name}'}</Placeholder>
-        <Description>Name des Servers</Description>
-      </UserProperty>
-    </>
-  );
-}
-
 export function GuildSettingsPageBotTab() {
   const { t } = useTranslation('guildSettingsPageBotTab');
   const { selectedGuild } = useGuildSelection();
@@ -137,14 +103,12 @@ export function GuildSettingsPageBotTab() {
                       onChange={handleChange}
                     />
                     <Headline>
-                      Blacklist
-                      <InfoIcon
-                        content="Benutzer in dieser Liste können nicht mit dem Bot interagieren. Eine ID pro Zeile."
-                        size={14}
-                      />
+                      {t('blacklist.title')}
+                      <InfoIcon content={t('blacklist.info')} size={14} />
                     </Headline>
                     <TextArea
                       id="blacklist"
+                      rows={8}
                       value={guildSettings.blacklist?.join('\n')}
                       onChange={(event) => {
                         const value = event.target.value
@@ -153,16 +117,30 @@ export function GuildSettingsPageBotTab() {
 
                         setFieldValue('blacklist', value);
                       }}
-                      rows={8}
                     />
                   </div>
                   <div>
                     <Headline>
                       {t('welcome.title')}
                       <InfoIcon
-                        title="Verfügbare Platzhalter für die Willkommensnachricht"
-                        content={<JoinMessagePlaceholders />}
+                        title={t('welcome.info.title')}
                         size={14}
+                        content={
+                          <>
+                            <UserProperty>
+                              <Placeholder>{'{member_name}'}</Placeholder>
+                              <Description>{t('welcome.info.content.memberName')}</Description>
+                            </UserProperty>
+                            <UserProperty>
+                              <Placeholder>{'{member_mention}'}</Placeholder>
+                              <Description>{t('welcome.info.content.memberMention')}</Description>
+                            </UserProperty>
+                            <UserProperty>
+                              <Placeholder>{'{guild_name}'}</Placeholder>
+                              <Description>{t('welcome.info.content.guildName')}</Description>
+                            </UserProperty>
+                          </>
+                        }
                       />
                     </Headline>
                     <ChannelSelection
@@ -181,9 +159,20 @@ export function GuildSettingsPageBotTab() {
                     <Headline>
                       {t('leave.title')}{' '}
                       <InfoIcon
-                        title="Verfügbare Platzhalter für die Abschiedsnachricht"
-                        content={<LeaveMessagePlaceholders />}
+                        title={t('leave.info.title')}
                         size={14}
+                        content={
+                          <>
+                            <UserProperty>
+                              <Placeholder>{'{member_name}'}</Placeholder>
+                              <Description>{t('leave.info.content.memberName')}</Description>
+                            </UserProperty>
+                            <UserProperty>
+                              <Placeholder>{'{guild_name}'}</Placeholder>
+                              <Description>{t('leave.info.content.guildName')}</Description>
+                            </UserProperty>
+                          </>
+                        }
                       />
                     </Headline>
                     <ChannelSelection

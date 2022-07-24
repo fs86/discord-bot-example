@@ -99,6 +99,7 @@ export function GuildSettingsPageBotTab() {
                     <Input
                       id="botNickname"
                       addonBefore={t('general.nicknameLabel')}
+                      placeholder={t('general.nicknamePlaceholder')}
                       value={guildSettings?.botNickname}
                       onChange={handleChange}
                     />
@@ -109,6 +110,7 @@ export function GuildSettingsPageBotTab() {
                     <TextArea
                       id="blacklist"
                       rows={8}
+                      placeholder={t('blacklist.placeholder')}
                       value={guildSettings.blacklist?.join('\n')}
                       onChange={(event) => {
                         const value = event.target.value
@@ -153,6 +155,7 @@ export function GuildSettingsPageBotTab() {
                     />
                     <TextArea
                       id="welcomeMessage"
+                      placeholder={t('welcome.messagePlaceholder')}
                       value={guildSettings?.welcomeMessage}
                       onChange={handleChange}
                     />
@@ -185,6 +188,7 @@ export function GuildSettingsPageBotTab() {
                     />
                     <TextArea
                       id="leaveMessage"
+                      placeholder={t('leave.messagePlaceholder')}
                       value={guildSettings?.leaveMessage}
                       onChange={handleChange}
                     />

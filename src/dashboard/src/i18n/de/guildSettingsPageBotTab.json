@@ -2,11 +2,13 @@
   "general": {
     "title": "Allgemein",
     "prefixLabel": "Prefix",
-    "nicknameLabel": "Nickname"
+    "nicknameLabel": "Nickname",
+    "nicknamePlaceholder": "Es wurde noch kein serverspezifischer Nickname gesetzt."
   },
   "blacklist": {
     "title": "Blacklist",
-    "info": "Benutzer in dieser Liste können nicht mit dem Bot interagieren. Eine ID pro Zeile."
+    "info": "Benutzer in dieser Liste können nicht mit dem Bot interagieren. Eine ID pro Zeile.",
+    "placeholder": "Noch keine Einträge vorhanden."
   },
   "welcome": {
     "title": "Willkommensnachricht",
@@ -19,7 +21,8 @@
       }
     },
     "channelLabel": "Channel",
-    "channelPlaceholder": "Channel"
+    "channelPlaceholder": "Channel",
+    "messagePlaceholder": "Noch keine Willkommensnachricht gesetzt."
   },
   "leave": {
     "title": "Abschiedsnachricht",
@@ -31,7 +34,8 @@
       }
     },
     "channelLabel": "Channel",
-    "channelPlaceholder": "Channel"
+    "channelPlaceholder": "Channel",
+    "messagePlaceholder": "Noch keine Abschiedsnachricht gesetzt."
   },
   "saveButton": "Speichern",
   "successMessage": "Die Servereinstellungen für {{guildName}} wurden gespeichert!",

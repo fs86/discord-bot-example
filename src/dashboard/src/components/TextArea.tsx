@@ -15,6 +15,7 @@ const StyledTextArea = styled(AntdTextArea)`
 interface TextAreaProps extends Omit<FieldWithLabelProps, 'children'> {
   value?: string;
   rows?: number;
+  placeholder?: string;
   className?: string;
   onChange?: ChangeEventHandler<HTMLTextAreaElement>;
 }

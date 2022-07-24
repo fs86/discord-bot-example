@@ -93,8 +93,8 @@ export function GuildSettingsPageBotTab() {
                     <Input
                       id="botPrefix"
                       addonBefore={t('general.prefixLabel')}
-                      onChange={handleChange}
                       value={guildSettings?.botPrefix}
+                      onChange={handleChange}
                     />
                     <Input
                       id="botNickname"

@@ -35,7 +35,7 @@ async def get_guilds(user: User = Depends(get_user), guilds: List[Guild] = Depen
     return bot_guilds
 
 
-@router.post("/{guild_id}/settings", status_code=status.HTTP_201_CREATED)
+@router.post("/{guild_id}/settings", status_code=status.HTTP_200_OK)
 @inject
 async def update_guild_settings(
     guild_id: int,

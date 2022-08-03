@@ -44,7 +44,7 @@ class WarnCog(BaseCog):
 
             for i, warning in enumerate(warnings):
                 number = str(i + 1).zfill(2)
-                description += f"`{number}` {warning['reason']}\r\n"
+                description += f"`{number}` {warning.reason}\r\n"
         else:
             title = f"{member.name} wurde noch nicht verwarnt"
 

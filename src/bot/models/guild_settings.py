@@ -22,7 +22,7 @@ class GuildSettings(Document):
     class Collection:
         name = "settings"
 
-    # class Settings:
-    #     use_cache = True
-    #     cache_expiration_time = datetime.timedelta(minutes=30)
-    #     cache_capacity = 5
+    class Settings:
+        use_cache = True
+        cache_expiration_time = datetime.timedelta(minutes=30)
+        cache_capacity = 5

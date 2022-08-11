@@ -3,5 +3,4 @@ This sample project gives you an overview how to structure your sorucecode for d
 
 In this example we will be using **MongoDB** as database provider. After the registration at https://mongodb.com you will get a cloud database for free with a capacity up to 500 MB data storage. This should be sufficient for most private projects.
 
-[German](README.de.md) installation instructions
--
+➠ [German](README.de.md) installation instructions

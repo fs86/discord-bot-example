@@ -1,8 +1,3 @@
-# Python Discord-Bot mit React Dashboard
-Dieses Beispielprojekt soll dir einen Überblick darüber verschaffen, wie du den Programmcode deines Discord-Bots sauber strukturieren kannst und wie du deinen Bot mit einer Verwaltungsoberfläche (Dashboard) verknüpfen kannst. Alles, was du hier vorfindest, sind lediglich **Ideen** bzw. **Anregungen** für eine spätere Umsetzung.
-
-> Für die Datenspeicherung wird in diesem Beispiel [MongoDB](https://www.mongodb.com/cloud/atlas/register) verwendet. Nach der Registrierung auf mongodb.com bekommst du eine kostenlose Cloud Datenbank mit einer Kapazität von bis zu 500 MB. Das sollte für die meisten Hobby-Projekte ausreichen.
-
 ## Wie führe ich das Projekt aus?
 Folgende Schritte sind notwendig, um den Discord-Bot, bzw. das Dashboard auf deinem Rechner auszuführen:
 

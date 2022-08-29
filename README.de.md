@@ -1,6 +1,3 @@
-## Wie führe ich das Projekt aus?
-Folgende Schritte sind notwendig, um den Discord-Bot, bzw. das Dashboard auf deinem Rechner auszuführen:
-
 ### 1. Python und Node.js installieren
 Zum Ausführen des Projektes ist eine [aktuelle Python Version](https://www.python.org/downloads/), sowie eine [aktuelle Node.js Version](https://nodejs.org/en/download/) erforderlich. Vergewissere dich, dass beides auf deinem System isntalliert ist, bevor du weitermachst.
 

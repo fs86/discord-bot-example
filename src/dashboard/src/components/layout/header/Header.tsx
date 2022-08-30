@@ -57,7 +57,7 @@ export function Header({ title, actionBarContent }: HeaderProps) {
       <GuildSelectionBar>
         {selectedGuild && (
           <>
-            <GuildSelectionLabel htmlFor="guildSelection">Guild:</GuildSelectionLabel>
+            <GuildSelectionLabel htmlFor="guildSelection">Server:</GuildSelectionLabel>
             <LinkButton onClick={showGuildSelection} inline>
               {selectedGuild?.name}
             </LinkButton>

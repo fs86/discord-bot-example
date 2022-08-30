@@ -75,6 +75,7 @@ oauth:
     - email
     - guilds
 ```
+
 #### src/dashboard/**.env**
 ```ini
 VITE_DC_CLIENT_ID=<CLIENT ID> # Client ID der Applikation (aus dem Discord Developer Portal zu entnehmen)

@@ -11,7 +11,7 @@ In this example we will be using **MongoDB** as database provider. After the reg
 ![dashboard-overview](https://user-images.githubusercontent.com/39554311/187510627-a5a61655-9a75-4390-96b8-5daa5bf4164e.png)
 
 ### Guild selection
-![dashboard-guild-selection](https://user-images.githubusercontent.com/39554311/187510733-84a7c1e9-0579-4fef-a89f-56bbbeea0a75.png)
+![dashboard-guild-selection](https://user-images.githubusercontent.com/39554311/187613323-8b3c48ac-27fb-4629-bf63-37e35b1b1936.png)
 
 ### Guild settings
 ![dashboard-guild-settings](https://user-images.githubusercontent.com/39554311/187510917-b4dee14c-b9b6-432b-a5f3-e8cf79634612.png)
